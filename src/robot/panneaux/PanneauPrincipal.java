@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package robot.panneaux;
 
 import com.thoughtworks.xstream.XStream;
@@ -59,9 +56,9 @@ public class PanneauPrincipal extends JPanel {
     
     private static final long serialVersionUID = 1L;
 
-    private JButton boutonInitialise = new JButton("initialisation");
-    private JButton boutonAvance = new JButton("avance");
-    private JButton boutonTourne = new JButton("tourne");
+    private final JButton boutonInitialise = new JButton("initialisation");
+    private final JButton boutonAvance = new JButton("avance");
+    private final JButton boutonTourne = new JButton("tourne");
     private JButton boutonMarque = new JButton("marque");
     private JButton boutonEfface = new JButton("efface");
     private JButton boutonSi = new JButton("si");
@@ -130,7 +127,7 @@ public class PanneauPrincipal extends JPanel {
     };
 
     public String[] getListeTests() {
-        ArrayList<String> liste = new ArrayList<String>();
+        ArrayList<String> liste = new ArrayList<>();
         for (int i = 0; i < comboExpression.getItemCount(); i++) {
             ExprBoolElt exp = (ExprBoolElt) comboExpression.getItemAt(i);
             liste.add(exp.toString());
@@ -283,7 +280,7 @@ public class PanneauPrincipal extends JPanel {
         });
     }
 
-    public void ouvrirOBJ(URL fichier) {
+    /*public void ouvrirOBJ(URL fichier) {
         try {
             ObjectInputStream oi = null;
             try {
@@ -330,12 +327,12 @@ public class PanneauPrincipal extends JPanel {
             Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
+    }*/
 
     public void ouvrir(URL fichier) {
-        if (Pattern.matches(".*\\.obj$", fichier.getFile())) {
+        /*if (Pattern.matches(".*\\.obj$", fichier.getFile())) {
             ouvrirOBJ(fichier);
-        } else {
+        } else {*/
             
             XStream xstream = new XStream(new DomDriver());
 
@@ -380,7 +377,7 @@ public class PanneauPrincipal extends JPanel {
                     i < frameParente.getArbre().getRowCount(); i++) {
                 frameParente.getArbre().expandRow(i);
             }
-       }
+       //}
     }
 
     private JMenu getMenuDemo() {
@@ -400,8 +397,8 @@ public class PanneauPrincipal extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                URL f = getClass().getResource("sources/" + nom + ".rob.obj");
-                PanneauPrincipal.this.ouvrirOBJ(f);
+                URL f = getClass().getResource("sources/" + nom + ".rob");
+                PanneauPrincipal.this.ouvrir(f);
             }
         });
         return item;
