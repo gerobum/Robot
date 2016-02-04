@@ -1,0 +1,582 @@
+expressions.DevantMarque -> expressions.DevantMarque:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.DevantMur -> expressions.DevantMur:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.Et -> expressions.Et:
+    void set(java.lang.Object) -> set
+    boolean evalue() -> a
+expressions.ExprBool -> expressions.ExprBool:
+    boolean evalue() -> a
+    void set(java.lang.Object) -> set
+expressions.ExprBoolElt -> expressions.ExprBoolElt:
+    java.lang.String getAbr() -> getAbr
+    java.lang.String toString() -> toString
+    java.lang.String getNom() -> getNom
+expressions.OperationBool -> expressions.OperationBool:
+    expressions.ExprBool gauche -> a
+    expressions.ExprBool droite -> b
+    java.lang.String nom -> c
+    java.lang.String toString() -> toString
+expressions.Ou -> expressions.Ou:
+    void set(java.lang.Object) -> set
+    boolean evalue() -> a
+expressions.ParseurExprBool -> expressions.ParseurExprBool:
+    java.util.regex.Pattern atome -> a
+    java.util.regex.Pattern conjonction00 -> b
+    java.util.regex.Pattern conjonction01 -> c
+    java.util.regex.Pattern conjonction10 -> d
+    java.util.regex.Pattern conjonction11 -> e
+    java.util.regex.Pattern disjonction00 -> f
+    java.util.regex.Pattern disjonction01 -> g
+    java.util.regex.Pattern disjonction10 -> h
+    java.util.regex.Pattern disjonction11 -> i
+    java.util.regex.Pattern negation0 -> j
+    java.util.regex.Pattern negation1 -> k
+    robot.Robot robot -> l
+    expressions.ExprBool compile(java.lang.String,robot.Robot) -> a
+    expressions.ExprBool compile(java.lang.String) -> a
+expressions.Pas -> expressions.Pas:
+    void set(java.lang.Object) -> set
+    boolean evalue() -> a
+expressions.PasDevantMarque -> expressions.PasDevantMarque:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.PasDevantMur -> expressions.PasDevantMur:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.PasSurMarque -> expressions.PasSurMarque:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.PasSurMinerai -> expressions.PasSurMinerai:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.SurMarque -> expressions.SurMarque:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+expressions.SurMinerai -> expressions.SurMinerai:
+    robot.Robot robot -> a
+    boolean evalue() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    java.lang.String getAbr() -> getAbr
+instruction.Appel -> instruction.Appel:
+    instruction.Bloc bloc -> b
+    void go() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+instruction.Avance -> instruction.Avance:
+    interfaces.Avancable avancable -> b
+    void go() -> a
+    void set(java.lang.Object) -> set
+instruction.Bloc -> instruction.Bloc:
+    void go() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    boolean autorisationAjout() -> b
+instruction.Efface -> instruction.Efface:
+    interfaces.Marqueur marqueur -> b
+    void go() -> a
+    void set(java.lang.Object) -> set
+instruction.Instruction -> instruction.Instruction:
+    java.lang.String nom -> a
+    void go() -> a
+    java.lang.String toString() -> toString
+    java.lang.String getNom() -> getNom
+    void set(java.lang.Object) -> set
+    boolean autorisationAjout() -> b
+    java.lang.String deepToString(java.lang.String) -> a
+instruction.InstructionComposée -> instruction.InstructionComposée:
+    java.util.HashMap variable -> b
+    java.lang.Integer get(java.lang.String) -> b
+    java.lang.Integer set(java.lang.String,int) -> a
+    java.lang.String[] getVars() -> getVars
+    java.lang.String deepToString(java.lang.String) -> a
+instruction.InstructionElementaire -> instruction.InstructionElementaire:
+    boolean autorisationAjout() -> b
+    java.lang.String deepToString(java.lang.String) -> a
+instruction.Marque -> instruction.Marque:
+    interfaces.Marqueur marqueur -> b
+    void go() -> a
+    void set(java.lang.Object) -> set
+instruction.Pour -> instruction.Pour:
+    java.lang.String debut -> b
+    java.lang.String fin -> c
+    java.lang.String pas -> d
+    java.lang.String nomCompteur -> e
+    void go() -> a
+    java.lang.String toString() -> toString
+    boolean autorisationAjout() -> b
+    void set(java.lang.Object) -> set
+instruction.Racine -> instruction.Racine:
+    void go() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    boolean autorisationAjout() -> b
+instruction.Si -> instruction.Si:
+    expressions.ExprBool garde -> b
+    void go() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    boolean autorisationAjout() -> b
+instruction.TantQue -> instruction.TantQue:
+    expressions.ExprBool garde -> b
+    void go() -> a
+    java.lang.String toString() -> toString
+    void set(java.lang.Object) -> set
+    boolean autorisationAjout() -> b
+instruction.Tourne -> instruction.Tourne:
+    interfaces.Tournable tournable -> b
+    void go() -> a
+    void set(java.lang.Object) -> set
+interfaces.Avancable -> interfaces.Avancable:
+    void avance() -> e
+interfaces.Marqueur -> interfaces.Marqueur:
+    void poserUneMarque() -> a
+    void enleverUneMarque() -> b
+interfaces.Tournable -> interfaces.Tournable:
+    void tourne() -> f
+lancement.Test -> lancement.Test:
+    int niveau -> a
+    int access$000() -> a
+lancement.Test$1 -> lancement.Test$1:
+    void run() -> run
+lancement.Test$2 -> lancement.Test$2:
+    void run() -> run
+robot.DansLeMur -> robot.DansLeMur:
+robot.FramePrincipale -> robot.FramePrincipale:
+    java.util.Random random -> a
+    robot.panneaux.PanneauPrincipal panneauPrincipal -> b
+    javax.swing.JPanel panneauTerrain -> c
+    terrain.Terrain terrain -> d
+    robot.Robot robot -> e
+    robot.panneaux.PanneauCommande panneauCommande -> f
+    robot.Programme programme -> g
+    javax.swing.JSplitPane splitPane -> h
+    javax.swing.JTree arbre -> i
+    javax.swing.JButton boutonExecuteProgramme -> j
+    javax.swing.JButton boutonExecuteSelection -> k
+    robot.panneaux.BoiteDeDialHTML exercicesDialog -> l
+    robot.panneaux.BoiteDeDialHTML manuelDialog -> m
+    javax.swing.JFileChooser chooser -> n
+    robot.panneaux.BoiteDeDialogueInit dialogueInitialisation -> o
+    javax.swing.JMenu menuNiveau -> p
+    javax.swing.JTree getArbre() -> getArbre
+    robot.Programme getProgramme() -> getProgramme
+    robot.Robot getRobot() -> getRobot
+    javax.swing.JSplitPane getSplitPane() -> getSplitPane
+    void montreDialInit() -> a
+    void redessine() -> b
+    robot.FramePrincipale$Position calculPosition(int) -> a
+    void initialiser(robot.Initialisation) -> a
+    void miseEnPlaceDesMenus() -> c
+    robot.Programme access$100(robot.FramePrincipale) -> a
+    robot.Robot access$200(robot.FramePrincipale) -> b
+    javax.swing.JButton access$300(robot.FramePrincipale) -> c
+    javax.swing.JButton access$400(robot.FramePrincipale) -> d
+    javax.swing.JTree access$500(robot.FramePrincipale) -> e
+    robot.panneaux.PanneauPrincipal access$600(robot.FramePrincipale) -> f
+    javax.swing.JFileChooser access$700(robot.FramePrincipale) -> g
+    robot.panneaux.BoiteDeDialHTML access$800(robot.FramePrincipale) -> h
+    robot.panneaux.BoiteDeDialHTML access$900(robot.FramePrincipale) -> i
+robot.FramePrincipale$1 -> robot.FramePrincipale$1:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$1$1 -> robot.FramePrincipale$1$1:
+    robot.FramePrincipale$1 this$1 -> a
+    void run() -> run
+robot.FramePrincipale$2 -> robot.FramePrincipale$2:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$2$1 -> robot.FramePrincipale$2$1:
+    robot.FramePrincipale$2 this$1 -> a
+    void run() -> run
+robot.FramePrincipale$3 -> robot.FramePrincipale$3:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$4 -> robot.FramePrincipale$4:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$5 -> robot.FramePrincipale$5:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$6 -> robot.FramePrincipale$6:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$7 -> robot.FramePrincipale$7:
+    robot.FramePrincipale this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.FramePrincipale$Position -> robot.FramePrincipale$Position:
+    int x -> a
+    int y -> b
+robot.Initialisation -> robot.Initialisation:
+    int positionRobot -> a
+    int orientationRobot -> b
+    boolean presenceMinerai -> c
+    int positionMinerai -> d
+    boolean presenceHauteur -> e
+    boolean presenceLargeur -> f
+    int hauteur -> g
+    int largeur -> h
+    int getHauteur() -> getHauteur
+    void setHauteur(int) -> setHauteur
+    int getLargeur() -> getLargeur
+    void setLargeur(int) -> setLargeur
+    boolean isPresenceHauteur() -> isPresenceHauteur
+    void setPresenceHauteur(boolean) -> setPresenceHauteur
+    boolean isPresenceLargeur() -> isPresenceLargeur
+    void setPresenceLargeur(boolean) -> setPresenceLargeur
+    int getOrientationRobot() -> getOrientationRobot
+    int getPositionMinerai() -> getPositionMinerai
+    int getPositionRobot() -> getPositionRobot
+    boolean isPresenceMinerai() -> isPresenceMinerai
+    void setOrientationRobot(int) -> setOrientationRobot
+    void setPositionMinerai(int) -> setPositionMinerai
+    void setPositionRobot(int) -> setPositionRobot
+    void setPrésenceMinerai(boolean) -> setPrésenceMinerai
+    java.lang.String toString() -> toString
+robot.JMenuItemNiveau -> robot.JMenuItemNiveau:
+    int niveau -> a
+    int getNiveau() -> getNiveau
+robot.Programme -> robot.Programme:
+    robot.Initialisation initialisation -> a
+    java.util.Map procedure -> b
+    javax.swing.tree.DefaultTreeModel arbreProgramme -> c
+    java.lang.String toString() -> toString
+    void changerDeRobot(instruction.Instruction,robot.Robot) -> a
+    javax.swing.tree.DefaultTreeModel getArbreProgramme() -> getArbreProgramme
+    instruction.Instruction getProcedurePrincipal() -> getProcedurePrincipal
+    instruction.Instruction getProcedure(java.lang.String) -> a
+    java.util.Collection getProcedures() -> getProcedures
+    void ajoutProcedure(instruction.Bloc) -> a
+    void retraitProcedure(java.lang.String) -> b
+    instruction.Bloc ajoutProcedure(java.lang.String) -> c
+    void setInitialisation(robot.Initialisation) -> setInitialisation
+    robot.Initialisation getInitialisation() -> getInitialisation
+    void supprimerProcedure() -> a
+robot.Robot -> robot.Robot:
+    terrain.Cellule passage -> b
+    java.util.Random random -> c
+    int duréeReference -> a
+    robot.Robot$Orientation[] tOrientation -> d
+    robot.Robot$Orientation vers -> e
+    java.awt.Color couleur -> f
+    terrain.Terrain terrain -> g
+    int x -> h
+    int y -> i
+    instruction.Instruction programme -> j
+    java.awt.Image[] image -> k
+    java.awt.Image[] robotN -> l
+    java.awt.Image[] robotS -> m
+    java.awt.Image[] robotE -> n
+    java.awt.Image[] robotO -> o
+    java.awt.Image[] robotCasse -> p
+    java.awt.Image[] robotNeM -> q
+    java.awt.Image[] robotSeM -> r
+    java.awt.Image[] robotEeM -> s
+    java.awt.Image[] robotOeM -> t
+    java.awt.Image[] robotNprem -> u
+    java.awt.Image[] robotSprem -> v
+    java.awt.Image[] robotEprem -> w
+    java.awt.Image[] robotOprem -> x
+    java.awt.Image[] robotCasseprem -> y
+    java.awt.Image[] robotNeMprem -> z
+    java.awt.Image[] robotSeMprem -> A
+    java.awt.Image[] robotEeMprem -> B
+    java.awt.Image[] robotOeMprem -> C
+    java.lang.Thread processus -> D
+    boolean enMarche -> E
+    int numeroImage -> F
+    terrain.Cellule quoiDessous() -> c
+    void setTaille(int,int) -> setTaille
+    java.awt.Image[] imageSelonOrientation() -> h
+    java.awt.Color getCouleur() -> getCouleur
+    terrain.Cellule quoiDevant() -> d
+    void avance() -> e
+    java.lang.Thread getProcessus() -> getProcessus
+    void tourne() -> f
+    void execute(instruction.Instruction) -> a
+    void stop() -> g
+    void run() -> run
+    java.awt.Image getImage() -> getImage
+    void poserUneMarque() -> a
+    void enleverUneMarque() -> b
+    int access$002(robot.Robot,int) -> a
+    int access$000(robot.Robot) -> a
+    java.awt.Image[] access$100(robot.Robot) -> b
+    int access$200(robot.Robot) -> c
+    terrain.Terrain access$300(robot.Robot) -> d
+    int access$400(robot.Robot) -> e
+robot.Robot$1 -> robot.Robot$1:
+    robot.Robot this$0 -> a
+    void run() -> run
+robot.Robot$Orientation -> robot.Robot$Orientation:
+    int direction -> a
+    int pasx -> b
+    int pasy -> c
+robot.panneaux.BoiteDeDialHTML -> robot.panneaux.BoiteDeDialHTML:
+    java.net.URL texteURL -> a
+    javax.swing.JTextPane textPaneExercices -> b
+    javax.swing.JScrollPane textPaneExercices() -> a
+robot.panneaux.BoiteDeDialogueInit -> robot.panneaux.BoiteDeDialogueInit:
+    robot.panneaux.PanneauInitialisation panneauInit -> a
+    robot.FramePrincipale environnement -> b
+    javax.swing.JButton valider -> c
+    javax.swing.JButton annuler -> d
+    boolean reponse -> e
+    void setInitialisation(robot.Initialisation) -> setInitialisation
+    robot.Initialisation getInitialisation() -> getInitialisation
+    boolean getOk() -> getOk
+    boolean access$002(robot.panneaux.BoiteDeDialogueInit,boolean) -> a
+robot.panneaux.BoiteDeDialogueInit$1 -> robot.panneaux.BoiteDeDialogueInit$1:
+    robot.panneaux.BoiteDeDialogueInit this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.BoiteDeDialogueInit$2 -> robot.panneaux.BoiteDeDialogueInit$2:
+    robot.panneaux.BoiteDeDialogueInit this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauCommande -> robot.panneaux.PanneauCommande:
+    robot.FramePrincipale frameParente -> a
+    javax.swing.JButton avance -> b
+    javax.swing.JButton efface -> c
+    javax.swing.JButton marque -> d
+    javax.swing.JSlider sliderDuréeAction -> e
+    javax.swing.JButton stopLeRobot -> f
+    javax.swing.JButton tourne -> g
+    int getDuree() -> getDuree
+    void access$000(robot.panneaux.PanneauCommande,javax.swing.event.ChangeEvent) -> a
+    void access$100(robot.panneaux.PanneauCommande,java.awt.event.ActionEvent) -> a
+    void access$200(robot.panneaux.PanneauCommande,java.awt.event.ActionEvent) -> b
+    void access$300(robot.panneaux.PanneauCommande,java.awt.event.ActionEvent) -> c
+    void access$400(robot.panneaux.PanneauCommande,java.awt.event.ActionEvent) -> d
+    void access$500(robot.panneaux.PanneauCommande,java.awt.event.ActionEvent) -> e
+robot.panneaux.PanneauCommande$1 -> robot.panneaux.PanneauCommande$1:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void stateChanged(javax.swing.event.ChangeEvent) -> stateChanged
+robot.panneaux.PanneauCommande$2 -> robot.panneaux.PanneauCommande$2:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauCommande$3 -> robot.panneaux.PanneauCommande$3:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauCommande$4 -> robot.panneaux.PanneauCommande$4:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauCommande$5 -> robot.panneaux.PanneauCommande$5:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauCommande$6 -> robot.panneaux.PanneauCommande$6:
+    robot.panneaux.PanneauCommande this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauInitialisation -> robot.panneaux.PanneauInitialisation:
+    robot.Initialisation initialisation -> a
+    boolean changementInterne -> b
+    javax.swing.JComboBox comboOrientationRobot -> c
+    javax.swing.JComboBox comboPositionMinerai -> d
+    javax.swing.JComboBox comboPositionRobot -> e
+    javax.swing.JCheckBox hauteurDefinie -> f
+    javax.swing.JCheckBox jCheckBoxMinerai -> g
+    javax.swing.JSlider jSliderHauteur -> h
+    javax.swing.JSlider jSliderLargeur -> i
+    javax.swing.JLabel labelOrientationRobot -> j
+    javax.swing.JLabel labelPositionMinerai -> k
+    javax.swing.JLabel labelPositionRobot -> l
+    javax.swing.JCheckBox largeurDefinie -> m
+    void initComponents() -> a
+    robot.Initialisation getInitialisation() -> getInitialisation
+    void access$000(robot.panneaux.PanneauInitialisation,java.awt.event.ItemEvent) -> a
+    void access$100(robot.panneaux.PanneauInitialisation,java.awt.event.ItemEvent) -> b
+    void access$200(robot.panneaux.PanneauInitialisation,javax.swing.event.ChangeEvent) -> a
+    void access$300(robot.panneaux.PanneauInitialisation,java.awt.event.ItemEvent) -> c
+    void access$400(robot.panneaux.PanneauInitialisation,javax.swing.event.ChangeEvent) -> b
+    void access$500(robot.panneaux.PanneauInitialisation,javax.swing.event.ChangeEvent) -> c
+    void access$600(robot.panneaux.PanneauInitialisation,javax.swing.event.ChangeEvent) -> d
+    void access$700(robot.panneaux.PanneauInitialisation,java.awt.event.ActionEvent) -> a
+robot.panneaux.PanneauInitialisation$1 -> robot.panneaux.PanneauInitialisation$1:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void itemStateChanged(java.awt.event.ItemEvent) -> itemStateChanged
+robot.panneaux.PanneauInitialisation$2 -> robot.panneaux.PanneauInitialisation$2:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void itemStateChanged(java.awt.event.ItemEvent) -> itemStateChanged
+robot.panneaux.PanneauInitialisation$3 -> robot.panneaux.PanneauInitialisation$3:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void stateChanged(javax.swing.event.ChangeEvent) -> stateChanged
+robot.panneaux.PanneauInitialisation$4 -> robot.panneaux.PanneauInitialisation$4:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void itemStateChanged(java.awt.event.ItemEvent) -> itemStateChanged
+robot.panneaux.PanneauInitialisation$5 -> robot.panneaux.PanneauInitialisation$5:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void stateChanged(javax.swing.event.ChangeEvent) -> stateChanged
+robot.panneaux.PanneauInitialisation$6 -> robot.panneaux.PanneauInitialisation$6:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void stateChanged(javax.swing.event.ChangeEvent) -> stateChanged
+robot.panneaux.PanneauInitialisation$7 -> robot.panneaux.PanneauInitialisation$7:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void stateChanged(javax.swing.event.ChangeEvent) -> stateChanged
+robot.panneaux.PanneauInitialisation$8 -> robot.panneaux.PanneauInitialisation$8:
+    robot.panneaux.PanneauInitialisation this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal -> robot.panneaux.PanneauPrincipal:
+    javax.swing.JButton boutonInitialise -> a
+    javax.swing.JButton boutonAvance -> b
+    javax.swing.JButton boutonTourne -> c
+    javax.swing.JButton boutonMarque -> d
+    javax.swing.JButton boutonEfface -> e
+    javax.swing.JButton boutonSi -> f
+    javax.swing.JButton boutonTantQue -> g
+    javax.swing.JButton boutonPour -> h
+    javax.swing.JLabel de -> i
+    javax.swing.JTextField texteDebutPour -> j
+    javax.swing.JLabel à -> k
+    javax.swing.JTextField texteFinPour -> l
+    javax.swing.JLabel pas -> m
+    javax.swing.JTextField textePasPour -> n
+    javax.swing.JButton boutonBloc -> o
+    javax.swing.JTextField texteBloc -> p
+    javax.swing.JTextArea texteExprBool -> q
+    expressions.ExprBool exprBoolComplexe -> r
+    expressions.ParseurExprBool parseur -> s
+    javax.swing.JButton boutonAjoutProcedure -> t
+    javax.swing.JButton boutonAppelProcedure -> u
+    javax.swing.JComboBox comboAppelProcedure -> v
+    javax.swing.JTextField texteNouvelleProcedure -> w
+    javax.swing.JButton boutonSupprime -> x
+    javax.swing.JButton boutonCopie -> y
+    javax.swing.JButton boutonColle -> z
+    javax.swing.JButton boutonCoupe -> A
+    java.io.ByteArrayOutputStream[] brancheCopiee -> B
+    javax.swing.JComboBox comboExpression -> C
+    robot.FramePrincipale frameParente -> D
+    boolean controleSyntaxique -> E
+    javax.swing.JPanel panneauProg -> F
+    java.awt.event.ActionListener ajoutInstruction -> G
+    java.awt.GridBagConstraints placementProg -> H
+    java.lang.String[] getListeTests() -> getListeTests
+    void setNiveau(int) -> setNiveau
+    void diviseDimension(javax.swing.JButton) -> a
+    void placementComposant(java.awt.Component,int,int,int,int,int) -> a
+    void placementComposant(java.awt.Component,int,int) -> a
+    void placementComposant(java.awt.Component,int,int,int) -> a
+    void setAppelProcedure(java.util.Collection) -> setAppelProcedure
+    robot.FramePrincipale access$000(robot.panneaux.PanneauPrincipal) -> a
+    boolean access$100(robot.panneaux.PanneauPrincipal) -> b
+    javax.swing.JButton access$200(robot.panneaux.PanneauPrincipal) -> c
+    javax.swing.JButton access$300(robot.panneaux.PanneauPrincipal) -> d
+    javax.swing.JButton access$400(robot.panneaux.PanneauPrincipal) -> e
+    javax.swing.JButton access$500(robot.panneaux.PanneauPrincipal) -> f
+    javax.swing.JButton access$600(robot.panneaux.PanneauPrincipal) -> g
+    javax.swing.JButton access$700(robot.panneaux.PanneauPrincipal) -> h
+    expressions.ExprBool access$800(robot.panneaux.PanneauPrincipal) -> i
+    javax.swing.JTextArea access$900(robot.panneaux.PanneauPrincipal) -> j
+    javax.swing.JComboBox access$1000(robot.panneaux.PanneauPrincipal) -> k
+    javax.swing.JButton access$1100(robot.panneaux.PanneauPrincipal) -> l
+    javax.swing.JButton access$1200(robot.panneaux.PanneauPrincipal) -> m
+    javax.swing.JTextField access$1300(robot.panneaux.PanneauPrincipal) -> n
+    javax.swing.JTextField access$1400(robot.panneaux.PanneauPrincipal) -> o
+    javax.swing.JComboBox access$1500(robot.panneaux.PanneauPrincipal) -> p
+    javax.swing.JButton access$1600(robot.panneaux.PanneauPrincipal) -> q
+    javax.swing.JButton access$1700(robot.panneaux.PanneauPrincipal) -> r
+    javax.swing.JTextField access$1800(robot.panneaux.PanneauPrincipal) -> s
+    javax.swing.JTextField access$1900(robot.panneaux.PanneauPrincipal) -> t
+    javax.swing.JTextField access$2000(robot.panneaux.PanneauPrincipal) -> u
+    expressions.ExprBool access$802(robot.panneaux.PanneauPrincipal,expressions.ExprBool) -> a
+    expressions.ParseurExprBool access$2100(robot.panneaux.PanneauPrincipal) -> v
+    javax.swing.JButton access$2200(robot.panneaux.PanneauPrincipal) -> w
+    javax.swing.JButton access$2300(robot.panneaux.PanneauPrincipal) -> x
+    java.io.ByteArrayOutputStream[] access$2402(robot.panneaux.PanneauPrincipal,java.io.ByteArrayOutputStream[]) -> a
+    java.io.ByteArrayOutputStream[] access$2400(robot.panneaux.PanneauPrincipal) -> y
+robot.panneaux.PanneauPrincipal$1 -> robot.panneaux.PanneauPrincipal$1:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal$2 -> robot.panneaux.PanneauPrincipal$2:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void caretUpdate(javax.swing.event.CaretEvent) -> caretUpdate
+robot.panneaux.PanneauPrincipal$3 -> robot.panneaux.PanneauPrincipal$3:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal$4 -> robot.panneaux.PanneauPrincipal$4:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal$5 -> robot.panneaux.PanneauPrincipal$5:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal$6 -> robot.panneaux.PanneauPrincipal$6:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+robot.panneaux.PanneauPrincipal$7 -> robot.panneaux.PanneauPrincipal$7:
+    robot.panneaux.PanneauPrincipal this$0 -> a
+    void actionPerformed(java.awt.event.ActionEvent) -> actionPerformed
+terrain.Cellule -> terrain.Cellule:
+    java.awt.Color getCouleur() -> getCouleur
+    java.awt.Image getImage() -> getImage
+    void setTaille(int,int) -> setTaille
+terrain.Marque -> terrain.Marque:
+    java.awt.Image imagePrem -> a
+    java.awt.Image image -> b
+    java.awt.Color getCouleur() -> getCouleur
+    java.awt.Image getImage() -> getImage
+    void setTaille(int,int) -> setTaille
+terrain.Minerai -> terrain.Minerai:
+    java.awt.Image imagePrem -> a
+    java.awt.Image image -> b
+    java.awt.Color getCouleur() -> getCouleur
+    java.awt.Image getImage() -> getImage
+    void setTaille(int,int) -> setTaille
+terrain.Mur -> terrain.Mur:
+    java.awt.Image imagePrem -> a
+    java.awt.Image image -> b
+    java.awt.Color getCouleur() -> getCouleur
+    java.awt.Image getImage() -> getImage
+    void setTaille(int,int) -> setTaille
+terrain.Terrain -> terrain.Terrain:
+    java.util.Random random -> a
+    terrain.Cellule[][] terrain -> b
+    int nX -> c
+    int nY -> d
+    int tailleCelluleX -> e
+    int tailleCelluleY -> f
+    robot.FramePrincipale frameParente -> g
+    void changementDeDimension() -> a
+    void setNy(int) -> setNy
+    void setNx(int) -> setNx
+    int getNy() -> getNy
+    int getNx() -> getNx
+    int getTailleCelluleX() -> getTailleCelluleX
+    void setTailleCelluleX(int) -> setTailleCelluleX
+    int getTailleCelluleY() -> getTailleCelluleY
+    void setTailleCelluleY(int) -> setTailleCelluleY
+    void set(int,int,terrain.Cellule) -> a
+    terrain.Cellule get(int,int) -> a
+    void paint(java.awt.Graphics) -> paint
+    robot.FramePrincipale access$000(terrain.Terrain) -> a
+    int access$100(terrain.Terrain) -> b
+    int access$200(terrain.Terrain) -> c
+    int access$302(terrain.Terrain,int) -> a
+    int access$402(terrain.Terrain,int) -> b
+    int access$300(terrain.Terrain) -> d
+    int access$400(terrain.Terrain) -> e
+    terrain.Cellule[][] access$500(terrain.Terrain) -> f
+terrain.Terrain$1 -> terrain.Terrain$1:
+    terrain.Terrain this$0 -> a
+    void componentResized(java.awt.event.ComponentEvent) -> componentResized
