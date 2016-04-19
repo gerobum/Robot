@@ -12,8 +12,9 @@ import robot.Robot;
  * @author Yvan
  */
 public class Et extends OperationBool {
-    private static final long serialVersionUID = 1L;
 
+    public static final long serialVersionUID = 0L;
+    
     public Et(ExprBool gauche, ExprBool droite, String nom) {
         super(gauche, droite, nom);
     }

@@ -8,6 +8,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import javax.swing.JPanel;
 
 /**
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
  * @author maillot
  */
 public class Terrain extends JPanel {
+
     private static final long serialVersionUID = 1L;
 
     private static Random random = new Random();
@@ -81,7 +83,6 @@ public class Terrain extends JPanel {
         int rapport = rapportX < rapportY ? rapportX : rapportY;
         rapport = rapport > 50 ? 50 : rapport;
 
-
         tailleCelluleX = tailleCelluleY = rapport;
 
         placementDesMurs();
@@ -138,7 +139,6 @@ public class Terrain extends JPanel {
                 int rapport = rapportX < rapportY ? rapportX : rapportY;
                 rapport = rapport > 50 ? 50 : rapport;
 
-
                 tailleCelluleX = tailleCelluleY = rapport;
 
                 setPreferredSize(new Dimension(nX * tailleCelluleX, nY * tailleCelluleY));
@@ -183,7 +183,6 @@ public class Terrain extends JPanel {
         int rapportY = height / nY < 2 ? 1 : height / nY;
         int rapport = rapportX < rapportY ? rapportX : rapportY;
         rapport = rapport > 50 ? 50 : rapport;
-
 
         tailleCelluleX = tailleCelluleY = rapport;
 
@@ -276,21 +275,26 @@ public class Terrain extends JPanel {
     @Override
     public void paint(java.awt.Graphics g) {
         super.paint(g);
-        int n = 0;
-        if (terrain == null)
+        //int n = 0;
+        if (terrain == null) {
             return;
+        }
 
         for (int x = 0; x < nX; x++) {
             for (int y = 0; y < nY; y++) {
-                if (terrain[x][y] != null) {
-                    if (terrain[x][y].getImage() == null) {
-                        //g.setColor(Color.GREEN/*terrain[x][y].getCouleur()*/);
-                        g.fillRect(x * tailleCelluleX, y * tailleCelluleY, tailleCelluleX, tailleCelluleY);
-                    } else {                       
-                        g.drawImage(terrain[x][y].getImage(), x * tailleCelluleX, y * tailleCelluleY, this);
-                    }
-                    n++;
+                //if (terrain[x][y] != null) {
+                try {
+                if (terrain[x][y].getImage() == null) {
+                    //g.setColor(Color.GREEN/*terrain[x][y].getCouleur()*/);
+                    g.fillRect(x * tailleCelluleX, y * tailleCelluleY, tailleCelluleX, tailleCelluleY);
+                } else {
+                    g.drawImage(terrain[x][y].getImage(), x * tailleCelluleX, y * tailleCelluleY, this);
                 }
+                } catch(NullPointerException npe) {
+                    
+                }
+                //n++;
+                //}
             }
         }
         int derY = tailleCelluleY * nY;

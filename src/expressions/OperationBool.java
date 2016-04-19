@@ -10,6 +10,7 @@ package expressions;
  * @author Yvan
  */
 public abstract class OperationBool extends ExprBool {
+    public static final long serialVersionUID = 0L;
     protected ExprBool gauche;
     protected ExprBool droite;
     private String nom;

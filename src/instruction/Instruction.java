@@ -13,6 +13,7 @@ import robot.NoeudProgramme;
  */
 public abstract class Instruction extends NoeudProgramme {
 
+    public static final long serialVersionUID = 0L;
     protected String nom;
 
     public abstract void go(robot.Robot robot) throws DansLeMur, InterruptedException;

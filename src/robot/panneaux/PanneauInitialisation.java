@@ -24,7 +24,8 @@ public class PanneauInitialisation extends javax.swing.JPanel {
     
     private static final long serialVersionUID = 1L;
     
-    private Initialisation initialisation;
+    private final Initialisation initialisation;
+    
     private boolean changementInterne = false;
 
     /** Creates new form NewJPanel */

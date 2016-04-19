@@ -11,6 +11,7 @@ package instruction;
  */
 public abstract class InstructionElementaire extends Instruction {
 
+    public static final long serialVersionUID = 0L;
     @Override
     public boolean autorisationAjout() {
         return false;

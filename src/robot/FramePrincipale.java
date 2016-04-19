@@ -213,7 +213,7 @@ public class FramePrincipale extends JFrame implements Detachable {
 
                         panneauPrincipal.ouvrir(f);
                     } catch (MalformedURLException ex) {
-                        Logger.getLogger(FramePrincipale.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(FramePrincipale.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }

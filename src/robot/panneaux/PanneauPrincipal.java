@@ -1,7 +1,7 @@
-
 package robot.panneaux;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import expressions.*;
 import instruction.*;
@@ -33,7 +33,7 @@ import robot.NoeudProgramme;
 import robot.Programme;
 
 class JMenuItemNiveau extends JMenuItem {
-    
+
     private static final long serialVersionUID = 1L;
 
     int niveau;
@@ -53,53 +53,53 @@ class JMenuItemNiveau extends JMenuItem {
  * @author Maillot
  */
 public class PanneauPrincipal extends JPanel {
-    
+
     private static final long serialVersionUID = 1L;
 
     private final JButton boutonInitialise = new JButton("initialisation");
     private final JButton boutonAvance = new JButton("avance");
     private final JButton boutonTourne = new JButton("tourne");
-    private JButton boutonMarque = new JButton("marque");
-    private JButton boutonEfface = new JButton("efface");
-    private JButton boutonSi = new JButton("si");
-    private JButton boutonTantQue = new JButton("tant que");
-    private JButton boutonPour = new JButton("pour");
-    private JLabel de = new JLabel("de", JLabel.CENTER);
-    private JTextField texteDebutPour = new JTextField("1");
-    private JLabel à = new JLabel("à", JLabel.CENTER);
-    private JTextField texteFinPour = new JTextField("10");
-    private JLabel pas = new JLabel("pas", JLabel.CENTER);
-    private JTextField textePasPour = new JTextField("1");
-    private JButton boutonBloc = new JButton("bloc");
-    private JTextField texteBloc = new JTextField();
-    private JTextArea texteExprBool = new JTextArea(3, 5);
+    private final JButton boutonMarque = new JButton("marque");
+    private final JButton boutonEfface = new JButton("efface");
+    private final JButton boutonSi = new JButton("si");
+    private final JButton boutonTantQue = new JButton("tant que");
+    private final JButton boutonPour = new JButton("pour");
+    private final JLabel de = new JLabel("de", JLabel.CENTER);
+    private final JTextField texteDebutPour = new JTextField("1");
+    private final JLabel à = new JLabel("à", JLabel.CENTER);
+    private final JTextField texteFinPour = new JTextField("10");
+    private final JLabel pas = new JLabel("pas", JLabel.CENTER);
+    private final JTextField textePasPour = new JTextField("1");
+    private final JButton boutonBloc = new JButton("bloc");
+    private final JTextField texteBloc = new JTextField();
+    private final JTextArea texteExprBool = new JTextArea(3, 5);
     private ExprBool exprBoolComplexe = null;
     private ParseurExprBool parseur;
-    private JButton boutonAjoutProcedure = new JButton("nouvelle procédure");
-    private JButton boutonAppelProcedure = new JButton("appel de procédure");
-    private JComboBox comboAppelProcedure = new JComboBox();
-    private JTextField texteNouvelleProcedure = new JTextField();
-    private JButton boutonEcrire = new JButton("écrire");
-    private JButton boutonLire = new JButton("Lire");
-    private JTextField texteLireEcrire = new JTextField();
-    private JButton boutonSupprime = new JButton("supprimer");
-    private JButton boutonCopie = new JButton("copier");
-    private JButton boutonColle = new JButton("coller");
-    private JButton boutonCoupe = new JButton("couper");
-    private JButton boutonExecutionProgramme = new JButton("Exécution du programme");
-    private JButton boutonExecutionSelection = new JButton("Exécution de la sélection");
+    private final JButton boutonAjoutProcedure = new JButton("nouvelle procédure");
+    private final JButton boutonAppelProcedure = new JButton("appel de procédure");
+    private final JComboBox comboAppelProcedure = new JComboBox();
+    private final JTextField texteNouvelleProcedure = new JTextField();
+    private final JButton boutonEcrire = new JButton("écrire");
+    private final JButton boutonLire = new JButton("Lire");
+    private final JTextField texteLireEcrire = new JTextField();
+    private final JButton boutonSupprime = new JButton("supprimer");
+    private final JButton boutonCopie = new JButton("copier");
+    private final JButton boutonColle = new JButton("coller");
+    private final JButton boutonCoupe = new JButton("couper");
+    private final JButton boutonExecutionProgramme = new JButton("Exécution du programme");
+    private final JButton boutonExecutionSelection = new JButton("Exécution de la sélection");
     private ByteArrayOutputStream brancheCopiee[] = null;
-    private JComboBox comboExpression = new JComboBox();
+    private final JComboBox comboExpression = new JComboBox();
     //private JTree arbre;
-    private Detachable frameParente;
+    private final Detachable frameParente;
     //private PanneauProcedure panneauProcedure;
     //private boolean controleSyntaxique = true;
     private JPanel panneauProg;
     private ActionListener ajoutInstruction;
-    private GridBagConstraints placementProg = new GridBagConstraints();
-    private BoiteDeDialHTML exercicesDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("exercices.html"));
-    private BoiteDeDialHTML manuelDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("manuel_utilisateur.html"));
-    private BoiteDeDialHTML aProposDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("aPropos.html"));
+    private final GridBagConstraints placementProg = new GridBagConstraints();
+    private final BoiteDeDialHTML exercicesDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("exercices.html"));
+    private final BoiteDeDialHTML manuelDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("manuel_utilisateur.html"));
+    private final BoiteDeDialHTML aProposDialog = new BoiteDeDialHTML(BoiteDeDialHTML.class.getResource("aPropos.html"));
     private JMenu menuNiveau;
     private static final String[] nomsFichiersDemo = {
         "Se dérouiller les roulettes sans risque",
@@ -109,14 +109,14 @@ public class PanneauPrincipal extends JPanel {
         "S'orienter avec un tant que",
         "Au milieu d'un bord",
         "Il y a du minerai sur un bord; se placer devant",
-        "Il y a peut-être du minerai sur un bord; se placer devant s'il existe (coince)",
-        "Il y a peut-être du minerai sur un bord; se placer devant s'il existe (coince pas mais PB)",
+        /*"Il y a peut-être du minerai sur un bord; se placer devant s'il existe (coince)",
+         "Il y a peut-être du minerai sur un bord; se placer devant s'il existe (coince pas mais PB)",*/
         "Il y a peut-être du minerai sur un bord; se placer devant s'il existe",
         "Au milieu d'un bord avec procédures",
         "Au milieu d'un bord avec procédures (fausse bonne idée)",
         "Trouver la plus grande colonne de marques",
         /*"Dessiner un rectangle de x par y",
-        "Dessiner un triangle",*/
+         "Dessiner un triangle",*/
         "Dessiner un carré de 10 x 10",
         "Dessiner un carré de 10 x 10 en faisant 5 allers et retours",
         "Dessiner un triangle isocèle",
@@ -154,7 +154,6 @@ public class PanneauPrincipal extends JPanel {
         boutonEcrire.setVisible(true);
         boutonLire.setVisible(true);
         texteLireEcrire.setVisible(true);
-
 
         boutonPour.setVisible(true);
         texteDebutPour.setVisible(true);
@@ -226,16 +225,12 @@ public class PanneauPrincipal extends JPanel {
         JMenuItem exo = new JMenuItem("Exercices...");
         JMenuItem aPropos = new JMenuItem("A propos...");
 
-
-
-
         frameParente.getJMenuBar().add(menuNiveau);
 
         frameParente.getJMenuBar().add(menuAide);
 
         // #### Enlevé temporairement pour cause de bug
         frameParente.getJMenuBar().add(PanneauPrincipal.this.getMenuDemo());
-
 
         menuAide.add(aide);
         menuAide.add(exo);
@@ -281,76 +276,66 @@ public class PanneauPrincipal extends JPanel {
     }
 
     /*public void ouvrirOBJ(URL fichier) {
-        try {
-            ObjectInputStream oi = null;
-            try {
-                oi = new ObjectInputStream(fichier.openStream());
-            } catch (IOException ex) {
-                Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NullPointerException ex) {
-                System.out.println("Le fichier s'appelle : " + fichier);
-                ex.printStackTrace();
-            }
-            Programme nouveauProgramme = (Programme) oi.readObject();
+     try {
+     ObjectInputStream oi = null;
+     try {
+     oi = new ObjectInputStream(fichier.openStream());
+     } catch (IOException ex) {
+     Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (NullPointerException ex) {
+     System.out.println("Le fichier s'appelle : " + fichier);
+     ex.printStackTrace();
+     }
+     Programme nouveauProgramme = (Programme) oi.readObject();
 
 
 
-            frameParente.setTitle(fichier.getFile());
+     frameParente.setTitle(fichier.getFile());
 
 
-            setAppelProcedure(nouveauProgramme.getProcedures());
-            Programme programme = frameParente.getProgramme();
+     setAppelProcedure(nouveauProgramme.getProcedures());
+     Programme programme = frameParente.getProgramme();
 
-            Instruction racine = (Instruction) frameParente.getProgramme().getArbreProgramme().getRoot();
-            while (racine.getChildCount() > 0) {
-                programme.getArbreProgramme().removeNodeFromParent((MutableTreeNode) racine.getFirstChild());
-            }
+     Instruction racine = (Instruction) frameParente.getProgramme().getArbreProgramme().getRoot();
+     while (racine.getChildCount() > 0) {
+     programme.getArbreProgramme().removeNodeFromParent((MutableTreeNode) racine.getFirstChild());
+     }
 
 
-            Instruction nouvelleRacine = (Instruction) nouveauProgramme.getArbreProgramme().getRoot();
+     Instruction nouvelleRacine = (Instruction) nouveauProgramme.getArbreProgramme().getRoot();
 
-            programme.supprimerProcedure();
-            while (nouvelleRacine.getChildCount() > 0) {
-                Instruction instruction = (Instruction) nouvelleRacine.getFirstChild();
-                programme.ajoutProcedure((Bloc) instruction);
-                programme.getArbreProgramme().insertNodeInto(instruction, racine, racine.getChildCount());
-            }
+     programme.supprimerProcedure();
+     while (nouvelleRacine.getChildCount() > 0) {
+     Instruction instruction = (Instruction) nouvelleRacine.getFirstChild();
+     programme.ajoutProcedure((Bloc) instruction);
+     programme.getArbreProgramme().insertNodeInto(instruction, racine, racine.getChildCount());
+     }
 
-            //Initialisation.initialiser(nouveauProgramme.getInitialisation(), FramePrincipale.this);
-            Initialisation.initialiser(nouveauProgramme.getInitialisation(), frameParente, false);
-            for (int i = 0; i < frameParente.getArbre().getRowCount(); i++) {
-                frameParente.getArbre().expandRow(i);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     //Initialisation.initialiser(nouveauProgramme.getInitialisation(), FramePrincipale.this);
+     Initialisation.initialiser(nouveauProgramme.getInitialisation(), frameParente, false);
+     for (int i = 0; i < frameParente.getArbre().getRowCount(); i++) {
+     frameParente.getArbre().expandRow(i);
+     }
+     } catch (IOException ex) {
+     Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+     Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+     }
 
-    }*/
-
+     }*/
     public void ouvrir(URL fichier) {
         /*if (Pattern.matches(".*\\.obj$", fichier.getFile())) {
-            ouvrirOBJ(fichier);
-        } else {*/
-            
-            XStream xstream = new XStream(new DomDriver());
+         ouvrirOBJ(fichier);
+         } else {*/
 
-            Programme nouveauProgramme = null;
+        XStream xstream = new XStream(new DomDriver());
 
-            try {
-                nouveauProgramme = (Programme) xstream.fromXML(fichier.openStream());
+        Programme nouveauProgramme = null;
 
-            } catch (FileNotFoundException ex) {
-                System.err.println(ex);
-            } catch (IOException ex) {
-                Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NullPointerException ex) {
-                System.err.println(ex);
-            }
+        try {
+            nouveauProgramme = (Programme) xstream.fromXML(fichier.openStream());
 
             frameParente.setTitle(fichier.getFile());
-
 
             setAppelProcedure(nouveauProgramme.getProcedures());
             Programme programme = frameParente.getProgramme();
@@ -377,7 +362,15 @@ public class PanneauPrincipal extends JPanel {
                     i < frameParente.getArbre().getRowCount(); i++) {
                 frameParente.getArbre().expandRow(i);
             }
-       //}
+
+        } catch (FileNotFoundException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Le fichier " + fichier + " semble absent", "Problème d'ouverture de fichier", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Le fichier " + fichier + " est illisible", "Problème d'ouverture de fichier", JOptionPane.ERROR_MESSAGE);
+        } catch (StreamException se) {
+            JOptionPane.showMessageDialog(this, "Le fichier " + fichier + " semble incompatible", "Problème d'incompatibilité de fichier", JOptionPane.ERROR_MESSAGE);
+        }
+        //}
     }
 
     private JMenu getMenuDemo() {
@@ -408,7 +401,6 @@ public class PanneauPrincipal extends JPanel {
 
         panneauProg = new JPanel();
 
-
         ajoutInstruction = new ActionListener() {
 
             @Override
@@ -426,7 +418,6 @@ public class PanneauPrincipal extends JPanel {
                 }
 
                 JButton source = (JButton) e.getSource();
-
 
                 Instruction instruction = null;
                 if (source == boutonAvance) {
@@ -486,11 +477,7 @@ public class PanneauPrincipal extends JPanel {
                         a = texteFinPour.getText();
                         pas = textePasPour.getText();
 
-
-
                         instruction = new Pour((InstructionComposee) select, de, a, pas);
-
-
 
                     } else {
                         //instruction = null; // Important, ne pas enlever
@@ -521,13 +508,7 @@ public class PanneauPrincipal extends JPanel {
             //}
         };
 
-
-
         boutonAvance.setText("avance");
-
-
-
-
 
         comboExpression.addItem(new DevantMur());
         comboExpression.addItem(new PasDevantMur());
@@ -555,7 +536,6 @@ public class PanneauPrincipal extends JPanel {
 
             }
         });
-
 
         JScrollPane vueDArbre = new JScrollPane(frameParente.getArbre());
         JPanel panneauArbre = new JPanel(new BorderLayout());
@@ -621,9 +601,6 @@ public class PanneauPrincipal extends JPanel {
         boutonAppelProcedure.addActionListener(ajoutInstruction);
         boutonEcrire.addActionListener(ajoutInstruction);
         boutonLire.addActionListener(ajoutInstruction);
-
-
-
 
         boutonSupprime.addActionListener(new ActionListener() {
 
@@ -697,7 +674,6 @@ public class PanneauPrincipal extends JPanel {
 
                 treePaths.addFirst(tp[0]);
 
-
                 if (treePaths != null) {
                     brancheCopiee = new ByteArrayOutputStream[treePaths.size()];
                     int i = 0;
@@ -707,7 +683,6 @@ public class PanneauPrincipal extends JPanel {
                         try {
                             ObjectOutputStream fout = new ObjectOutputStream(brancheCopiee[i]);
                             fout.writeObject(select);
-
 
                         } catch (IOException ex) {
                             Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -739,7 +714,6 @@ public class PanneauPrincipal extends JPanel {
                         try {
                             ObjectInputStream fin = new ObjectInputStream(new ByteArrayInputStream(copiee.toByteArray()));
                             instruction = (Instruction) fin.readObject();
-
 
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(PanneauPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -817,7 +791,6 @@ public class PanneauPrincipal extends JPanel {
         panneauPas.add(textePasPour);
         placementComposant(panneauPas, pl++, 3);
 
-
         //placementComposant(panneauProcedure, 6, 0, 4);
         placementComposant(texteNouvelleProcedure, pl++, 0, 4);
         placementComposant(boutonAjoutProcedure, pl++, 0, 4);
@@ -834,10 +807,6 @@ public class PanneauPrincipal extends JPanel {
         placementComposant(boutonCopie, pl, 2);
         placementComposant(boutonColle, pl++, 3);
 
-
-
-
-
         placementComposant(new JLabel(" ", JLabel.CENTER), pl++, 0, 4);
 
         placementComposant(new JLabel(" ", JLabel.CENTER), pl++, 0, 4);
@@ -846,13 +815,7 @@ public class PanneauPrincipal extends JPanel {
         placementComposant(boutonExecutionProgramme, pl, 0, 2);
         placementComposant(boutonExecutionSelection, pl, 2, 2);
 
-
-
-
-
         miseEnPlaceDesMenus();
-
-
 
     }
 
@@ -878,19 +841,19 @@ public class PanneauPrincipal extends JPanel {
             try {
                 XStream xstream = new XStream(new DomDriver());
 
-                Programme programme = null;                                          
+                Programme programme = null;
 
                 programme = (Programme) xstream.fromXML(getClass().getResourceAsStream("sources/" + nom + ".rob"));
                 //os = null;
                 //File file = new File(getClass().getResource("sources/" + nom + ".rob.obj"));
                 // getClass().getr
                 try ( //os = new ObjectOutputStream(new FileOutputStream(new File(getClass().getResource("sources/" + nom + ".rob.obj").toURI())));
-                //os = new ObjectOutputStream(getClass().getResourceAsStream("sources/" + nom + ".rob.obj"));
-                        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/robot/panneaux/sources/"+ nom + ".rob.obj"))) {
+                        //os = new ObjectOutputStream(getClass().getResourceAsStream("sources/" + nom + ".rob.obj"));
+                        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/robot/panneaux/sources/" + nom + ".rob.obj"))) {
                     os.writeObject(programme);
                 }
             } catch (FileNotFoundException ex) {
-                
+
             } catch (IOException ex) {
                 System.err.println(ex);
             } catch (NullPointerException ex) {
@@ -899,7 +862,6 @@ public class PanneauPrincipal extends JPanel {
                 System.err.println(ex);
             }
         }
-
 
         demo.add(getMenuItem(nom));
 

@@ -13,6 +13,7 @@ import java.util.HashMap;
  */
 public abstract class InstructionComposee extends Instruction {
 
+    public static final long serialVersionUID = 0L;
     
     private HashMap<String, Integer> variable = new HashMap<String, Integer>();
 
