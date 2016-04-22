@@ -9,30 +9,42 @@ import java.util.Vector;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Maillot
  */
-public class Modele5 extends DefaultTableModel {
+public class Modele5 extends AbstractTableModel {
 
-    private Object[] columnTypes = {1, 1.0, true, ""};
-    private Vector<Vector<Object>> donnee;
+    private Object[][] datas;
+    private String[] columnNames;
+    private Class<?>[] columnTypes;
 
-    public Modele5(Vector<Vector<Object>> donnee, Vector<String> columnNames, Object[] columnTypes) {
-        this.donnee = donnee;
-        setDataVector(donnee, columnNames);
+    public Modele5(Object[][] datas, String[] columnNames, Class<?>[] columnTypes) {
+        this.datas = datas;
+        this.columnNames = columnNames;
+        this.columnTypes = columnTypes;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return columnTypes[columnIndex].getClass();
+        return columnTypes[columnIndex];
     }
 
     @Override
-    public void setValueAt(Object aValue, int row, int column) {
-        super.setValueAt(aValue, row, column);
-        donnee.get(row).set(column, aValue);
+    public int getRowCount() {
+        return datas.length;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return datas[0].length;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        return datas[rowIndex][columnIndex];
     }
 }
