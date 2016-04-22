@@ -1,48 +1,63 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package modele;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Maillot
  */
-public class Modele6 extends DefaultTableModel {
-    private String[] columnNames = {"Integer", "Boolean", "String"};
-    private Object[][] donnee = {{1, true, "Vrai"}};
-    public Modele6() {
-        setDataVector(donnee, columnNames);
-    }
+public class Modele6 extends AbstractTableModel {
+    private final String[] columnNames = {"Integer", "Boolean", "String"};
+    private Integer vi;
+    private Boolean vb;
+    private String vs;
+ 
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        if (column == 1) return true;
-        else return false;
+        return column == 1;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return donnee[0][columnIndex].getClass();
+        switch(columnIndex) {
+            case 0:
+                return Integer.class;
+            case 1:
+                return Boolean.class;
+            default:
+                return String.class;
+        }
     }
 
     @Override
     public void setValueAt(Object aValue, int row, int column) {
-        super.setValueAt(aValue, row, column);
-        if ((Boolean) aValue) {
-            super.setValueAt(1, row, 0);
-            super.setValueAt("Vrai", row, 2);
-        } else {
-            super.setValueAt(0, row, 0);
-            super.setValueAt("Faux", row, 2);
-        }
+        vb = (Boolean) aValue;
+        vi = vb ? 1 : 0;
+        vs = vb ? "Vrai" : "Faux";
+        fireTableDataChanged();
     }
 
+    @Override
+    public int getRowCount() {
+        return 1;
+    }
 
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch(columnIndex) {
+            case 0:
+                return vi;
+            case 1:
+                return vb;
+            default:
+                return vs;
+        }
+    }
 }
