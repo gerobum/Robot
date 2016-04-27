@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         fillButton = (Button) findViewById(R.id.fillButton);
         okButton = (Button) findViewById(R.id.okButton);
 
-
-
         magicNumber = 15;
 
     }
