@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.maillot.examen2.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Prénom"
+        android:id="@id/prenomLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="33dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextName"
+        android:layout_alignBottom="@id/prenomLabel"
+        android:layout_alignLeft="@+id/editTextPhone"
+        android:layout_alignStart="@+id/editTextPhone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Téléphone"
+        android:id="@id/labelTelephone"
+        android:layout_below="@id/prenomLabel"
+        android:layout_alignLeft="@id/prenomLabel"
+        android:layout_alignStart="@id/prenomLabel" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextPhone"
+        android:layout_alignBottom="@id/labelTelephone"
+        android:layout_toRightOf="@id/labelTypeTel"
+        android:layout_toEndOf="@id/labelTypeTel"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Type de tél"
+        android:id="@id/labelTypeTel"
+        android:layout_below="@id/labelTelephone"
+        android:layout_alignLeft="@id/labelTelephone"
+        android:layout_alignStart="@id/labelTelephone"
+        android:layout_marginTop="21dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/buttonOK"
+        android:layout_marginTop="120dp"
+        android:layout_below="@+id/labelTypeTel"
+        android:layout_alignLeft="@id/labelTypeTel"
+        android:layout_alignStart="@id/labelTypeTel" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:id="@+id/buttonAnnuler"
+        android:layout_alignTop="@+id/buttonOK"
+        android:layout_toRightOf="@id/labelTypeTel"
+        android:layout_toEndOf="@id/labelTypeTel" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:choiceMode="singleChoice"
+        android:layout_alignTop="@id/labelTypeTel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/buttonAnnuler"
+        android:layout_above="@+id/buttonAnnuler"
+        android:layout_alignLeft="@+id/editTextPhone"
+        android:layout_alignStart="@+id/editTextPhone" />
+
+</RelativeLayout>
+
