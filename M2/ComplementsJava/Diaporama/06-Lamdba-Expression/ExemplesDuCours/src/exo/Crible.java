@@ -34,7 +34,8 @@ public class Crible {
 
     public static void main(String[] args) throws NoSuchMethodException {
     
-        afficherLesNombresPremiersAvant(10000000);
+        //afficherLesNombresPremiersAvant(10000000);
+        afficherLesNombresPremiersAvant(100);
         
         System.out.println();
     }
