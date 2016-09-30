@@ -4,10 +4,6 @@ package dessin;
 import java.awt.Graphics;
 import java.awt.Point;
 
-/**
- *
- * @author yvan
- */
 public class Rectangle extends FigureSimple {
     
     private final int width, height;

@@ -4,10 +4,6 @@ import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author yvan
- */
 public class FigureComposee extends Figure {
 
     private final Set<Figure> figures = new HashSet<>();

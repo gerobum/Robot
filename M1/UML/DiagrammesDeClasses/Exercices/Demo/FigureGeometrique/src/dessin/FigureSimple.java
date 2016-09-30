@@ -2,10 +2,6 @@ package dessin;
 
 import java.awt.Point;
 
-/**
- *
- * @author yvan
- */
 public abstract class FigureSimple extends Figure {
 
     protected Point reference;

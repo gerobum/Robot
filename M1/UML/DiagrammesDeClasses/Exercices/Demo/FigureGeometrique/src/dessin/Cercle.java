@@ -3,10 +3,6 @@ package dessin;
 import java.awt.Graphics;
 import java.awt.Point;
 
-/**
- *
- * @author yvan
- */
 public final class Cercle extends FigureSimple {
     private final int rayon;
 

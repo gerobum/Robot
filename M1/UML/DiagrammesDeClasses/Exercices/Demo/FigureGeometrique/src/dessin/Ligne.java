@@ -4,10 +4,6 @@ package dessin;
 import java.awt.Graphics;
 import java.awt.Point;
 
-/**
- *
- * @author yvan
- */
 public class Ligne extends FigureSimple {
     
     private int dx, dy;
