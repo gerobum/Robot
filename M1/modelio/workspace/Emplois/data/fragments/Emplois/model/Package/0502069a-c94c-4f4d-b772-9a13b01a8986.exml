@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="emplois" version="4">
+  <OBJECT>
+    <ID name="emplois" mc="Standard.Package" uid="0502069a-c94c-4f4d-b772-9a13b01a8986"/>
+    <PID name="Emplois" mc="Standard.Project" uid="d2e91224-be4f-4046-a66d-33b021259d19"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[emplois]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Employé" mc="Standard.Class" uid="6aa670cf-9ce5-407f-9958-baba9edb3c4b"/>
+        <COMPID name="Entreprise" mc="Standard.Class" uid="4bf650ae-db2d-470c-b909-d7b42473457a"/>
+        <COMPID name="Poste" mc="Standard.Class" uid="61e61fd5-f211-4562-a776-25cfadf366c4"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="overview diagram" mc="Standard.ClassDiagram" uid="486380db-9f21-4252-b777-7f4b58593234"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

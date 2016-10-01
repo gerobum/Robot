@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="FigureGeometrique" version="4">
+  <OBJECT>
+    <ID name="FigureGeometrique" mc="Standard.DiagramSet" uid="fed60784-f977-406e-bf21-59bee84ef2a0"/>
+    <PID name="FigureGeometrique" mc="Standard.Project" uid="87dc245b-8cbf-4db4-a624-4de0119677b7"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[FigureGeometrique]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>
