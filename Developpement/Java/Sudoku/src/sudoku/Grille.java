@@ -17,6 +17,7 @@ public class Grille {
 
     public Grille() {
         for (int i = 0; i < 9; ++i) {
+<<<<<<< HEAD
             ligne.add(new Zone9());
 
         }
@@ -31,6 +32,11 @@ public class Grille {
                     ligne.get(6).getCase(i), 
                     ligne.get(7).getCase(i), 
                     ligne.get(8).getCase(i)));
+=======
+            Zone9 z = new Zone9();
+
+            ligne.add(new Zone9());
+>>>>>>> 6b8b3539a6450b67f5ac44f34bd2b68cee170a26
         }
     }
 
