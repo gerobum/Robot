@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Poste" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Personne" version="4">
   <OBJECT>
-    <ID name="Poste" mc="Standard.Class" uid="61e61fd5-f211-4562-a776-25cfadf366c4"/>
-    <PID name="Analyse" mc="Standard.Package" uid="e476d305-0e00-480b-9e4f-eb730c8044c2"/>
+    <ID name="Personne" mc="Standard.Class" uid="ad825858-116f-4d43-819f-78a95c39fee3"/>
+    <PID name="Conception" mc="Standard.Package" uid="ffadf607-e6ac-401c-bcac-51bbc08a47d6"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -11,32 +11,32 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Poste]]></ATT>
+      <ATT name="Name"><![CDATA[Personne]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="salaire" mc="Standard.Attribute" uid="5ec81bfd-7f80-4a52-8f41-d802ee5fb580"/>
+          <ID name="nom" mc="Standard.Attribute" uid="c17521d6-9577-4370-b1b4-01615e820fcb"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">Read</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
             <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
             <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
-            <ATT name="Visibility">Private</ATT>
+            <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[salaire]]></ATT>
+            <ATT name="Name"><![CDATA[nom]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Type">
-              <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+              <FOREIGNID name="string" mc="Standard.DataType" uid="00000004-0000-000d-0000-000000000000"/>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>

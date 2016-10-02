@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Emploi de analyse - conception" version="4">
+  <OBJECT>
+    <ID name="Emploi de analyse - conception" mc="Standard.ClassDiagram" uid="9eaa0e49-0726-4b71-bb39-be427c0272e8"/>
+    <PID name="emplois" mc="Standard.Package" uid="0502069a-c94c-4f4d-b772-9a13b01a8986"/>
+    <ATTRIBUTES>
+      <ATT name="UiDataVersion">63</ATT>
+      <ATT name="UiData"><![CDATA[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]]></ATT>
+      <ATT name="PdeProperties"></ATT>
+      <ATT name="Name"><![CDATA[Emploi de analyse - conception]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <LINK relation="Represented">
+        <ID name="Analyse" mc="Standard.Package" uid="e476d305-0e00-480b-9e4f-eb730c8044c2"/>
+        <ID name="Employé" mc="Standard.Class" uid="6aa670cf-9ce5-407f-9958-baba9edb3c4b"/>
+        <ID name="Entreprise" mc="Standard.Class" uid="4bf650ae-db2d-470c-b909-d7b42473457a"/>
+        <ID name="Poste" mc="Standard.Class" uid="61e61fd5-f211-4562-a776-25cfadf366c4"/>
+        <REFOBJ>
+          <ID name="salaire" mc="Standard.Attribute" uid="5ec81bfd-7f80-4a52-8f41-d802ee5fb580"/>
+        </REFOBJ>
+        <REFOBJ>
+          <ID name="entreprise" mc="Standard.AssociationEnd" uid="90601972-4f1a-4013-9ba3-6a15978a3d4a"/>
+        </REFOBJ>
+        <REFOBJ>
+          <ID name="employé" mc="Standard.AssociationEnd" uid="9d1272fc-64f7-4f71-a904-17c9b6510dbe"/>
+        </REFOBJ>
+      </LINK>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Standard.Note" uid="3894b058-0759-415f-9b6e-7a54224c8df3"/>
+          <ATTRIBUTES>
+            <ATT name="Content"></ATT>
+            <ATT name="MimeType"></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

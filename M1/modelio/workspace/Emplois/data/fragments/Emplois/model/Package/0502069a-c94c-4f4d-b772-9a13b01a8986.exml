@@ -14,12 +14,13 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="Employé" mc="Standard.Class" uid="6aa670cf-9ce5-407f-9958-baba9edb3c4b"/>
-        <COMPID name="Entreprise" mc="Standard.Class" uid="4bf650ae-db2d-470c-b909-d7b42473457a"/>
-        <COMPID name="Poste" mc="Standard.Class" uid="61e61fd5-f211-4562-a776-25cfadf366c4"/>
+        <COMPID name="Analyse" mc="Standard.Package" uid="e476d305-0e00-480b-9e4f-eb730c8044c2"/>
+        <COMPID name="Conception" mc="Standard.Package" uid="ffadf607-e6ac-401c-bcac-51bbc08a47d6"/>
       </COMP>
       <COMP relation="Product">
-        <COMPID name="overview diagram" mc="Standard.ClassDiagram" uid="486380db-9f21-4252-b777-7f4b58593234"/>
+        <COMPID name="Emploi pour l'analyse" mc="Standard.ClassDiagram" uid="486380db-9f21-4252-b777-7f4b58593234"/>
+        <COMPID name="Emploi pour la conception" mc="Standard.ClassDiagram" uid="2f81516c-b2ad-47d6-977c-dcff1262669b"/>
+        <COMPID name="Emploi de analyse - conception" mc="Standard.ClassDiagram" uid="9eaa0e49-0726-4b71-bb39-be427c0272e8"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>
