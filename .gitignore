@@ -2,7 +2,6 @@ Rallye/.idea/vcs.xml
 Rallye/app/app.iml
 log
 **/dist/
-**/nbproject/
 **/build/
 **/bin/
 **/.idea/
