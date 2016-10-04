@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grille {
+    
+    public static final class SetFixed {
+        public final int l, c, v;
+
+        public SetFixed(int l, int c, int v) {
+            this.l = l;
+            this.c = c;
+            this.v = v;
+        }
+        
+    }
 
     private final List<Zone9> ligne;
     private final List<Zone9> colonne;
@@ -15,7 +26,7 @@ public class Grille {
         carré = new ArrayList<>();
     }
 
-    public Grille() {
+    public Grille(SetFixed... sfs) {
         for (int i = 0; i < 9; ++i) {
             ligne.add(new Zone9());
         }
@@ -121,7 +132,11 @@ public class Grille {
                 ligne.get(7).getCase(8),
                 ligne.get(8).getCase(6),
                 ligne.get(8).getCase(7),
-                ligne.get(8).getCase(8)));        
+                ligne.get(8).getCase(8))); 
+        
+        for(SetFixed sf : sfs) {
+            ligne.get(sf.l).getCase(sf.c).setValue(sf.v);
+        }
     }
 
     public Zone9 getLigne(int i) {

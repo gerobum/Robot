@@ -136,7 +136,7 @@ public class FrameSudoku extends JFrame implements ActionListener, KeyListener, 
                 
                 bouton[L][C] = new Bouton(grille.getCase(L, C), L, C);
                 bouton[L][C].setPreferredSize(new Dimension(70, 70));
-                bouton[L][C].setFont(new Font("Bradley Hand ITC", Font.BOLD, 16));
+                //bouton[L][C].setFont(new Font("Bradley Hand ITC", Font.BOLD, 16));
                 //grille.getCarré(L,C).setBouton(bouton[L][C]);
                 //grille.getCarré(L,C).construire_nom_bouton();
                 bouton[L][C].addKeyListener(this);
