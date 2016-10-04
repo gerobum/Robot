@@ -57,20 +57,19 @@ class Bouton extends JButton {
             setFont(FONT_FOR_1_CAR);
         } else {
             setFont(FONT_FOR_9_CAR);
-            String nom = "<html>";
-            int k = 1;
-            for(int i = 0; i < 3; i++) {
-                for(int j = 0; j < 3; j++) {
-                    if (aCase.hasThisPossibility(k)) {
-                        nom+=k+"";
-                    } else {
-                        nom+=" ";
-                    }
-                    k++;
-                }
-                nom+="<br>";
+            StringBuilder sb = new StringBuilder();
+            sb.append("<html>");
+            Integer[] p = aCase.getPossibilities();
+            int x=1;
+            for(int k : p) {
+                sb.append(k);
+                if (x % 3 == 0)
+                    sb.append("<br>");
+                ++x;
             }
-            setText(nom+"</html>");  
+            
+            sb.append("</html>");
+            setText(sb.toString());  
         }
     }
 }
