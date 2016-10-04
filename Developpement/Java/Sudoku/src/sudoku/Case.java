@@ -57,6 +57,15 @@ public class Case {
             return value+"";
     }
     
+    public int numberOfPossibily() {
+        return possibility.size();
+    }
     
-    
+    public Integer[] getPossibilities() {
+        return possibility.toArray(new Integer[] {});
+    }
+
+    public boolean hasThisPossibility(int k) {
+        return possibility.contains(k);
+    }
 }

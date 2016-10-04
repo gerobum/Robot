@@ -135,5 +135,9 @@ public class Grille {
     public Zone9 getCarré(int l, int c) {
         return carré.get(l * 3 + c);
     }
+    
+    public Case getCase(int l, int c) {
+        return ligne.get(l).getCase(c);
+    }
 
 }
