@@ -49,6 +49,14 @@ public class Case {
                 this.value = value;
     }
     
+    @Override
+    public String toString() {
+        if (value == null)
+            return " ";
+        else
+            return value+"";
+    }
+    
     
     
 }

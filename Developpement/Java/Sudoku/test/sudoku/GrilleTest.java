@@ -35,7 +35,8 @@ public class GrilleTest extends TestCase {
         Grille g = new Grille();
         for (int l = 0; l < 9; ++l) {
             for (int c = 0; c < 9; ++c) {
-                assertEquals(g.getLigne(l).getCase(c), g.getColonne(c).getCase(l));
+                assertEquals("("+l+ ", " + c+")", g.getLigne(l).getCase(c), g.getColonne(c).getCase(l)); 
+                assertEquals("("+l+ ", " + c+")=("+"("+l/3+","+c/3+")"+ ", " + "("+"("+l%3+","+c%3+"))"+")", g.getLigne(l).getCase(c), g.getCarré(l/3, c/3).getCase(l%3, c%3));                 
             }
         }
     }
