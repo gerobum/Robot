@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pendule;
 
 import langues.ChoixDeLangue;
@@ -9,13 +5,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Locale;
 import javax.swing.*;
 import java.util.ResourceBundle;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 /**
  *
@@ -24,7 +16,6 @@ import javax.swing.event.MenuListener;
 public class StopWatch extends JFrame implements Runnable {
 
     public enum State {
-
         READY, // pret à démarrer
         ACTIVE, // en train de décompter
         BLOQUED     // bloqué
@@ -99,22 +90,8 @@ public class StopWatch extends JFrame implements Runnable {
 
         centre.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
 
-        JPanel pan = new JPanel();
-        pan.setLayout(new GridLayout(1, 3));
-        pan.add(start);
-        pan.add(stop);
-        pan.add(reset);
 
-        getContentPane().add(centre, "Center");
-        getContentPane().add(pan, "South");
-        getContentPane().setBackground(Color.orange);
-        choixDeLangue = new ChoixDeLangue(this);
-        changerDeLangue = new JCheckBox(java.util.ResourceBundle.getBundle("langues/dico").getString("CHANGER DE LANGUE"));
-        getContentPane().add(changerDeLangue, "North");
-
-        pack();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        init();
 
         changerDeLangue.addActionListener(new ActionListener() {
             @Override
@@ -142,7 +119,7 @@ public class StopWatch extends JFrame implements Runnable {
                 }
                 // Pourquoi une interruption ici ?
                 runner.interrupt();
-        // Sans ça, l'appui sur STOP n'est pas immédiat
+                // Sans ça, l'appui sur STOP n'est pas immédiat
                 // L'attente (sleep) doit se terminer.
                 // L'interruption interrompt cette attente.
             }
@@ -161,6 +138,26 @@ public class StopWatch extends JFrame implements Runnable {
             }
         });
         runner = new Thread(this);
+    }
+
+    private void init() {
+        
+        JPanel pan = new JPanel();
+        pan.setLayout(new GridLayout(1, 3));
+        pan.add(start);
+        pan.add(stop);
+        pan.add(reset);
+
+        getContentPane().add(centre, "Center");
+        getContentPane().add(pan, "South");
+        getContentPane().setBackground(Color.orange);
+        choixDeLangue = new ChoixDeLangue(this);
+        changerDeLangue = new JCheckBox(java.util.ResourceBundle.getBundle("langues/dico").getString("CHANGER DE LANGUE"));
+        getContentPane().add(changerDeLangue, "North");
+
+        pack();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     @Override
