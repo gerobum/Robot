@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -43,49 +45,67 @@ import javax.swing.JLabel;
  *
  * @author maillot
  */
-public class JLabelCalendar extends JLabel implements Runnable {
+public class JLabelCalendar extends JLabel /* --- implements Runnable devient obsolète avec Timer et TimerTask --- */ {
 
-  private static DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM);
+    private static DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM);
 
-  public JLabelCalendar() {
-    super(dateFormat.format(new Date()), JLabel.CENTER);
-    init();
-  }
-  
-  private void init() {
-      
-    // Pour la couleur de fond ...
-    setOpaque(true);
-    setBackground(Color.cyan);
-    // Pour une fonte plus visible...
-    setFont(getFont().deriveFont(60F));
+    // --- TimerTask et Timer peuvent être utilisés pour éviter Thread.sleep() dans une boucle
+    private TimerTask timertask;
+    private Timer timer;
+    // ---
 
-    FontMetrics fm = getFontMetrics(getFont());
-    setPreferredSize(new Dimension((int) (fm.stringWidth(getText()) * 1.5), (int) (fm.getHeight() * 1.5)));
-
-    // Pour avoir une bordure intérieure
-    setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-    // Pour mettre à jour l'affichage...
-    new Thread(this).start();
-  }
-
-  @Override
-  public void setLocale(Locale locale) {
-    super.setLocale(locale);
-    dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, locale);
-    setText(dateFormat.format(new Date()));
-  }
-
-  @Override
-  public void run() {
-    while (true) {
-      try {
-        Thread.sleep(1000);
-        setText(dateFormat.format(new Date()));
-      } catch (InterruptedException ex) {
-        Logger.getLogger(JLabelCalendar.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    public JLabelCalendar() {
+        super(dateFormat.format(new Date()), JLabel.CENTER);
+        init();
     }
-  }
+
+    private void init() {
+
+        // Pour la couleur de fond ...
+        setOpaque(true);
+        setBackground(Color.cyan);
+        // Pour une fonte plus visible...
+        setFont(getFont().deriveFont(60F));
+
+        FontMetrics fm = getFontMetrics(getFont());
+        setPreferredSize(new Dimension((int) (fm.stringWidth(getText()) * 1.5), (int) (fm.getHeight() * 1.5)));
+
+        // Pour avoir une bordure intérieure
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Pour mettre à jour l'affichage...
+        // --- TimerTask et Timer peuvent être utilisés pour éviter Thread.sleep() dans une boucle
+        // --- new Thread(this).start();
+        timertask = new TimerTask() {
+            @Override
+            public void run() {
+                setText(dateFormat.format(new Date()));
+            }
+        };
+        timer = new Timer();
+        // --- Lance la tâche de timer à partir de maintenant toutes les seconces.
+        timer.schedule(timertask, 0, 1000);
+        // ---
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        super.setLocale(locale);
+        dateFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM, locale);
+        setText(dateFormat.format(new Date()));
+    }
+
+    /* --- TimerTask et Timer peuvent être utilisés pour éviter Thread.sleep() dans une boucle
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(1000);
+                setText(dateFormat.format(new Date()));
+            } catch (InterruptedException ex) {
+                Logger.getLogger(JLabelCalendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    --- */
 }
