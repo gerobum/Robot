@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package partie1;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,7 +50,11 @@ public class JLabelCalendar extends JLabel implements Runnable {
 
   public JLabelCalendar() {
     super(dateFormat.format(new Date()), JLabel.CENTER);
-
+    init();
+  }
+  
+  private void init() {
+      
     // Pour la couleur de fond ...
     setOpaque(true);
     setBackground(Color.cyan);
