@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package langues;
 
 import java.awt.GridLayout;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,7 +17,7 @@ import pendule.StopWatch;
 public class ChoixDeLangue extends JDialog {
 
     private JTextField langue, region, autre;
-    private JLabel jLlangue, jLregion, jLautre;
+    private final JLabel jLlangue, jLregion, jLautre;
     private StopWatch stopWatch;
 
     @Override
@@ -38,20 +34,15 @@ public class ChoixDeLangue extends JDialog {
 
     public ChoixDeLangue(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
-        getContentPane().setLayout(new GridLayout(2, 3));
         langue = new JTextField(8);
         region = new JTextField(8);
         autre = new JTextField(8);
         jLlangue = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("LANGUE"));
         jLregion = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("REGION"));
         jLautre = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("AUTRE"));
-        getContentPane().add(jLlangue);
-        getContentPane().add(jLregion);
-        getContentPane().add(jLautre);
-        getContentPane().add(langue);
-        getContentPane().add(region);
-        getContentPane().add(autre);
-        setModal(false);
+        
+        init();
+        
         CaretListener caret = new CaretListener() {
             @Override
             public void caretUpdate(CaretEvent e) {
@@ -61,11 +52,21 @@ public class ChoixDeLangue extends JDialog {
             }
         };
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-
         langue.addCaretListener(caret);
         region.addCaretListener(caret);
         autre.addCaretListener(caret);
+    }
+    
+    private void init() {        
+        getContentPane().setLayout(new GridLayout(2, 3));
+        getContentPane().add(jLlangue);
+        getContentPane().add(jLregion);
+        getContentPane().add(jLautre);
+        getContentPane().add(langue);
+        getContentPane().add(region);
+        getContentPane().add(autre);
+        setModal(false);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
     }
 }
