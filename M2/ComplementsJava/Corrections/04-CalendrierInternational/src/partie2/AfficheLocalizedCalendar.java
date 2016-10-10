@@ -1,11 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package partie2;
 
-import partie2.LocalizedCalendar;
 import javax.swing.JFrame;
 
 /**
@@ -14,6 +8,10 @@ import javax.swing.JFrame;
  */
 public class AfficheLocalizedCalendar extends JFrame {
     public AfficheLocalizedCalendar() {
+        init();
+    }
+    
+    private void init() {        
         getContentPane().add(new LocalizedCalendar());
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,7 +19,7 @@ public class AfficheLocalizedCalendar extends JFrame {
     }
 
     public static void main(String[] args) {
-        new AfficheLocalizedCalendar();
+        AfficheLocalizedCalendar afficheLocalizedCalendar = new AfficheLocalizedCalendar();
     }
 
 }

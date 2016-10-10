@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package partie2;
 
 import java.awt.BorderLayout;
@@ -24,10 +19,14 @@ import partie1.JLabelCalendar;
  * @author maillot
  */
 public class LocalizedCalendar extends JPanel {
-    private JLabelCalendar pc = new JLabelCalendar();
-    private JComboBox liste = new JComboBox(DateFormat.getAvailableLocales());
+    private final JLabelCalendar pc = new JLabelCalendar();
+    private final JComboBox liste = new JComboBox(DateFormat.getAvailableLocales());
  
     public LocalizedCalendar() {
+        init();
+    }
+    
+    private void init() {        
         setLayout(new BorderLayout());
         add(pc, "Center");
         liste.setSelectedItem(getLocale());

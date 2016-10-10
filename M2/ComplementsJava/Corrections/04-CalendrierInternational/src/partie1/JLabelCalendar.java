@@ -1,4 +1,3 @@
-
 package partie1;
 
 import java.awt.Color;
