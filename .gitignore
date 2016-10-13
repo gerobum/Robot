@@ -10,6 +10,7 @@ log
 **/bin
 **/.idea
 **/.gradle
+nbproject/private/
 .directory
 # Built application files
 *.apk
