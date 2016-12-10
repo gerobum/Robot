@@ -77,7 +77,7 @@ public class PanneauPrincipal extends JPanel {
     private ParseurExprBool parseur;
     private final JButton boutonAjoutProcedure = new JButton("nouvelle procédure");
     private final JButton boutonAppelProcedure = new JButton("appel de procédure");
-    private final JComboBox comboAppelProcedure = new JComboBox();
+    private final JComboBox<NoeudProgramme> comboAppelProcedure = new JComboBox<>();
     private final JTextField texteNouvelleProcedure = new JTextField();
     private final JButton boutonEcrire = new JButton("écrire");
     private final JButton boutonLire = new JButton("Lire");
@@ -89,7 +89,7 @@ public class PanneauPrincipal extends JPanel {
     private final JButton boutonExecutionProgramme = new JButton("Exécution du programme");
     private final JButton boutonExecutionSelection = new JButton("Exécution de la sélection");
     private ByteArrayOutputStream brancheCopiee[] = null;
-    private final JComboBox comboExpression = new JComboBox();
+    private final JComboBox<ExprBool> comboExpression = new JComboBox<>();
     //private JTree arbre;
     private final Detachable frameParente;
     //private PanneauProcedure panneauProcedure;
