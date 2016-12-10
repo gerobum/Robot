@@ -8,7 +8,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 import javax.swing.JPanel;
 
 /**

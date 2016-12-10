@@ -23,7 +23,7 @@ import terrain.Terrain;
  * @author Yvan
  */
 public class FramePrincipale extends JFrame implements Detachable {
-    
+
     private static final long serialVersionUID = 1L;
 
     private static Random random = new Random();
@@ -102,9 +102,9 @@ public class FramePrincipale extends JFrame implements Detachable {
         panneauPrincipal.setNiveau(niveau);
         panneauPrincipal.figerNiveau(niveau);
     }
-
+    
     public FramePrincipale() {
-        super("Le monde de nono");
+        //super("Le monde de nono");
         setJMenuBar(new JMenuBar());
 
         setSize(800, 600);
@@ -137,7 +137,7 @@ public class FramePrincipale extends JFrame implements Detachable {
 
 
         Initialisation.initialiser(this, false);
-        
+
         panneauDExecution = new PanneauDExecution(this);
 
 
@@ -151,7 +151,7 @@ public class FramePrincipale extends JFrame implements Detachable {
 
         FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers robot", "rob");
         chooser.setFileFilter(filtre);
-        
+
         pack();
 
     }
@@ -173,16 +173,16 @@ public class FramePrincipale extends JFrame implements Detachable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-              
+
                 if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    File f = chooser.getSelectedFile();              
+                    File f = chooser.getSelectedFile();
 
                     if (!Pattern.matches(".*\\.rob$", f.toString()))
                         f = new File(f.toString()+".rob");
                     XStream xstream = new XStream(new DomDriver());
                     ObjectOutputStream os = null;
                     try {
-                        
+
                         xstream.toXML(programme, new FileOutputStream(f));
                         os = new ObjectOutputStream(new FileOutputStream(new File(f.toString()+".obj")));
                         os.writeObject(programme);
@@ -267,4 +267,4 @@ public class FramePrincipale extends JFrame implements Detachable {
     public void executeSelection() {
         panneauDExecution.executeSelection();
     }
-}
+    }
