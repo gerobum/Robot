@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://www.netbeans.org/ns/project/1">
     <type>org.netbeans.modules.java.j2seproject</type>
+    <configuration>
     <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
         <extension file="jfx-impl.xml" id="jfx3">
             <dependency dependsOn="-jfx-copylibs" target="-post-jar"/>
@@ -11,7 +12,6 @@
             <dependency dependsOn="jar" target="run"/>
         </extension>
     </buildExtensions>
-    <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>Robot</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
