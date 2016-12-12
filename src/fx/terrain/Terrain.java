@@ -14,9 +14,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -55,6 +58,8 @@ public class Terrain extends Application {
     private GridPane grid;
     private Button avance;
     private Button tourne;
+    private Button plusPetit;
+    private Button plusGrand;
     //private ArrayList<ArrayList<Cellule>> nodesGrid;
 
     @Override
@@ -68,18 +73,30 @@ public class Terrain extends Application {
         avance = new Button("Avance");
         avance.setOnAction(e -> {
             robot.avance();
-            System.out.println("Avance");
+            System.out.println("avance");
         });
         tourne = new Button("Tourne");
         tourne.setOnAction(e -> {
             robot.tourne();
-            System.out.println("Tourne");
+            System.out.println("tourne");
+        });
+        plusPetit = new Button("v");
+        plusPetit.setOnAction(e -> {
+            robot.plusPetit();
+            System.out.println("v");
+        });
+        plusGrand = new Button("^");
+        plusGrand.setOnAction(e -> {
+            robot.plusGrand();
+            System.out.println("^");
         });
 
         BorderPane root = new BorderPane(grid);
         FlowPane bottom = new FlowPane();
         bottom.getChildren().add(avance);
         bottom.getChildren().add(tourne);
+        bottom.getChildren().add(plusGrand);
+        bottom.getChildren().add(plusPetit);
         root.setBottom(bottom);
         grille(grid);
 
@@ -170,6 +187,9 @@ public class Terrain extends Application {
 
     public void change(Robot robot) {
         GridPane.setConstraints(robot.getNode(), robot.getX(), robot.getY());
+        grid.getChildren().filtered(n -> n.getClass()==ImageView.class).stream().forEach((n) -> {
+            System.out.println(GridPane.getColumnIndex(n) + ", " + GridPane.getRowIndex(n) + " : " + n);
+        });
     }
 
     public void add(Robot robot) {

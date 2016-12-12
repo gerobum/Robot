@@ -65,8 +65,20 @@ public class Robot implements Cellule/*, Runnable*/ {
 
     public void tourne() {
         orientation = OrientationRobot.values()[(orientation.ordinal() + 1) % 4];
+        image.setRotate(image.getRotate() + 90);
         terrain.change(this);
-        image.setRotate(image.getRotate()+90);
+    }
+
+    public void plusPetit() {
+        image.setScaleX(image.getScaleX()*0.8);
+        image.setScaleY(image.getScaleY()*0.8);
+        terrain.change(this);
+    }
+
+    public void plusGrand() {
+        image.setScaleX(image.getScaleX()*1.2);
+        image.setScaleY(image.getScaleY()*1.2);
+        terrain.change(this);
     }
 
     private class Orientation {
@@ -98,6 +110,7 @@ public class Robot implements Cellule/*, Runnable*/ {
         image = new ImageView(new Image("/fx/robot/images/robotVersNord.png"));
         this.orientation = orientation;
         image.setRotate(orientation.angle);
+        image.setPreserveRatio(true);
 
         terrain.add(this);
     }
