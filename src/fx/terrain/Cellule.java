@@ -1,5 +1,5 @@
 
-package fx.main;
+package fx.terrain;
 
 
 

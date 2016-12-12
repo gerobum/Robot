@@ -1,16 +1,14 @@
 package fx.robot;
 
 
-import fx.main.Cellule;
-import fx.main.Marque;
-import fx.main.Terrain;
+import fx.terrain.Cellule;
+import fx.terrain.OrientationRobot;
+import fx.terrain.Terrain;
 import instruction.Instruction;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import robot.DansLeMur;
-import terrain.Mur;
 
 public class Robot implements Cellule/*, Runnable*/ {
 
@@ -28,6 +26,10 @@ public class Robot implements Cellule/*, Runnable*/ {
     private Thread processus;
     private boolean enMarche = false;
     private int numeroImage = 0;
+    
+   
+    
+    private OrientationRobot orientation;
     
     private ImageView image;
 
@@ -76,6 +78,8 @@ public class Robot implements Cellule/*, Runnable*/ {
         terrain.set(x, y, this);
         
         image = new ImageView(new Image("/fx/robot/images/robotVersNord.png"));
+        orientation = OrientationRobot.values()[random.nextInt(4)];
+        image.setRotate(orientation.angle);
     }
 
     /**
@@ -139,7 +143,6 @@ public class Robot implements Cellule/*, Runnable*/ {
 
     @Override
     public ImageView getNode() {
-        image.setRotate(random.nextInt(360));
         return image;
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fx.main;
+package fx.terrain;
 
 import fx.robot.Robot;
 import java.util.Random;
@@ -59,6 +59,7 @@ public class Terrain extends Application {
         terrain = new Cellule[nX][nY];
 
         GridPane root = new GridPane();
+        root.setGridLinesVisible(true);
         grille(root);
 
         // ######
@@ -68,7 +69,7 @@ public class Terrain extends Application {
         //gc = canvas.getGraphicsContext2D();
         //drawShapes(gc);
         //root.getChildren().add(canvas);
-        root.add(robot.getNode(), 0, 0);
+        root.add(robot.getNode(), 5, 5);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -78,8 +79,17 @@ public class Terrain extends Application {
         int i = 0;
         int j = 0;
         
-        for (int x = 0; x < largeur; x += tailleCelluleX) {
-            for (int y = 0; y < hauteur; y += tailleCelluleY) {
+        for (int x = 0; x < nX; ++x) {
+            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), x, 0);
+            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), x, nY-1);
+        }
+        for (int y = 0; y < nY; ++y) {
+            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), 0, y);
+            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), nX-1, y);
+        }
+                       
+        for (int x = 1; x < nX-1; ++x) {
+            for (int y = 1; y < nY-1; ++y) {
                 root.add(new CelluleVide(tailleCelluleX, tailleCelluleY).getNode(), x, y);
                 i = (i + 1) % 2;
             }
