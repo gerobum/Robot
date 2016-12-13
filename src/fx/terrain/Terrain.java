@@ -6,15 +6,18 @@
 package fx.terrain;
 
 import fx.robot.Robot;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,15 +42,18 @@ public class Terrain extends Application {
     public static final int SUD_EST = 1;
     public static final int SUD_OUEST = 2;
     public static final int NORD_OUEST = 3;
-    private Cellule[][] terrain;
+
     private int nX;
     private int nY;
     private int tailleCelluleX = 50;
     private int tailleCelluleY = 50;
     private int largeur = 1200;
     private int hauteur = 600;
-
-    private Color[] couleurs = {Color.AZURE, Color.WHITESMOKE};
+    private Set<Robot> robots = new HashSet<>();
+    private Robot robot;
+    private GridPane grid;
+    private Button avance;
+    //private ArrayList<ArrayList<Cellule>> nodesGrid;
 
     @Override
     public void start(Stage primaryStage) {
@@ -56,20 +62,20 @@ public class Terrain extends Application {
         nX = largeur / tailleCelluleX;
         nY = hauteur / tailleCelluleY;
 
-        terrain = new Cellule[nX][nY];
+        grid = new GridPane();
+        avance = new Button("Avance");
+        avance.setOnAction(e -> {
+            robot.avance();
+        });
 
-        GridPane root = new GridPane();
-        root.setGridLinesVisible(true);
-        grille(root);
+        BorderPane root = new BorderPane(grid);
+        root.setBottom(avance);
+        grille(grid);
 
         // ######
-        Robot robot = new Robot(this);
+        robot = new Robot(this);
+        robots.add(robot);
         // ######
-
-        //gc = canvas.getGraphicsContext2D();
-        //drawShapes(gc);
-        //root.getChildren().add(canvas);
-        root.add(robot.getNode(), 5, 5);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -78,19 +84,41 @@ public class Terrain extends Application {
     private void grille(GridPane root) {
         int i = 0;
         int j = 0;
-        
+
+        Cellule c;
+
+        /*nodesGrid = new ArrayList<>(nX);
         for (int x = 0; x < nX; ++x) {
-            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), x, 0);
-            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), x, nY-1);
+            nodesGrid.add(new ArrayList<>(nY));
+            for(int y = 0; y < nY; ++y) {
+                nodesGrid.get(x).add(null);
+            }
+        }*/
+        for (int x = 0; x < nX; ++x) {
+            c = new Mur(tailleCelluleX, tailleCelluleY);
+            root.add(c.getNode(), x, 0);
+            //nodesGrid.get(x).set(0, c);
+
+            c = new Mur(tailleCelluleX, tailleCelluleY);
+            root.add(c.getNode(), x, nY - 1);
+            //nodesGrid.get(x).set(nY - 1, c);
         }
+
         for (int y = 0; y < nY; ++y) {
-            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), 0, y);
-            root.add(new Mur(tailleCelluleX, tailleCelluleY).getNode(), nX-1, y);
+            c = new Mur(tailleCelluleX, tailleCelluleY);
+            root.add(c.getNode(), 0, y);
+            //nodesGrid.get(0).set(y, c);
+
+            c = new Mur(tailleCelluleX, tailleCelluleY);
+            root.add(c.getNode(), nX - 1, y);
+            //nodesGrid.get(nX - 1).set(y, c);
         }
-                       
-        for (int x = 1; x < nX-1; ++x) {
-            for (int y = 1; y < nY-1; ++y) {
-                root.add(new CelluleVide(tailleCelluleX, tailleCelluleY).getNode(), x, y);
+
+        for (int x = 1; x < nX - 1; ++x) {
+            for (int y = 1; y < nY - 1; ++y) {
+                c = new CelluleVide(tailleCelluleX, tailleCelluleY);
+                root.add(c.getNode(), x, y);
+                //nodesGrid.get(x).set(y, c);
                 i = (i + 1) % 2;
             }
             if (i == j) {
@@ -103,9 +131,6 @@ public class Terrain extends Application {
     private void drawShapes(GraphicsContext gc) {
         if (gc != null) {
             gc.setFill(Color.ALICEBLUE);
-            //gc.setStroke(Color.BLUE);
-            //gc.setLineWidth(5);
-            //gc.fillOval(10, 60, 30, 30);
         }
     }
 
@@ -117,17 +142,28 @@ public class Terrain extends Application {
         return tailleCelluleY;
     }
 
+    public void setTailleCelluleX(int tailleCelluleX) {
+        this.tailleCelluleX = tailleCelluleX;
+    }
+
+    public void setTailleCelluleY(int tailleCelluleY) {
+        this.tailleCelluleY = tailleCelluleY;
+    }
+
     public void repaint(int x, int y, int tailleCelluleX, int tailleCelluleY) {
     }
 
     public Cellule get(int x, int y) {
-        return terrain[x][y];
+        return null;
     }
 
-    public void set(int x, int y, Robot robot) {
-        terrain[x][y] = robot;
+    public void change(Robot robot) {
+        GridPane.setConstraints(robot.getNode(), robot.getX(), robot.getY());
     }
 
+    public void add(Robot robot) {
+        grid.add(robot.getNode(), robot.getX(), robot.getY());
+    }
 
     public int getNx() {
         return nX;

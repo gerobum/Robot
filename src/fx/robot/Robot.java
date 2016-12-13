@@ -1,10 +1,8 @@
 package fx.robot;
 
-
 import fx.terrain.Cellule;
 import fx.terrain.OrientationRobot;
 import fx.terrain.Terrain;
-import instruction.Instruction;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,47 +15,44 @@ public class Robot implements Cellule/*, Runnable*/ {
     private boolean stop = false;
     // La durée en ms pour avancer d'une case.
     public int duréeReference = 200;
-    private Orientation[] tOrientation = {new Orientation(0, 0, -1), new Orientation(1, 1, 0), new Orientation(2, 0, 1), new Orientation(3, -1, 0)};
-    private Orientation vers = tOrientation[0];
     private Color couleur;
     private Terrain terrain;
     private int x, y;
-    private Instruction programme;
+    //private Instruction programme;
     private Thread processus;
     private boolean enMarche = false;
     private int numeroImage = 0;
-    
-   
-    
+
     private OrientationRobot orientation;
-    
+
     private ImageView image;
 
     public Cellule quoiDessous() {
         return passage;
     }
 
-
     public void bloquer() {
         stop = true;
     }
-    
+
     public synchronized void deBloquer() {
         stop = false;
         notifyAll();
     }
-    
+
     public boolean isStopped() {
         return stop;
     }
-    
+
     @Override
     public void setTaille(int lx, int ly) {
 
     }
 
     public void avance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        x += orientation.pasX;
+        y += orientation.pasY;
+        terrain.change(this);
     }
 
     public void enleverUneMarque() {
@@ -83,19 +78,26 @@ public class Robot implements Cellule/*, Runnable*/ {
         }
     };
 
+    public int getX() {
+        return x;
+    }
 
-    private void init(Terrain terrain, int x, int y, int direction, Color couleur) {
+    public int getY() {
+        return y;
+    }
+
+    private void init(Terrain terrain, int x, int y, OrientationRobot orientation, Color couleur) {
         this.terrain = terrain;
         this.couleur = couleur;
         passage = terrain.get(x, y);
         this.x = x;
         this.y = y;
-        vers = tOrientation[direction];
-        terrain.set(x, y, this);
-        
+
         image = new ImageView(new Image("/fx/robot/images/robotVersNord.png"));
-        orientation = OrientationRobot.values()[random.nextInt(4)];
+        this.orientation = orientation;
         image.setRotate(orientation.angle);
+
+        terrain.add(this);
     }
 
     /**
@@ -105,23 +107,51 @@ public class Robot implements Cellule/*, Runnable*/ {
      * @see public Robot(Terrain terrain, int x, int y)
      */
     public Robot(Terrain terrain) {
-        init(terrain, random.nextInt(terrain.getNx()), random.nextInt(terrain.getNy()), random.nextInt(4), Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        init(
+                terrain,
+                random.nextInt(terrain.getNx() - 1) + 1,
+                random.nextInt(terrain.getNy() - 1) + 1,
+                OrientationRobot.values()[random.nextInt(4)],
+                Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+        );
     }
 
     public Robot(Terrain terrain, int x, int y) {
-        init(terrain, x, y, random.nextInt(4),  Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        init(
+                terrain,
+                x,
+                y,
+                OrientationRobot.values()[random.nextInt(4)],
+                Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+        );
     }
 
     public Robot(Terrain terrain, int x, int y, Color couleur) {
-        init(terrain, x, y, random.nextInt(4), Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        init(
+                terrain,
+                x,
+                y,
+                OrientationRobot.values()[random.nextInt(4)],
+                Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+        );
     }
 
     public Robot(Terrain terrain, Color couleur) {
-        init(terrain, random.nextInt(terrain.getNx()), random.nextInt(terrain.getNy()), random.nextInt(4), couleur);
+        init(
+                terrain,
+                random.nextInt(terrain.getNx() - 1) + 1,
+                random.nextInt(terrain.getNy() - 1) + 1,
+                OrientationRobot.values()[random.nextInt(4)], couleur
+        );
     }
 
-    public Robot(Terrain terrain, int x, int y, int dir) {
-        init(terrain, x, y, dir, Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+    public Robot(Terrain terrain, int x, int y, OrientationRobot orientation) {
+        init(
+                terrain,
+                x,
+                y,
+                orientation,
+                Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
     }
 
     /**
@@ -136,8 +166,8 @@ public class Robot implements Cellule/*, Runnable*/ {
 
     public Cellule quoiDevant() {
 
-        int xa = x + vers.pasx;
-        int ya = y + vers.pasy;
+        int xa = x + orientation.pasX;
+        int ya = y + orientation.pasY;
 
         if (xa >= terrain.getNx()) {
             xa = 0;
@@ -155,7 +185,6 @@ public class Robot implements Cellule/*, Runnable*/ {
 
         return terrain.get(xa, ya);
     }
-
 
     @Override
     public ImageView getNode() {
