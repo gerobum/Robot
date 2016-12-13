@@ -13,8 +13,8 @@ public class CelluleVide implements Cellule {
     private final Rectangle rectangle;
 
     public CelluleVide(int width, int height) {
-        rectangle = new Rectangle(width, height, Color.WHITE);  
-        rectangle.setStroke(Color.ALICEBLUE);
+        rectangle = new Rectangle(width, height, Color.CORNSILK);  
+        rectangle.setStroke(Color.CHOCOLATE);
     }
 
     @Override
