@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -47,12 +48,13 @@ public class Terrain extends Application {
     private int nY;
     private int tailleCelluleX = 50;
     private int tailleCelluleY = 50;
-    private int largeur = 1200;
-    private int hauteur = 600;
+    private int largeur = 10*50;
+    private int hauteur = 6*50;
     private Set<Robot> robots = new HashSet<>();
     private Robot robot;
     private GridPane grid;
     private Button avance;
+    private Button tourne;
     //private ArrayList<ArrayList<Cellule>> nodesGrid;
 
     @Override
@@ -66,10 +68,19 @@ public class Terrain extends Application {
         avance = new Button("Avance");
         avance.setOnAction(e -> {
             robot.avance();
+            System.out.println("Avance");
+        });
+        tourne = new Button("Tourne");
+        tourne.setOnAction(e -> {
+            robot.tourne();
+            System.out.println("Tourne");
         });
 
         BorderPane root = new BorderPane(grid);
-        root.setBottom(avance);
+        FlowPane bottom = new FlowPane();
+        bottom.getChildren().add(avance);
+        bottom.getChildren().add(tourne);
+        root.setBottom(bottom);
         grille(grid);
 
         // ######
@@ -95,21 +106,21 @@ public class Terrain extends Application {
             }
         }*/
         for (int x = 0; x < nX; ++x) {
-            c = new Mur(tailleCelluleX, tailleCelluleY);
+            c = new Trou(tailleCelluleX, tailleCelluleY);
             root.add(c.getNode(), x, 0);
             //nodesGrid.get(x).set(0, c);
 
-            c = new Mur(tailleCelluleX, tailleCelluleY);
+            c = new Trou(tailleCelluleX, tailleCelluleY);
             root.add(c.getNode(), x, nY - 1);
             //nodesGrid.get(x).set(nY - 1, c);
         }
 
         for (int y = 0; y < nY; ++y) {
-            c = new Mur(tailleCelluleX, tailleCelluleY);
+            c = new Trou(tailleCelluleX, tailleCelluleY);
             root.add(c.getNode(), 0, y);
             //nodesGrid.get(0).set(y, c);
 
-            c = new Mur(tailleCelluleX, tailleCelluleY);
+            c = new Trou(tailleCelluleX, tailleCelluleY);
             root.add(c.getNode(), nX - 1, y);
             //nodesGrid.get(nX - 1).set(y, c);
         }

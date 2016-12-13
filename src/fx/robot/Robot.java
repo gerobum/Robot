@@ -64,7 +64,9 @@ public class Robot implements Cellule/*, Runnable*/ {
     }
 
     public void tourne() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        orientation = OrientationRobot.values()[(orientation.ordinal() + 1) % 4];
+        terrain.change(this);
+        image.setRotate(image.getRotate()+90);
     }
 
     private class Orientation {
@@ -109,8 +111,8 @@ public class Robot implements Cellule/*, Runnable*/ {
     public Robot(Terrain terrain) {
         init(
                 terrain,
-                random.nextInt(terrain.getNx() - 1) + 1,
-                random.nextInt(terrain.getNy() - 1) + 1,
+                random.nextInt(terrain.getNx() - 2) + 1,
+                random.nextInt(terrain.getNy() - 2) + 1,
                 OrientationRobot.values()[random.nextInt(4)],
                 Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
         );
@@ -139,8 +141,8 @@ public class Robot implements Cellule/*, Runnable*/ {
     public Robot(Terrain terrain, Color couleur) {
         init(
                 terrain,
-                random.nextInt(terrain.getNx() - 1) + 1,
-                random.nextInt(terrain.getNy() - 1) + 1,
+                random.nextInt(terrain.getNx() - 2) + 1,
+                random.nextInt(terrain.getNy() - 2) + 1,
                 OrientationRobot.values()[random.nextInt(4)], couleur
         );
     }
