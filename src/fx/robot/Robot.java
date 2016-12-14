@@ -7,6 +7,7 @@ import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import fx.terrain.Marque;
 
 public class Robot implements Cellule/*, Runnable*/ {
 
@@ -49,48 +50,30 @@ public class Robot implements Cellule/*, Runnable*/ {
 
     }
 
+    public void enleverUneMarque() {
+         }
+
+    public void poserUneMarque() {
+        terrain.set(x, y, new Marque(terrain.getTailleCelluleX(), terrain.getTailleCelluleY()));
+        terrain.change(this);
+     }
+
     public void avance() {
         x += orientation.pasX;
         y += orientation.pasY;
         terrain.change(this);
     }
 
-    public void enleverUneMarque() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void poserUneMarque() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void tourne() {
         orientation = OrientationRobot.values()[(orientation.ordinal() + 1) % 4];
         image.setRotate(image.getRotate() + 90);
-        terrain.change(this);
     }
 
-    public void plusPetit() {
-        image.setScaleX(image.getScaleX()*0.8);
-        image.setScaleY(image.getScaleY()*0.8);
-        terrain.change(this);
+    public void echelle(double s) {
+        image.setScaleX(image.getScaleX() * s);
+        image.setScaleY(image.getScaleY() * s);
+
     }
-
-    public void plusGrand() {
-        image.setScaleX(image.getScaleX()*1.2);
-        image.setScaleY(image.getScaleY()*1.2);
-        terrain.change(this);
-    }
-
-    private class Orientation {
-
-        public final int direction, pasx, pasy;
-
-        Orientation(int ix, int px, int py) {
-            pasx = px;
-            pasy = py;
-            direction = ix;
-        }
-    };
 
     public int getX() {
         return x;
@@ -109,8 +92,10 @@ public class Robot implements Cellule/*, Runnable*/ {
 
         image = new ImageView(new Image("/fx/robot/images/robotVersNord.png"));
         this.orientation = orientation;
-        image.setRotate(orientation.angle);
         image.setPreserveRatio(true);
+        image.setSmooth(true);
+        image.setCache(true);
+        image.setRotate(orientation.angle);
 
         terrain.add(this);
     }
@@ -206,4 +191,9 @@ public class Robot implements Cellule/*, Runnable*/ {
         return image;
     }
 
+    public void fit() {
+        double fit = Math.min(terrain.getTailleCelluleY(), terrain.getTailleCelluleX());
+        image.setFitHeight(fit);
+        image.setFitWidth(fit);
+    }
 }
