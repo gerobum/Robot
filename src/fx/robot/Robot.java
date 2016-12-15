@@ -1,5 +1,6 @@
 package fx.robot;
 
+import fx.panneaux.ApplicationPrincipale;
 import fx.terrain.Cellule;
 import fx.terrain.OrientationRobot;
 import fx.terrain.Terrain;
@@ -17,7 +18,7 @@ public class Robot implements Cellule/*, Runnable*/ {
     // La durée en ms pour avancer d'une case.
     public int duréeReference = 200;
     private Color couleur;
-    private Terrain terrain;
+    private ApplicationPrincipale applicationPrincipale;
     private int x, y;
     //private Instruction programme;
     private Thread processus;
@@ -54,14 +55,14 @@ public class Robot implements Cellule/*, Runnable*/ {
          }
 
     public void poserUneMarque() {
-        terrain.set(x, y, new Marque(terrain.getTailleCelluleX(), terrain.getTailleCelluleY()));
-        terrain.change(this);
+        applicationPrincipale.set(x, y, new Marque(applicationPrincipale.getTailleCelluleX(), applicationPrincipale.getTailleCelluleY()));
+        applicationPrincipale.change(this);
      }
 
     public void avance() {
         x += orientation.pasX;
         y += orientation.pasY;
-        terrain.change(this);
+        applicationPrincipale.change(this);
     }
 
     public void tourne() {
@@ -83,10 +84,10 @@ public class Robot implements Cellule/*, Runnable*/ {
         return y;
     }
 
-    private void init(Terrain terrain, int x, int y, OrientationRobot orientation, Color couleur) {
-        this.terrain = terrain;
+    private void init(ApplicationPrincipale applicationPrincipale, int x, int y, OrientationRobot orientation, Color couleur) {
+        this.applicationPrincipale = applicationPrincipale;
         this.couleur = couleur;
-        passage = terrain.get(x, y);
+        passage = applicationPrincipale.get(x, y);
         this.x = x;
         this.y = y;
 
@@ -97,28 +98,28 @@ public class Robot implements Cellule/*, Runnable*/ {
         image.setCache(true);
         image.setRotate(orientation.angle);
 
-        terrain.add(this);
+        applicationPrincipale.add(this);
     }
 
     /**
      * Créer un robot "quelque part" sur le terrain.
      *
-     * @param terrain : terrain sur lequel circule le robot
-     * @see public Robot(Terrain terrain, int x, int y)
+     * @param applicationPrincipale : terrain sur lequel circule le robot
+     * @see public Robot(ApplicationPrincipale terrain, int x, int y)
      */
-    public Robot(Terrain terrain) {
+    public Robot(ApplicationPrincipale applicationPrincipale) {
         init(
-                terrain,
-                random.nextInt(terrain.getNx() - 2) + 1,
-                random.nextInt(terrain.getNy() - 2) + 1,
+                applicationPrincipale,
+                random.nextInt(applicationPrincipale.getNx() - 2) + 1,
+                random.nextInt(applicationPrincipale.getNy() - 2) + 1,
                 OrientationRobot.values()[random.nextInt(4)],
                 Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
         );
     }
 
-    public Robot(Terrain terrain, int x, int y) {
+    public Robot(ApplicationPrincipale applicationPrincipale, int x, int y) {
         init(
-                terrain,
+                applicationPrincipale,
                 x,
                 y,
                 OrientationRobot.values()[random.nextInt(4)],
@@ -126,9 +127,9 @@ public class Robot implements Cellule/*, Runnable*/ {
         );
     }
 
-    public Robot(Terrain terrain, int x, int y, Color couleur) {
+    public Robot(ApplicationPrincipale applicationPrincipale, int x, int y, Color couleur) {
         init(
-                terrain,
+                applicationPrincipale,
                 x,
                 y,
                 OrientationRobot.values()[random.nextInt(4)],
@@ -136,18 +137,18 @@ public class Robot implements Cellule/*, Runnable*/ {
         );
     }
 
-    public Robot(Terrain terrain, Color couleur) {
+    public Robot(ApplicationPrincipale applicationPrincipale, Color couleur) {
         init(
-                terrain,
-                random.nextInt(terrain.getNx() - 2) + 1,
-                random.nextInt(terrain.getNy() - 2) + 1,
+                applicationPrincipale,
+                random.nextInt(applicationPrincipale.getNx() - 2) + 1,
+                random.nextInt(applicationPrincipale.getNy() - 2) + 1,
                 OrientationRobot.values()[random.nextInt(4)], couleur
         );
     }
 
-    public Robot(Terrain terrain, int x, int y, OrientationRobot orientation) {
+    public Robot(ApplicationPrincipale applicationPrinciaple, int x, int y, OrientationRobot orientation) {
         init(
-                terrain,
+                applicationPrinciaple,
                 x,
                 y,
                 orientation,
@@ -169,21 +170,21 @@ public class Robot implements Cellule/*, Runnable*/ {
         int xa = x + orientation.pasX;
         int ya = y + orientation.pasY;
 
-        if (xa >= terrain.getNx()) {
+        if (xa >= applicationPrincipale.getNx()) {
             xa = 0;
         }
         if (xa < 0) {
-            xa = terrain.getNx() - 1;
+            xa = applicationPrincipale.getNx() - 1;
         }
 
-        if (ya >= terrain.getNy()) {
+        if (ya >= applicationPrincipale.getNy()) {
             ya = 0;
         }
         if (ya < 0) {
-            ya = terrain.getNy() - 1;
+            ya = applicationPrincipale.getNy() - 1;
         }
 
-        return terrain.get(xa, ya);
+        return applicationPrincipale.get(xa, ya);
     }
 
     @Override
@@ -192,7 +193,7 @@ public class Robot implements Cellule/*, Runnable*/ {
     }
 
     public void fit() {
-        double fit = Math.min(terrain.getTailleCelluleY(), terrain.getTailleCelluleX());
+        double fit = Math.min(applicationPrincipale.getTailleCelluleY(), applicationPrincipale.getTailleCelluleX());
         image.setFitHeight(fit);
         image.setFitWidth(fit);
     }

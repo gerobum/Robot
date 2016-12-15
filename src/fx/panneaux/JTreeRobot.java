@@ -1,5 +1,6 @@
 package fx.panneaux;
 
+import fx.programme.NoeudProgramme;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
@@ -7,7 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import robot.NoeudProgramme;
+
 
 /**
  *
