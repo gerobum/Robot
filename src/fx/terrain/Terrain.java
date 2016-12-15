@@ -6,10 +6,15 @@
 package fx.terrain;
 
 import fx.robot.Robot;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -19,6 +24,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -43,7 +49,7 @@ public class Terrain extends Application {
 
     private int nX = 15;
     private int nY = 10;
-    private int tailleCellule = 35;
+    private int tailleCellule = 60;
     private int largeur;
     private int hauteur;
     private Set<Robot> robots = new HashSet<>();
@@ -55,6 +61,7 @@ public class Terrain extends Application {
     private Button efface;
     private Button fit;
     //private ArrayList<ArrayList<Cellule>> nodesGrid;
+    private final Map<Node, Cellule> NODE_2_CELLULE = new HashMap<>();
 
     @Override
     public void start(Stage primaryStage) {
@@ -99,7 +106,7 @@ public class Terrain extends Application {
         robot = new Robot(this);
         robots.add(robot);
         // ######
- 
+
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.sizeToScene();
@@ -124,20 +131,24 @@ public class Terrain extends Application {
         for (int x = 0; x < nX; ++x) {
             c = new Trou(tailleCellule, tailleCellule);
             root.add(c.getNode(), x, 0);
+            NODE_2_CELLULE.put(c.getNode(), c);
             //nodesGrid.get(x).set(0, c);
 
             c = new Trou(tailleCellule, tailleCellule);
             root.add(c.getNode(), x, nY - 1);
+            NODE_2_CELLULE.put(c.getNode(), c);
             //nodesGrid.get(x).set(nY - 1, c);
         }
 
         for (int y = 0; y < nY; ++y) {
             c = new Trou(tailleCellule, tailleCellule);
             root.add(c.getNode(), 0, y);
+            NODE_2_CELLULE.put(c.getNode(), c);
             //nodesGrid.get(0).set(y, c);
 
             c = new Trou(tailleCellule, tailleCellule);
             root.add(c.getNode(), nX - 1, y);
+            NODE_2_CELLULE.put(c.getNode(), c);
             //nodesGrid.get(nX - 1).set(y, c);
         }
 
@@ -186,15 +197,32 @@ public class Terrain extends Application {
 
     public void change(Robot robot) {
         GridPane.setConstraints(robot.getNode(), robot.getX(), robot.getY());
-        grid.getChildren().filtered(n -> n.getClass()==ImageView.class).stream().forEach((n) -> {
-            System.out.println(GridPane.getColumnIndex(n) + ", " + GridPane.getRowIndex(n) + " : " + n);
-        });
-        robot.getNode().toFront();
-        
+        if (grid.getChildren()
+                .stream()
+                .filter(n -> GridPane.getColumnIndex(n) == robot.getX() && GridPane.getRowIndex(n) == robot.getY())
+                .filter(n -> NODE_2_CELLULE.get(n) != null)
+                .map(n -> NODE_2_CELLULE.get(n))
+                .anyMatch(n -> n.getClass() == Trou.class)) {
+            robot.tombe();
+            System.out.println("Plooouff");
+            ScaleTransition st = new ScaleTransition(Duration.seconds(2), robot.getNode());
+            st.setByX(-0.5);
+            st.setByY(-0.5);
+            st.setCycleCount(1);
+            st.setRate(1.5);
+            st.setFromX(robot.getNode().getScaleX()*1.4);
+            st.setFromY(robot.getNode().getScaleY()*1.4);
+            st.setToX(0);
+            st.setToY(0);
+            st.play();
+        } else {
+            robot.getNode().toFront();
+        }
     }
 
     public void add(Robot robot) {
         grid.add(robot.getNode(), robot.getX(), robot.getY());
+        NODE_2_CELLULE.put(robot.getNode(), robot);
     }
 
     public int getNx() {
@@ -207,6 +235,12 @@ public class Terrain extends Application {
 
     public void set(int xa, int ya, Marque passage) {
         grid.add(passage.getNode(), xa, ya);
+        NODE_2_CELLULE.put(passage.getNode(), passage);
+    }
+
+    public void unset(int xa, int ya, Marque passage) {
+        grid.getChildren().remove(passage.getNode());
+        NODE_2_CELLULE.remove(passage.getNode());
     }
 
     public static void main(String[] args) {

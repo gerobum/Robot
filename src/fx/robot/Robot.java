@@ -196,4 +196,9 @@ public class Robot implements Cellule/*, Runnable*/ {
         image.setFitHeight(fit);
         image.setFitWidth(fit);
     }
+
+    public void tombe() {
+        // Arrêter le thread en cours
+        
+    }
 }
