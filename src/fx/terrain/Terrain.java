@@ -194,17 +194,9 @@ public class Terrain extends Application {
     public Cellule get(int x, int y) {
         return null;
     }
-
-    public void change(Robot robot) {
-        GridPane.setConstraints(robot.getNode(), robot.getX(), robot.getY());
-        if (grid.getChildren()
-                .stream()
-                .filter(n -> GridPane.getColumnIndex(n) == robot.getX() && GridPane.getRowIndex(n) == robot.getY())
-                .filter(n -> NODE_2_CELLULE.get(n) != null)
-                .map(n -> NODE_2_CELLULE.get(n))
-                .anyMatch(n -> n.getClass() == Trou.class)) {
-            robot.tombe();
-            System.out.println("Plooouff");
+    
+    private void tombe(Robot robot) {
+           robot.tombe();
             ScaleTransition st = new ScaleTransition(Duration.seconds(2), robot.getNode());
             st.setByX(-0.5);
             st.setByY(-0.5);
@@ -215,6 +207,17 @@ public class Terrain extends Application {
             st.setToX(0);
             st.setToY(0);
             st.play();
+    }
+
+    public void change(Robot robot) {
+        GridPane.setConstraints(robot.getNode(), robot.getX(), robot.getY());
+        if (grid.getChildren()
+                .stream()
+                .filter(n -> GridPane.getColumnIndex(n) == robot.getX() && GridPane.getRowIndex(n) == robot.getY())
+                .filter(n -> NODE_2_CELLULE.get(n) != null)
+                .map(n -> NODE_2_CELLULE.get(n))
+                .anyMatch(n -> n.getClass() == Trou.class)) {
+                tombe(robot);
         } else {
             robot.getNode().toFront();
         }
