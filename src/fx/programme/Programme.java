@@ -6,9 +6,9 @@
 package fx.programme;
 
 
-import fx.instruction.Bloc;
-import fx.instruction.Instruction;
-import fx.instruction.Racine;
+import fx.programme.instruction.Bloc;
+import fx.programme.instruction.Instruction;
+import fx.programme.instruction.Racine;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
