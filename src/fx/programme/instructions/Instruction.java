@@ -1,4 +1,4 @@
-package fx.programme.instruction;
+package fx.programme.instructions;
 
 import fx.programme.NoeudProgramme;
 import fx.robot.DansLeMur;

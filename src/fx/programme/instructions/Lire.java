@@ -1,4 +1,4 @@
-package fx.programme.instruction;
+package fx.programme.instructions;
 
 import javax.swing.ImageIcon;
 import fx.robot.DansLeMur;

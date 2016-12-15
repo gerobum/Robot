@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package fx.programme.instruction;
+package fx.programme.instructions;
 
 import java.util.HashMap;
 

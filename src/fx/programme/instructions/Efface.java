@@ -1,4 +1,4 @@
-package fx.programme.instruction;
+package fx.programme.instructions;
 
 import fx.robot.Robot;
 import javax.swing.ImageIcon;
@@ -8,18 +8,25 @@ import javax.swing.ImageIcon;
  *
  * @author Yvan
  */
-public class Marque extends InstructionElementaire {
+public class Efface extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;
+    
     //private transient Marqueur marqueur;
-    public Marque() {
-        nom = "marque";
+    public Efface() {
+        nom = "efface";
         //this.marqueur = marqueur;
     }
     @Override
     public void go(Robot robot) /*throws DansLeMur*/ {
-        robot.poserUneMarque();
+        //marqueur.enleverUneMarque();
+        robot.enleverUneMarque();
     }
+
+    /*@Override
+    public void set(Object o) {
+        marqueur = (Marqueur) o;
+    }*/
 
     @Override
     public ImageIcon getIcon() {
