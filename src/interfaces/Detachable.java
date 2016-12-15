@@ -6,12 +6,11 @@ package interfaces;
 
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
-import robot.Initialisation;
 import robot.Programme;
 import robot.Robot;
+
 import robot.panneaux.BoiteDeDialogueInit;
 import robot.panneaux.PanneauCommande;
 import robot.panneaux.PanneauTerrain;

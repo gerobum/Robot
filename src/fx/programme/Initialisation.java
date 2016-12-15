@@ -1,24 +1,22 @@
-
 package fx.programme;
 
-import fx.terrain.Position;
+import fx.interfaces.*;
+import fx.terrain.*;
 import static fx.terrain.Position.*;
 import fx.terrain.OrientationRobot;
-import static fx.terrain.OrientationRobot.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import terrain.Terrain;
+import java.util.Set;
 
 /**
  *
  * @author Yvan
  */
 public class Initialisation implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
- 
     private Position positionRobot = QUELCONQUE;
     private OrientationRobot orientationRobot = null;
     private boolean presenceMinerai = false;
@@ -29,14 +27,15 @@ public class Initialisation implements Serializable {
     private int largeur;
     private static final Random RANDOM = new Random();
 
-    public static Terrain.Position calculPosition(Position position, Terrain terrain) {
+    public static Position calculPosition(Position position, Terrain terrain) {
 
         switch (position) {
             case QUELCONQUE:
-                return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, RANDOM.nextInt(terrain.getNy() - 2) + 1);
+            //return new Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, RANDOM.nextInt(terrain.getNy() - 2) + 1);
+
             case CONTRE_UN_MUR:
                 // Tirage au sort du mur
-                int mur = RANDOM.nextInt(4);
+                /*int mur = RANDOM.nextInt(4);
                 switch (mur) {
                     case Terrain.NORD:
                         return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, 1);
@@ -46,11 +45,11 @@ public class Initialisation implements Serializable {
                         return new Terrain.Position(1, RANDOM.nextInt(terrain.getNy() - 2) + 1);
                     case Terrain.EST:
                         return new Terrain.Position(terrain.getNx() - 2, RANDOM.nextInt(terrain.getNy() - 2) + 1);
-                }
+                }*/
                 break;
             case DANS_UN_COIN:
                 // Tirage au sort du coin
-                int coin = RANDOM.nextInt(4);
+                /*int coin = RANDOM.nextInt(4);
                 switch (coin) {
                     case Terrain.NORD_EST:
                         return new Terrain.Position(terrain.getNx() - 2, 1);
@@ -60,12 +59,12 @@ public class Initialisation implements Serializable {
                         return new Terrain.Position(1, terrain.getNy() - 2);
                     case Terrain.NORD_OUEST:
                         return new Terrain.Position(1, 1);
-                }
+                }*/
                 break;
             case PAS_CONTRE_UN_MUR:
-                return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 4) + 2, RANDOM.nextInt(terrain.getNy() - 4) + 2);
+            //return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 4) + 2, RANDOM.nextInt(terrain.getNy() - 4) + 2);
             case PAS_DANS_UN_COIN:
-                int x;
+            /*int x;
                 int y;
                 do {
                     x = RANDOM.nextInt(terrain.getNx() - 2) + 1;
@@ -74,33 +73,117 @@ public class Initialisation implements Serializable {
                         || x == 1 && y == terrain.getNy() - 2
                         || x == terrain.getNx() - 2 && y == 1
                         || x == terrain.getNx() - 2 && y == terrain.getNy() - 2);
-                return new Terrain.Position(x, y);
+                return new Terrain.Position(x, y);*/
 
             case CONTRE_LE_MUR_NORD:
-                return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, 1);
+            //return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, 1);
             case CONTRE_LE_MUR_EST:
-                return new Terrain.Position(terrain.getNx() - 2, RANDOM.nextInt(terrain.getNy() - 2) + 1);
+            //return new Terrain.Position(terrain.getNx() - 2, RANDOM.nextInt(terrain.getNy() - 2) + 1);
             case CONTRE_LE_MUR_SUD:
-                return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, terrain.getNy() - 2);
+            //return new Terrain.Position(RANDOM.nextInt(terrain.getNx() - 2) + 1, terrain.getNy() - 2);
             case CONTRE_LE_MUR_OUEST:
-                return new Terrain.Position(1, RANDOM.nextInt(terrain.getNy() - 2) + 1);
+            //return new Terrain.Position(1, RANDOM.nextInt(terrain.getNy() - 2) + 1);
             case DANS_LE_COIN_NE:
-                return new Terrain.Position(terrain.getNx() - 2, 1);
+            //return new Terrain.Position(terrain.getNx() - 2, 1);
             case DANS_LE_COIN_SE:
-                return new Terrain.Position(terrain.getNx() - 2, terrain.getNy() - 2);
+            //return new Terrain.Position(terrain.getNx() - 2, terrain.getNy() - 2);
 
             case DANS_LE_COIN_SO:
-                return new Terrain.Position(1, terrain.getNy() - 2);
+            //return new Terrain.Position(1, terrain.getNy() - 2);
             case DANS_LE_COIN_NO:
-                return new Terrain.Position(1, 1);
+            //return new Terrain.Position(1, 1);
             default:
-                try {
+            /*try {
                     throw new Exception("position : " + position + " Ne devrait pas arriver");
                 } catch (Exception ex) {             
-                }
-                return null;
+                }*/
+            //return null;
         }
         return null;
+    }
+
+    public static void initialiser(Detachable frameParente, boolean marque) {
+        initialiser(frameParente.getProgramme().getInitialisation(), frameParente, marque);
+    }
+
+    public static void initialiser(Initialisation initialisation, Detachable frameParente, boolean marque) {
+        frameParente.getProgramme().setInitialisation(initialisation);
+        // #### frameParente.getDialogueInitialisation().setInitialisation(initialisation);
+        int hauteur = -1;
+        int largeur = -1;
+        if (frameParente.getProgramme().getInitialisation().isPresenceHauteur()) {
+            hauteur = frameParente.getProgramme().getInitialisation().getHauteur();
+        }
+        if (frameParente.getProgramme().getInitialisation().isPresenceLargeur()) {
+            largeur = frameParente.getProgramme().getInitialisation().getLargeur();
+        }
+
+        // Récupérer les coordonnées des marques entrées à la souris
+        class Coord {
+
+            public final int x, y;
+
+            Coord(int x, int y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        /* #### Set<Coord> marquesALaSouris = new HashSet<>();
+        try {
+            for (int x = 0; x < frameParente.getTerrain().getNx(); x++) {
+                for (int y = 0; y < frameParente.getTerrain().getNy(); y++) {
+                    Cellule c = frameParente.getTerrain().get(x, y);
+                    if (c instanceof terrain.Marque) {
+                        terrain.Marque m = (terrain.Marque) c;
+                        if (m.isExterieur()) {
+                            marquesALaSouris.add(new Coord(x, y));
+                        }
+                    }
+                }
+            }
+        } catch (NullPointerException np) {
+            // Arrive la première fois
+        } 
+
+        if (frameParente.getTerrain() != null) {
+            frameParente.viderTerrain();
+        }
+
+
+
+        frameParente.setTerrain(new Terrain(frameParente, hauteur, largeur));
+
+
+        // Remettre les marques (tant que faire se peut, puisque
+        // les dimensions du terrain ont pu changées
+        if (marque) {
+            for (Coord c : marquesALaSouris) {
+
+                if (c.x > 0 && c.x < frameParente.getTerrain().getNx() - 1 && c.y > 0 && c.y < frameParente.getTerrain().getNy() - 1) {
+                    frameParente.getTerrain().set(c.x, c.y, 
+                            new terrain.Marque(frameParente.getTerrain().getTailleCelluleX(), frameParente.getTerrain().getTailleCelluleY(), true));
+                }
+
+            }
+        }
+
+        //placementDesMurs();
+        // Le minerai doit être placé avant le robot...
+        if (frameParente.getProgramme().getInitialisation().isPresenceMinerai()) {
+            placementDuMinerai(frameParente.getProgramme().getInitialisation().getPositionMinerai(), frameParente.getTerrain());
+        }
+
+        placementDuRobot(frameParente.getProgramme().getInitialisation().getOrientationRobot(),
+                frameParente.getProgramme().getInitialisation().getPositionRobot(),
+                frameParente);
+
+        frameParente.getPanneauTerrain().add(frameParente.getTerrain(), "Center");
+
+
+        frameParente.getRobot().duréeReference = frameParente.getPanneauCommande().getDuree();
+        //Programme.changerDeRobot((Instruction) frameParente.getProgramme().getArbreProgramme().getRoot(), frameParente.getRobot());
+    
+#### */
     }
 
     public int getHauteur() {
