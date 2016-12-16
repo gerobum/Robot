@@ -55,7 +55,7 @@ public class Robot implements Cellule/*, Runnable*/ {
          }
 
     public void poserUneMarque() {
-        applicationPrincipale.set(x, y, new Marque(applicationPrincipale.getTailleCelluleX(), applicationPrincipale.getTailleCelluleY()));
+        applicationPrincipale.add(new Marque(applicationPrincipale.getTailleCelluleX(), applicationPrincipale.getTailleCelluleY()), x, y);
         applicationPrincipale.change(this);
      }
 

@@ -15,8 +15,6 @@ import javafx.stage.*;
 import javafx.util.Duration;
 import javax.swing.JTree;
 
-
-
 /**
  *
  * @author yvan
@@ -38,8 +36,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private Button marque;
     private Button efface;
     private Button fit;
-    //private ArrayList<ArrayList<Cellule>> nodesGrid;
-    private final Map<Node, Cellule> NODE_2_CELLULE = new HashMap<>();
 
     private Stage stage;
     private JTreeRobot arbre;
@@ -125,15 +121,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
         this.tailleCellule = tailleCellule;
     }
 
-    public Cellule get(int x, int y) {
-        return NODE_2_CELLULE.get(grid.getChildren()
-                .stream()
-                .filter(n -> GridPane.getColumnIndex(n) == x)
-                .filter(n -> GridPane.getRowIndex(n) == y)
-                .filter(n -> n.isVisible())
-                .findFirst().get());
-    }
-
     private void tombe(Robot robot) {
         robot.tombe();
         ScaleTransition st = new ScaleTransition(Duration.seconds(2), robot.getNode());
@@ -153,9 +140,11 @@ public class ApplicationPrincipale extends Application implements Detachable {
         if (grid.getChildren()
                 .stream()
                 .filter(n -> GridPane.getColumnIndex(n) == robot.getX() && GridPane.getRowIndex(n) == robot.getY())
-                .filter(n -> NODE_2_CELLULE.get(n) != null)
-                .map(n -> NODE_2_CELLULE.get(n))
+                .filter(n -> grid.get(n) != null)
+                .map(n -> grid.get(n))
+                .peek(System.out::println)
                 .anyMatch(n -> n.getClass() == Trou.class)) {
+            System.out.println("Plouf");
             tombe(robot);
         } else {
             robot.getNode().toFront();
@@ -163,8 +152,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
     }
 
     public void add(Robot robot) {
-        grid.add(robot.getNode(), robot.getX(), robot.getY());
-        NODE_2_CELLULE.put(robot.getNode(), robot);
+        grid.add(robot, robot.getX(), robot.getY());
     }
 
     public int getNx() {
@@ -175,14 +163,12 @@ public class ApplicationPrincipale extends Application implements Detachable {
         return nY;
     }
 
-    public void set(int xa, int ya, Marque passage) {
-        grid.add(passage.getNode(), xa, ya);
-        NODE_2_CELLULE.put(passage.getNode(), passage);
+    public void add(Cellule passage, int xa, int ya) {
+        grid.add(passage, xa, ya);
     }
 
-    public void unset(int xa, int ya, Marque passage) {
-        grid.getChildren().remove(passage.getNode());
-        NODE_2_CELLULE.remove(passage.getNode());
+    public void remove(Cellule passage) {
+        grid.remove(passage);
     }
 
     public static void main(String[] args) {
@@ -227,5 +213,9 @@ public class ApplicationPrincipale extends Application implements Detachable {
     @Override
     public void montreDialInit() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Cellule get(int x, int y) {
+        return grid.get(x, y);
     }
 }
