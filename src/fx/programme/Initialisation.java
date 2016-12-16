@@ -5,9 +5,7 @@ import fx.terrain.*;
 import static fx.terrain.Position.*;
 import fx.terrain.OrientationRobot;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  *

@@ -1,4 +1,4 @@
-package fx.panneaux;
+package fx.panneaux.swing;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.StreamException;

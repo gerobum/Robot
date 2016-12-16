@@ -6,7 +6,7 @@ package fx.terrain;
  * @author yvan
  */
 public enum Position {
-    QUELCONQUE("Queconque"), 
+    QUELCONQUE("N'importe où"), 
     CONTRE_UN_MUR("Contre un mur"),
     DANS_UN_COIN("Dans un coin"),
     PAS_CONTRE_UN_MUR("Pas contre un mur"),

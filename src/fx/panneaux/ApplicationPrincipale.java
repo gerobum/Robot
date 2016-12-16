@@ -1,5 +1,6 @@
 package fx.panneaux;
 
+import fx.panneaux.swing.PanneauPrincipal;
 import fx.interfaces.*;
 import fx.programme.*;
 import fx.robot.*;
@@ -35,13 +36,14 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private Button tourne;
     private Button marque;
     private Button efface;
-    private Button fit;
+    private Button init;
 
     private Stage stage;
     private JTreeRobot arbre;
     private Programme programme;
 
     private SwingNode panneauPrincipal;
+    private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
     @Override
     public void start(Stage primaryStage) {
@@ -64,13 +66,17 @@ public class ApplicationPrincipale extends Application implements Detachable {
         marque.setOnAction(e -> {
             robot.poserUneMarque();
         });
-        efface = new Button("^");
+        efface = new Button("Efface");
         efface.setOnAction(e -> {
             robot.enleverUneMarque();
         });
-        fit = new Button("<>");
-        fit.setOnAction(e -> {
-            robot.fit();
+        init = new Button("Init");
+        init.setOnAction(e -> {
+            Optional<String> result = DIALOG_INIT.showAndWait();
+            if (result.isPresent()) {
+                System.out.println("OK");
+            }
+            //DIALOG_INIT.showAndWait();
         });
 
         BorderPane root = new BorderPane(grid);
@@ -89,9 +95,9 @@ public class ApplicationPrincipale extends Application implements Detachable {
         bottom.getChildren().add(tourne);
         bottom.getChildren().add(efface);
         bottom.getChildren().add(marque);
-        bottom.getChildren().add(fit);
+        bottom.getChildren().add(init);
         root.setBottom(bottom);
-
+        
         // ######
         robot = new Robot(this);
         robots.add(robot);
@@ -212,7 +218,8 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     @Override
     public void montreDialInit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DIALOG_INIT.showAndWait();
+        System.out.println("INITIALISATION");
     }
 
     public Cellule get(int x, int y) {
