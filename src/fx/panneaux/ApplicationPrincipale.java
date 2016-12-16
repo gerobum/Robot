@@ -72,9 +72,10 @@ public class ApplicationPrincipale extends Application implements Detachable {
         });
         init = new Button("Init");
         init.setOnAction(e -> {
-            Optional<String> result = DIALOG_INIT.showAndWait();
+            Optional<Initialisation> result = DIALOG_INIT.showAndWait();
             if (result.isPresent()) {
-                System.out.println("OK");
+                DIALOG_INIT.setInitialisation(result.get());
+                System.out.println(result.get());
             }
             //DIALOG_INIT.showAndWait();
         });

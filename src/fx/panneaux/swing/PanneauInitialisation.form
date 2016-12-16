@@ -99,14 +99,14 @@
     <Component class="javax.swing.JComboBox" name="comboPositionRobot">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Position.values())" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(fx.terrain.PositionPotentielle.values())" type="code"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboPositionRobotItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Position&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;fx.terrain.PositionPotentielle&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelPositionRobot">
@@ -117,14 +117,14 @@
     <Component class="javax.swing.JComboBox" name="comboOrientationRobot">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(OrientationRobot.values())" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(fx.terrain.OrientationPotentielle.values())" type="code"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboOrientationRobotItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;OrientationRobot&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;fx.terrain.OrientationPotentielle&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelOrientationRobot">
@@ -148,7 +148,7 @@
     <Component class="javax.swing.JComboBox" name="comboPositionMinerai">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Position.values())" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(fx.terrain.PositionPotentielle.values())" type="code"/>
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -156,7 +156,7 @@
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboPositionMineraiItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Position&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;fx.terrain.PositionPotentielle&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JSlider" name="jSliderHauteur">

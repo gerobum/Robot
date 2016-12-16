@@ -5,7 +5,7 @@ package fx.terrain;
  *
  * @author yvan
  */
-public enum Position {
+public enum PositionPotentielle {
     QUELCONQUE("N'importe où"), 
     CONTRE_UN_MUR("Contre un mur"),
     DANS_UN_COIN("Dans un coin"),
@@ -22,7 +22,7 @@ public enum Position {
     
     public final String nom;
 
-    private Position(String nom) {
+    private PositionPotentielle(String nom) {
         this.nom = nom;
     }
     

@@ -2,13 +2,14 @@ package fx.robot;
 
 import fx.panneaux.ApplicationPrincipale;
 import fx.terrain.Cellule;
-import fx.terrain.OrientationRobot;
+import fx.terrain.OrientationPotentielle;
 import fx.terrain.Terrain;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import fx.terrain.Marque;
+import fx.terrain.OrientationReelle;
 
 public class Robot implements Cellule/*, Runnable*/ {
 
@@ -25,7 +26,7 @@ public class Robot implements Cellule/*, Runnable*/ {
     private boolean enMarche = false;
     private int numeroImage = 0;
 
-    private OrientationRobot orientation;
+    private OrientationReelle orientation;
 
     private ImageView image;
 
@@ -66,7 +67,7 @@ public class Robot implements Cellule/*, Runnable*/ {
     }
 
     public void tourne() {
-        orientation = OrientationRobot.values()[(orientation.ordinal() + 1) % 4];
+        orientation = OrientationReelle.values()[(orientation.ordinal() + 1) % 4];
         image.setRotate(image.getRotate() + 90);
     }
 
@@ -84,7 +85,7 @@ public class Robot implements Cellule/*, Runnable*/ {
         return y;
     }
 
-    private void init(ApplicationPrincipale applicationPrincipale, int x, int y, OrientationRobot orientation, Color couleur) {
+    private void init(ApplicationPrincipale applicationPrincipale, int x, int y, OrientationReelle orientation, Color couleur) {
         this.applicationPrincipale = applicationPrincipale;
         this.couleur = couleur;
         passage = applicationPrincipale.get(x, y);
@@ -108,45 +109,41 @@ public class Robot implements Cellule/*, Runnable*/ {
      * @see public Robot(ApplicationPrincipale terrain, int x, int y)
      */
     public Robot(ApplicationPrincipale applicationPrincipale) {
-        init(
-                applicationPrincipale,
+        init(applicationPrincipale,
                 random.nextInt(applicationPrincipale.getNx() - 2) + 1,
                 random.nextInt(applicationPrincipale.getNy() - 2) + 1,
-                OrientationRobot.values()[random.nextInt(4)],
+                OrientationReelle.values()[random.nextInt(4)],
                 Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
         );
     }
 
     public Robot(ApplicationPrincipale applicationPrincipale, int x, int y) {
-        init(
-                applicationPrincipale,
+        init(applicationPrincipale,
                 x,
                 y,
-                OrientationRobot.values()[random.nextInt(4)],
+                OrientationReelle.values()[random.nextInt(4)],
                 Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
         );
     }
 
     public Robot(ApplicationPrincipale applicationPrincipale, int x, int y, Color couleur) {
-        init(
-                applicationPrincipale,
+        init(applicationPrincipale,
                 x,
                 y,
-                OrientationRobot.values()[random.nextInt(4)],
+                OrientationReelle.values()[random.nextInt(4)],
                 Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
         );
     }
 
     public Robot(ApplicationPrincipale applicationPrincipale, Color couleur) {
-        init(
-                applicationPrincipale,
+        init(applicationPrincipale,
                 random.nextInt(applicationPrincipale.getNx() - 2) + 1,
                 random.nextInt(applicationPrincipale.getNy() - 2) + 1,
-                OrientationRobot.values()[random.nextInt(4)], couleur
+                OrientationReelle.values()[random.nextInt(4)], couleur
         );
     }
 
-    public Robot(ApplicationPrincipale applicationPrinciaple, int x, int y, OrientationRobot orientation) {
+    public Robot(ApplicationPrincipale applicationPrinciaple, int x, int y, OrientationReelle orientation) {
         init(
                 applicationPrinciaple,
                 x,
