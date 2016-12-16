@@ -243,7 +243,7 @@ public class PanneauInitialisation extends javax.swing.JPanel {
         if (changementInterne) {
             return;
         }
-        initialisation.setPositionMinerai((PositionPotentielle) comboPositionMinerai.getSelectedItem());
+initialisation.setPositionMinerai((PositionPotentielle) comboPositionMinerai.getSelectedItem());
     }//GEN-LAST:event_comboPositionMineraiItemStateChanged
 
     private void largeurDefinieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeurDefinieActionPerformed
@@ -261,8 +261,6 @@ public class PanneauInitialisation extends javax.swing.JPanel {
             return;
         }
         jSliderHauteur.setEnabled(hauteurDefinie.isSelected());
-        initialisation.setPresenceHauteur(hauteurDefinie.isSelected());
-        initialisation.setHauteur(jSliderHauteur.getValue());
     }//GEN-LAST:event_hauteurDefinieStateChanged
 
 private void jSliderHauteurStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderHauteurStateChanged
@@ -276,7 +274,7 @@ private void jSliderLargeurStateChanged(javax.swing.event.ChangeEvent evt) {//GE
     if (changementInterne) {
         return;
     }
-    initialisation.setLargeur(jSliderLargeur.getValue());
+   initialisation.setLargeur(jSliderLargeur.getValue());
 }//GEN-LAST:event_jSliderLargeurStateChanged
 
 
