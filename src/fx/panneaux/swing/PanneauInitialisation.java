@@ -2,8 +2,8 @@ package fx.panneaux.swing;
 
 
 import fx.programme.Initialisation;
-import fx.terrain.OrientationRobot;
-import fx.terrain.Position;
+import fx.terrain.OrientationPotentielle;
+import fx.terrain.PositionPotentielle;
 import terrain.Terrain;
 
 /**
@@ -14,17 +14,17 @@ public class PanneauInitialisation extends javax.swing.JPanel {
     
     private static final long serialVersionUID = 1L;
     
-    private final Initialisation initialisation;
+    private final Initialisation INIT;
+    private final Initialisation INIT_OLD;
     
     private boolean changementInterne = false;
 
     /** Creates new form NewJPanel */
     public PanneauInitialisation() {
-        initialisation = new Initialisation();
-        initComponents();
+        this(new Initialisation());
     }
     public PanneauInitialisation(Initialisation initialisation) {
-        this.initialisation = initialisation;
+        this.INIT = this.INIT_OLD = initialisation;
         initComponents();
         
         changementInterne = true;
@@ -67,7 +67,7 @@ public class PanneauInitialisation extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Initialisation"));
 
-        comboPositionRobot.setModel(new javax.swing.DefaultComboBoxModel<>(Position.values()));
+        comboPositionRobot.setModel(new javax.swing.DefaultComboBoxModel<>(PositionPotentielle.values()));
         comboPositionRobot.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboPositionRobotItemStateChanged(evt);
@@ -76,7 +76,7 @@ public class PanneauInitialisation extends javax.swing.JPanel {
 
         labelPositionRobot.setText("Position du robot");
 
-        comboOrientationRobot.setModel(new javax.swing.DefaultComboBoxModel<>(OrientationRobot.values()));
+        comboOrientationRobot.setModel(new javax.swing.DefaultComboBoxModel<>(OrientationPotentielle.values()));
         comboOrientationRobot.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboOrientationRobotItemStateChanged(evt);
@@ -94,7 +94,7 @@ public class PanneauInitialisation extends javax.swing.JPanel {
 
         labelPositionMinerai.setText("Position du minerai");
 
-        comboPositionMinerai.setModel(new javax.swing.DefaultComboBoxModel<>(Position.values()));
+        comboPositionMinerai.setModel(new javax.swing.DefaultComboBoxModel<>(PositionPotentielle.values()));
         comboPositionMinerai.setEnabled(false);
         comboPositionMinerai.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -211,56 +211,56 @@ public class PanneauInitialisation extends javax.swing.JPanel {
             comboPositionMinerai.setEnabled(true);
         else
             comboPositionMinerai.setEnabled(false);
-        initialisation.setPrésenceMinerai(jCheckBoxMinerai.isSelected());
+        INIT.setPrésenceMinerai(jCheckBoxMinerai.isSelected());
     }//GEN-LAST:event_jCheckBoxMineraiStateChanged
 
     private void comboOrientationRobotItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboOrientationRobotItemStateChanged
         // TODO add your handling code here:
         if (changementInterne) return;
-        initialisation.setOrientationRobot((OrientationRobot) comboOrientationRobot.getSelectedItem());
+        INIT.setOrientationRobot((OrientationPotentielle) comboOrientationRobot.getSelectedItem());
     }//GEN-LAST:event_comboOrientationRobotItemStateChanged
 
     private void comboPositionRobotItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPositionRobotItemStateChanged
         // TODO add your handling code here:
         if (changementInterne) return;
-        initialisation.setPositionRobot((Position) comboPositionRobot.getSelectedItem());
+        INIT.setPositionRobot((PositionPotentielle) comboPositionRobot.getSelectedItem());
     }//GEN-LAST:event_comboPositionRobotItemStateChanged
 
     private void comboPositionMineraiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPositionMineraiItemStateChanged
         if (changementInterne) return;
-        initialisation.setPositionMinerai((Position) comboPositionMinerai.getSelectedItem());
+        INIT.setPositionMinerai((PositionPotentielle) comboPositionMinerai.getSelectedItem());
     }//GEN-LAST:event_comboPositionMineraiItemStateChanged
 
     private void largeurDefinieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeurDefinieActionPerformed
         if (changementInterne) return;
         jSliderLargeur.setEnabled(largeurDefinie.isSelected());
-        initialisation.setPresenceLargeur(largeurDefinie.isSelected());
-        initialisation.setLargeur(jSliderLargeur.getValue());
+        INIT.setPresenceLargeur(largeurDefinie.isSelected());
+        INIT.setLargeur(jSliderLargeur.getValue());
       
     }//GEN-LAST:event_largeurDefinieActionPerformed
 
     private void hauteurDefinieStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hauteurDefinieStateChanged
         if (changementInterne) return;
         jSliderHauteur.setEnabled(hauteurDefinie.isSelected());
-        initialisation.setPresenceHauteur(hauteurDefinie.isSelected());
-        initialisation.setHauteur(jSliderHauteur.getValue());
+        INIT.setPresenceHauteur(hauteurDefinie.isSelected());
+        INIT.setHauteur(jSliderHauteur.getValue());
     }//GEN-LAST:event_hauteurDefinieStateChanged
 
 private void jSliderHauteurStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderHauteurStateChanged
         if (changementInterne) return;
-    initialisation.setHauteur(jSliderHauteur.getValue());
+    INIT.setHauteur(jSliderHauteur.getValue());
 }//GEN-LAST:event_jSliderHauteurStateChanged
 
 private void jSliderLargeurStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderLargeurStateChanged
         if (changementInterne) return;
-    initialisation.setLargeur(jSliderLargeur.getValue());
+    INIT.setLargeur(jSliderLargeur.getValue());
 }//GEN-LAST:event_jSliderLargeurStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<OrientationRobot> comboOrientationRobot;
-    private javax.swing.JComboBox<Position> comboPositionMinerai;
-    private javax.swing.JComboBox<Position> comboPositionRobot;
+    private javax.swing.JComboBox<OrientationPotentielle> comboOrientationRobot;
+    private javax.swing.JComboBox<PositionPotentielle> comboPositionMinerai;
+    private javax.swing.JComboBox<PositionPotentielle> comboPositionRobot;
     private javax.swing.JCheckBox hauteurDefinie;
     private javax.swing.JCheckBox jCheckBoxMinerai;
     private javax.swing.JSlider jSliderHauteur;
@@ -271,7 +271,10 @@ private void jSliderLargeurStateChanged(javax.swing.event.ChangeEvent evt) {//GE
     private javax.swing.JCheckBox largeurDefinie;
     // End of variables declaration//GEN-END:variables
 
-    public Initialisation getInitialisation() {
-        return initialisation;
+    public Initialisation getAfterValidation() {
+        return INIT;
+    }
+    public Initialisation getAfterCancelation() {
+        return INIT_OLD;
     }
 }
