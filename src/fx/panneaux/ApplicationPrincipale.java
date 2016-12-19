@@ -44,8 +44,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     //private SwingNode panneauPrincipal;
     private PanneauPrincipal panneauPrincipal;
-    
-    private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
     @Override
     public void start(Stage primaryStage) {
@@ -74,11 +72,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
         });
         init = new Button("Init");
         init.setOnAction(e -> {
-            Optional<Initialisation> result = DIALOG_INIT.showAndWait();
-            if (result.isPresent()) {
-                DIALOG_INIT.setInitialisation(result.get());
-                System.out.println(result.get());
-            }
+
             //DIALOG_INIT.showAndWait();
         });
 
@@ -222,7 +216,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     @Override
     public void montreDialInit() {
-        DIALOG_INIT.showAndWait();
+        //DIALOG_INIT.showAndWait();
         System.out.println("INITIALISATION");
     }
 

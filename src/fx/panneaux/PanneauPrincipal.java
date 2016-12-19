@@ -1,8 +1,10 @@
 package fx.panneaux;
 
+import fx.programme.Initialisation;
 import fx.programme.NoeudProgramme;
 import fx.programme.expressions.*;
 import java.io.ByteArrayOutputStream;
+import java.util.Optional;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -51,16 +53,18 @@ public class PanneauPrincipal extends GridPane {
     private ByteArrayOutputStream brancheCopiee[] = null;
     private final ComboBox<ExprBool> comboExpression = new ComboBox<>();
 
+    private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
+
     public PanneauPrincipal() {
 
         doingUI();
-
+        addListeners();
     }
 
     private void doingUI() {
         ColumnConstraints cc = new ColumnConstraints();
         int row = 0;
-        add(boutonInitialise, 0, row++, 8, 1);  
+        add(boutonInitialise, 0, row++, 8, 1);
         labelProgrammation.setAlignment(Pos.CENTER);
         labelProgrammation.setPrefHeight(10);
         add(labelProgrammation, 0, row++, 8, 1);
@@ -73,8 +77,8 @@ public class PanneauPrincipal extends GridPane {
         add(boutonSi, 0, row, 2, 1);
         add(boutonTantQue, 2, row, 2, 1);
         add(comboExpression, 4, row++, 4, 1);
-        
-        add(boutonPour, 0, row, 2,1);
+
+        add(boutonPour, 0, row, 2, 1);
         add(de, 2, row);
         texteDebutPour.setPrefColumnCount(2);
         add(texteDebutPour, 3, row);
@@ -91,16 +95,16 @@ public class PanneauPrincipal extends GridPane {
         add(boutonLire, 0, row, 2, 1);
         add(boutonEcrire, 2, row, 2, 1);
         add(texteLireEcrire, 4, row, 4, 1);
-        
-        for(Node n : getChildren()) {
-            if (n instanceof Region)
+
+        for (Node n : getChildren()) {
+            if (n instanceof Region) {
                 ((Region) n).setMaxWidth(Double.POSITIVE_INFINITY);
+            }
             setFillWidth(n, true);
         }
-        
+
         comboExpression.getItems().addAll(
                 new DevantMur(),
-                new PasDevantMur(),
                 new PasDevantMur(),
                 new SurMarque(),
                 new PasSurMarque(),
@@ -110,5 +114,15 @@ public class PanneauPrincipal extends GridPane {
                 new PasSurMinerai()
         );
         comboExpression.getSelectionModel().selectFirst();
+    }
+
+    private void addListeners() {
+        boutonInitialise.setOnAction(e -> {
+            Optional<Initialisation> result = DIALOG_INIT.showAndWait();
+            if (result.isPresent()) {
+                DIALOG_INIT.setInitialisation(result.get());
+                System.out.println(result.get());
+            }
+        });
     }
 }
