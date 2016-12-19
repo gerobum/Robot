@@ -1,6 +1,6 @@
 package fx.panneaux;
 
-import fx.panneaux.swing.PanneauPrincipal;
+//import fx.panneaux.swing.PanneauPrincipal;
 import fx.interfaces.*;
 import fx.programme.*;
 import fx.robot.*;
@@ -42,7 +42,9 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private JTreeRobot arbre;
     private Programme programme;
 
-    private SwingNode panneauPrincipal;
+    //private SwingNode panneauPrincipal;
+    private PanneauPrincipal panneauPrincipal;
+    
     private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
     @Override
@@ -82,12 +84,13 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
         BorderPane root = new BorderPane(grid);
 
-        panneauPrincipal = new SwingNode();
+        //panneauPrincipal = new SwingNode();
 
         programme = new Programme();
         arbre = new JTreeRobot(programme.getArbreProgramme());
 
-        panneauPrincipal.setContent(new PanneauPrincipal(this));
+        //panneauPrincipal.setContent(new PanneauPrincipal(this));
+        panneauPrincipal = new PanneauPrincipal();
 
         root.setLeft(panneauPrincipal);
 
