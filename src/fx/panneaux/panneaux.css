@@ -14,7 +14,7 @@ and open the template in the editor.
 */
 .bordered-titled-title {
   -fx-background-color: white;
-  -fx-translate-y: 26;
+  -fx-translate-y: -36;
   -fx-translate-x: 60;
 }
 

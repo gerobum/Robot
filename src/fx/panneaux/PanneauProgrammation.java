@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
  *
  * @author yvan
  */
-public class PanneauProgrammation extends GridPane {
+public class PanneauProgrammation extends PanneauBordure {
 
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
@@ -43,29 +43,23 @@ public class PanneauProgrammation extends GridPane {
     private final Button boutonLire = new Button("Lire");
     private final TextField texteLireEcrire = new TextField();
     private final ComboBox<ExprBool> comboExpression = new ComboBox<>();
-    /*private final Button boutonSupprime = new Button("supprimer");
-    private final Button boutonCopie = new Button("copier");
-    private final Button boutonColle = new Button("coller");
-    private final Button boutonCoupe = new Button("couper");
-    private final Button boutonExecutionProgramme = new Button("Exécution du programme");
-    private final Button boutonExecutionSelection = new Button("Exécution de la sélection");
-    private ByteArrayOutputStream brancheCopiee[] = null;*/
+
 
     private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
     public PanneauProgrammation() {
-
+        super("  Programmation  ");
         doingUI();
         addListeners();
     }
 
     private void doingUI() {
-        setPadding(new Insets(20));
 
         //ColumnConstraints cc = new ColumnConstraints();
         int row = 0;
         //boutonInitialise.setMaxWidth(300);
         add(boutonInitialise, 0, row++, 8, 1);
+        boutonAvance.setMaxWidth(Double.POSITIVE_INFINITY);
         add(boutonAvance, 0, row, 2, 1);
         add(boutonTourne, 2, row, 2, 1);
         add(boutonMarque, 4, row, 2, 1);
@@ -96,7 +90,6 @@ public class PanneauProgrammation extends GridPane {
         add(boutonLire, 0, row, 2, 1);
         add(boutonEcrire, 2, row, 2, 1);
         add(texteLireEcrire, 4, row, 4, 1);
-
 
         comboExpression.getItems().addAll(
                 new DevantMur(),

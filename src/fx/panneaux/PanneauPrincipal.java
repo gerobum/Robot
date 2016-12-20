@@ -26,15 +26,10 @@ public class PanneauPrincipal extends GridPane {
     }
 
     private void doingUI() {
-        PanneauProgrammation panneauProgrammation = new PanneauProgrammation();  
-        panneauProgrammation.getStyleClass().add("main-panel");
         getStylesheets().add(getClass().getResource("panneaux.css").toExternalForm());
-        
-        Label titreProgrammation = new Label("  Programmation  ");
-        titreProgrammation.getStyleClass().add("bordered-titled-title");
-      
-        add(panneauProgrammation, 0, 1);
-        add(titreProgrammation, 0, 0);
+        int row = 1;
+        add(new PanneauProgrammation(), 0, row++);
+        add(new PanneauEdition(), 0, row++);
     }
 
     private void addListeners() {
