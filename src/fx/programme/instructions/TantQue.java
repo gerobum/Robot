@@ -22,14 +22,15 @@ public class TantQue extends InstructionComposee {
         icone = new ImageIcon(tmp);
     }
 
-    public TantQue(ExprBool garde) {
+    public TantQue(Instruction parent, ExprBool garde) {
+        super(parent);
         this.nom = "tant que";
         this.garde = garde;
     }
 
-    public TantQue() {
+    /*public TantQue() {
         this(null);
-    }
+    }*/
 
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {

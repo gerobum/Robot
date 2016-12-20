@@ -16,7 +16,8 @@ public class Lire extends InstructionElementaire {
     String message;
     String variable;
 
-    public Lire(String variable, String message) {
+    public Lire(Instruction parent, String variable, String message) {
+        super(parent);
         this.message = message;
         this.variable = variable;
         nom = variable + " = lire, " + message;

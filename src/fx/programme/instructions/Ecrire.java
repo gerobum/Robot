@@ -23,6 +23,16 @@ public class Ecrire extends InstructionElementaire {
     private transient JDialog boite;
     private transient Robot robot;
 
+    
+    
+
+    public Ecrire(Instruction parent, String message) {
+        super(parent);
+        this.message = message;
+        nom = "écrire, " + message;
+        créerDialogue();
+    }
+    
     /*
      * private JDialog creerDialogue(String message) {
      *
@@ -61,15 +71,6 @@ public class Ecrire extends InstructionElementaire {
         });
     }
     
-    /**
-     * Méthode pour afficher un message
-     * @param message le message à afficher.
-     */
-    public Ecrire(String message) {
-        this.message = message;
-        nom = "écrire, " + message;
-        créerDialogue();
-    }
     
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {

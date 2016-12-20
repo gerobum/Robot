@@ -8,12 +8,10 @@ package fx.programme;
 
 import fx.programme.instructions.Bloc;
 import fx.programme.instructions.Instruction;
-import fx.programme.instructions.Racine;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -24,29 +22,26 @@ public class Programme implements Serializable {
 
     private Initialisation initialisation;
     private final Map<String, Instruction> PROCEDURE;
-    private final DefaultTreeModel ARBRE_PROGRAMME;
+    //private final DefaultTreeModel ARBRE_PROGRAMME;
+    private final Bloc PRINCIPAL;
     public Programme() {
 
         initialisation = new Initialisation();
-        ARBRE_PROGRAMME = new DefaultTreeModel(new Racine());
+        //ARBRE_PROGRAMME = new DefaultTreeModel(new Racine());
         PROCEDURE  = new HashMap<>();
-        Bloc principal = new Bloc("procédure principale");
-        PROCEDURE.put("procédure principale", principal);
-        ARBRE_PROGRAMME.insertNodeInto(principal, (Instruction)ARBRE_PROGRAMME.getRoot(), 0);
+        PRINCIPAL = new Bloc(null, "procédure principale");
+        PROCEDURE.put("procédure principale", PRINCIPAL);
+        //ARBRE_PROGRAMME.insertNodeInto(principal, (Instruction)ARBRE_PROGRAMME.getRoot(), 0);
         
     }
 
     @Override
     public String toString() {
-        String retour = initialisation.toString() +  "\n" + 
-
-        ((Instruction)ARBRE_PROGRAMME.getRoot()).deepToString("");
-        return retour;
-    }
-
-
-    public DefaultTreeModel getArbreProgramme() {
-        return ARBRE_PROGRAMME;
+        StringBuilder sb = new StringBuilder(initialisation.toString() +  "\n");
+        for(Instruction p : PROCEDURE.values()) {
+            sb.append(p.deepToString("  "));
+        }
+        return sb.toString();
     }
 
     public Instruction getProcedurePrincipal() {
@@ -65,14 +60,10 @@ public class Programme implements Serializable {
     }
     public void retraitProcedure(String nom) {
         Bloc as = (Bloc) PROCEDURE.remove(nom);
-        if (as != null) {
-            ARBRE_PROGRAMME.removeNodeFromParent(as);
-        }
     }
     public Bloc ajoutProcedure(String nom) {
-        Bloc bloc = new Bloc(nom);
+        Bloc bloc = new Bloc(PRINCIPAL, nom);
         PROCEDURE.put(nom, bloc);
-        ARBRE_PROGRAMME.insertNodeInto(bloc, (Instruction)ARBRE_PROGRAMME.getRoot(), 0);
         return bloc;
 
     }
@@ -91,5 +82,4 @@ public class Programme implements Serializable {
     public void supprimerProcedure() {
         PROCEDURE.clear();
     }
-
 }

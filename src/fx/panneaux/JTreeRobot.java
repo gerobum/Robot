@@ -1,6 +1,6 @@
 package fx.panneaux;
 
-import fx.programme.NoeudProgramme;
+import fx.programme.instructions.Instruction;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
@@ -9,35 +9,34 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
-
 /**
  *
  * @author yvan
  */
 public class JTreeRobot extends JTree {
-    
+
     private static final long serialVersionUID = 1L;
 
-    private int memX = -1, memY = -1;    
-    private NoeudProgramme noeudSelectionné;
+    private int memX = -1, memY = -1;
+    private Instruction noeudSelectionné;
 
     public JTreeRobot(DefaultTreeModel modele) {
         super(modele);
-        
-        
+
         DefaultTreeCellRenderer dtcr = new DefaultTreeCellRenderer() {
             private static final long serialVersionUID = 1L;
+
             @Override
             public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
                 super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-                if (((NoeudProgramme) value).getIcon() != null) {
-                    setIcon(((NoeudProgramme) value).getIcon());
+                if (((Instruction) value).getIcon() != null) {
+                    setIcon(((Instruction) value).getIcon());
                 }
                 return this;
             }
         };
-        
-        dtcr.setLeafIcon(null);        
+
+        dtcr.setLeafIcon(null);
         setCellRenderer(dtcr);
 
         addMouseListener(new MouseListener() {
@@ -51,7 +50,7 @@ public class JTreeRobot extends JTree {
                 try {
                     memX = me.getX();
                     memY = me.getY();
-                    noeudSelectionné = (NoeudProgramme) getPathForLocation(memX, memY).getLastPathComponent();
+                    // ####  noeudSelectionné = (NoeudProgramme) getPathForLocation(memX, memY).getLastPathComponent();
                     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 } catch (Exception ex) {
                 }
@@ -59,11 +58,11 @@ public class JTreeRobot extends JTree {
 
             @Override
             public void mouseReleased(MouseEvent me) {
-
+                /* ####
                 try {
                     if (memX != me.getX() && memY != me.getY()) {
-                        NoeudProgramme noeud = (NoeudProgramme) getPathForLocation(me.getX(), me.getY()).getLastPathComponent();
-                        NoeudProgramme parent = (NoeudProgramme) noeud.getParent();
+                         NoeudProgramme noeud = (NoeudProgramme) getPathForLocation(me.getX(), me.getY()).getLastPathComponent();
+                         NoeudProgramme parent = (NoeudProgramme) noeud.getParent();
                         int i = parent.getIndex(noeud);
                         if (me.isControlDown()) {
                             parent.insert(noeudSelectionné.clone(), i);
@@ -79,7 +78,7 @@ public class JTreeRobot extends JTree {
                     memX = -1;
                     memY = -1;
                 }
-
+#### */
             }
 
             @Override

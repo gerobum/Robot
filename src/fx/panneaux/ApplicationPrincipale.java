@@ -79,7 +79,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
         BorderPane root = new BorderPane(grid);
 
         programme = new Programme();
-        arbre = new JTreeRobot(programme.getArbreProgramme());
+        //arbre = new JTreeRobot(programme.getArbreProgramme());
 
         panneauPrincipal = new PanneauPrincipal();
 

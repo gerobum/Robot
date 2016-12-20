@@ -1,7 +1,6 @@
 package fx.panneaux;
 
 import fx.programme.Initialisation;
-import fx.programme.NoeudProgramme;
 import fx.programme.expressions.*;
 import java.util.Optional;
 import javafx.geometry.Insets;

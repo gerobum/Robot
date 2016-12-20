@@ -18,6 +18,7 @@ public class Pour extends InstructionComposee {
     private String nomCompteur;
     
     public Pour(InstructionComposee parent, String debut, String fin, String pas) {
+        super(parent);
         this.nom = "pour";
         this.debut = debut;
         this.fin = fin;

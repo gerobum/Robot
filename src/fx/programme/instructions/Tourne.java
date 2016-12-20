@@ -11,7 +11,8 @@ public class Tourne extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;
 
-    public Tourne() {
+    public Tourne(Instruction parent) {
+        super(parent);
         nom = "tourne";
     }
 

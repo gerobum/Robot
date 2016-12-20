@@ -12,7 +12,8 @@ import fx.robot.Robot;
 public class Bloc extends InstructionComposee {
     private static final long serialVersionUID = 1L;
     
-    public Bloc(String nom) {        
+    public Bloc(Instruction parent, String nom) {       
+        super(parent);
         Scanner sc = new Scanner(nom);
         sc.useDelimiter(", ");
         this.nom = sc.next();
@@ -23,9 +24,9 @@ public class Bloc extends InstructionComposee {
         }
     }
     
-    public Bloc() {
-        this("bloc");
-    }
+    /*public Bloc() {
+        this(null, "bloc");
+    }*/
 
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {
@@ -51,7 +52,4 @@ public class Bloc extends InstructionComposee {
     public ImageIcon getIcon() {
         return null; 
     }
-
-
-
 }

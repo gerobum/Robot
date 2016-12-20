@@ -1,14 +1,5 @@
 package fx.panneaux;
 
-import fx.programme.Initialisation;
-import fx.programme.NoeudProgramme;
-import fx.programme.expressions.*;
-import java.io.ByteArrayOutputStream;
-import java.util.Optional;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.*;
 
 /**
@@ -27,6 +18,7 @@ public class PanneauPrincipal extends GridPane {
 
     private void doingUI() {
         getStylesheets().add(getClass().getResource("panneaux.css").toExternalForm());
+        setVgap(15);
         int row = 1;
         add(new PanneauProgrammation(), 0, row++);
         add(new PanneauEdition(), 0, row++);

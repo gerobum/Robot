@@ -17,6 +17,10 @@ public abstract class InstructionComposee extends Instruction {
     
     private final HashMap<String, Integer> VARIABLE = new HashMap<>();
 
+    public InstructionComposee(Instruction parent) {
+        super(parent);
+    }
+
     /**
      * Retourne la valeur d'une variable passée en paramètre
      * @param nomVar

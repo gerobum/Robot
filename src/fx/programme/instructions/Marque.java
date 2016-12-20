@@ -11,10 +11,10 @@ import javax.swing.ImageIcon;
 public class Marque extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;
-    //private transient Marqueur marqueur;
-    public Marque() {
+
+    public Marque(Instruction parent) {
+        super(parent);
         nom = "marque";
-        //this.marqueur = marqueur;
     }
     @Override
     public void go(Robot robot) /*throws DansLeMur*/ {

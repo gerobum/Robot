@@ -24,10 +24,11 @@ public class Si extends InstructionComposee {
         icone = new ImageIcon(tmp);
     }
 
-    public Si() {
+    /*public Si() {
         this(null);      
-    }
-    public Si(ExprBool garde) {
+    }*/
+    public Si(Instruction parent, ExprBool garde) {
+        super(parent);
         this.nom = "si";
         this.garde = garde;
         

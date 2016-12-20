@@ -12,10 +12,9 @@ public class Efface extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;
     
-    //private transient Marqueur marqueur;
-    public Efface() {
+    public Efface(Instruction parent) {
+        super(parent);
         nom = "efface";
-        //this.marqueur = marqueur;
     }
     @Override
     public void go(Robot robot) /*throws DansLeMur*/ {

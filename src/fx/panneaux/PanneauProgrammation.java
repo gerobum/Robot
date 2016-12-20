@@ -1,13 +1,11 @@
 package fx.panneaux;
 
 import fx.programme.Initialisation;
-import fx.programme.NoeudProgramme;
 import fx.programme.expressions.*;
+import fx.programme.instructions.Instruction;
 import java.util.Optional;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 
 /**
  *
@@ -37,7 +35,7 @@ public class PanneauProgrammation extends PanneauBordure {
     private ParseurExprBool parseur;
     private final Button boutonAjoutProcedure = new Button("nouvelle procédure");
     private final Button boutonAppelProcedure = new Button("appel de procédure");
-    private final ComboBox<NoeudProgramme> comboAppelProcedure = new ComboBox<>();
+    private final ComboBox<Instruction> comboAppelProcedure = new ComboBox<>();
     private final TextField texteNouvelleProcedure = new TextField();
     private final Button boutonEcrire = new Button("écrire");
     private final Button boutonLire = new Button("Lire");
