@@ -42,7 +42,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private JTreeRobot arbre;
     private Programme programme;
 
-    //private SwingNode panneauPrincipal;
+
     private PanneauPrincipal panneauPrincipal;
 
     @Override
@@ -78,12 +78,9 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
         BorderPane root = new BorderPane(grid);
 
-        //panneauPrincipal = new SwingNode();
-
         programme = new Programme();
         arbre = new JTreeRobot(programme.getArbreProgramme());
 
-        //panneauPrincipal.setContent(new PanneauPrincipal(this));
         panneauPrincipal = new PanneauPrincipal();
 
         root.setLeft(panneauPrincipal);
@@ -97,6 +94,8 @@ public class ApplicationPrincipale extends Application implements Detachable {
         root.setBottom(bottom);
         
         // ######
+        robot = new Robot(this);
+        robots.add(robot);
         robot = new Robot(this);
         robots.add(robot);
         // ######

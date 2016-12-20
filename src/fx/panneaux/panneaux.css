@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19 déc. 2016, 23:59:09
+    Author     : yvan
+
+
+.panneau {
+  -fx-font: 28px Vivaldi;
+}
+*/
+.bordered-titled-title {
+  -fx-background-color: white;
+  -fx-translate-y: 26;
+  -fx-translate-x: 60;
+}
+
+.bordered-titled-border {
+  -fx-content-display: top;
+  -fx-border-insets: 20 15 15 15;
+  -fx-background-color: white;
+  -fx-border-color: black;
+  -fx-border-width: 2;
+}
+.main-panel {
+  -fx-content-display: top;
+  -fx-border-insets: 20 15 15 15;
+  -fx-background-color: white;
+  -fx-border-color: gray;
+  -fx-border-width: 3;
+  -fx-effect: innershadow(three-pass-box, gray, 12 , 0.5, 1, 1);
+  -fx-border-radius: 15;
+}
+
+.panneau {
+  -fx-content-display: top;
+  -fx-border-insets: 20 15 15 15;
+  -fx-background-color: white;
+  -fx-border-color: black;
+  -fx-border-width: 2;
+}
+.bordered-titled-content {
+  -fx-padding: 26 10 10 10;
+}
+
+.button-like {
+  -fx-background-color: 
+       -fx-shadow-highlight-color, 
+       -fx-outer-border, 
+       -fx-inner-border, 
+       -fx-body-color;
+  -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+  -fx-background-radius: 3px, 3px, 2px, 1px;
+}
