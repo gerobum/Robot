@@ -30,6 +30,7 @@ public class PanneauPrincipal extends GridPane {
         int row = 1;
         add(new PanneauProgrammation(), 0, row++);
         add(new PanneauEdition(), 0, row++);
+        add(new PanneauExecution(), 0, row++);
     }
 
     private void addListeners() {

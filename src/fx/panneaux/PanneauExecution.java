@@ -13,27 +13,22 @@ import javafx.scene.layout.*;
  *
  * @author yvan
  */
-public class PanneauEdition extends PanneauBordure {
+public class PanneauExecution extends PanneauBordure {
 
-    private final Button boutonSupprime = new Button("supprimer");
-    private final Button boutonCopie = new Button("copier");
-    private final Button boutonColle = new Button("coller");
-    private final Button boutonCoupe = new Button("couper");
+    private final Button boutonExecutionProgramme = new Button("Exécution du programme");
+    private final Button boutonExecutionSelection = new Button("Exécution de la sélection");
 
 
-
-    public PanneauEdition() {
-        super(" Edition  ");
+    public PanneauExecution() {
+        super(" Exécution  ");
         doingUI();
         addListeners();
     }
 
     private void doingUI() {
 
-        add(boutonSupprime, 0, 0);
-        add(boutonCopie, 1, 0);
-        add(boutonColle, 2, 0);
-        add(boutonCoupe, 3, 0);
+        add(boutonExecutionProgramme, 0, 0);
+        add(boutonExecutionSelection, 1, 0);
 
         for (Node n : getChildren()) {
             /*if (n instanceof Region) {
