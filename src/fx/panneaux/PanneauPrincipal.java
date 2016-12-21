@@ -1,13 +1,16 @@
 package fx.panneaux;
 
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 
 /**
  *
  * @author yvan
  */
-public class PanneauPrincipal extends GridPane {
+public class PanneauPrincipal extends SplitPane {
 
+    private GridPane gridPane = new GridPane();
+    private StackPane stackPane = new StackPane();
   
 
     public PanneauPrincipal() {
@@ -18,11 +21,13 @@ public class PanneauPrincipal extends GridPane {
 
     private void doingUI() {
         getStylesheets().add(getClass().getResource("panneaux.css").toExternalForm());
-        setVgap(15);
+        gridPane.setVgap(15);
         int row = 1;
-        add(new PanneauProgrammation(), 0, row++);
-        add(new PanneauEdition(), 0, row++);
-        add(new PanneauExecution(), 0, row++);
+        gridPane.add(new PanneauProgrammation(), 0, row++);
+        gridPane.add(new PanneauEdition(), 0, row++);
+        gridPane.add(new PanneauExecution(), 0, row++);
+        stackPane.setPrefWidth(500);
+        getItems().addAll(gridPane, stackPane);
     }
 
     private void addListeners() {
