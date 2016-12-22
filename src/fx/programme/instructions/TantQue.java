@@ -3,7 +3,7 @@ package fx.programme.instructions;
 import fx.programme.expressions.ExprBool;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import fx.robot.DansLeMur;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
 /**

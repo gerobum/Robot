@@ -2,7 +2,7 @@ package fx.programme.instructions;
 
 import java.util.Scanner;
 import javax.swing.ImageIcon;
-import fx.robot.DansLeMur;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
 /**

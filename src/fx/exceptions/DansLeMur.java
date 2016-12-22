@@ -1,4 +1,4 @@
-package fx.robot;
+package fx.exceptions;
 
 
 /**

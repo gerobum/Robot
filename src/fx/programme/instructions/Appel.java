@@ -1,6 +1,6 @@
 package fx.programme.instructions;
 
-import fx.robot.DansLeMur;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import java.util.Scanner;
 import javax.swing.ImageIcon;

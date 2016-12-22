@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.swing.*;
-import fx.robot.DansLeMur;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
 /**

@@ -7,7 +7,7 @@ package fx.programme;
 import fx.programme.instructions.Bloc;
 import fx.programme.instructions.Instruction;
 import fx.programme.instructions.Racine;
-import fx.robot.DansLeMur;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import java.io.Serializable;
 import java.util.Collection;
@@ -25,7 +25,7 @@ public class Programme extends Instruction implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Initialisation initialisation;
-    private final Map<String, Instruction> PROCEDURE;
+    private final Map<String, Bloc> PROCEDURE;
     // #### private final DefaultTreeModel ARBRE_PROGRAMME;
     private final TreeItem<Instruction> PROGRAMME;
     private final Bloc PRINCIPAL;
@@ -44,9 +44,13 @@ public class Programme extends Instruction implements Serializable {
         PROGRAMME.getChildren().add(new TreeItem<>(PRINCIPAL));
 
     }
-
+    
     @Override
     public String toString() {
+        return "programme";
+    }
+
+    public String deepToString() {
         StringBuilder sb = new StringBuilder(initialisation.toString() + "\n");
         for (Instruction p : PROCEDURE.values()) {
             sb.append(p.deepToString("  "));
@@ -58,17 +62,17 @@ public class Programme extends Instruction implements Serializable {
         return PROGRAMME;
     }
 
-    public Instruction getProcedurePrincipal() {
+    public Bloc getProcedurePrincipal() {
         return PROCEDURE.get("procédure principale");
     }
 
-    public Instruction getProcedure(String nom) {
+    public Bloc getProcedure(String nom) {
         return PROCEDURE.get(nom);
     }
 
-    public Collection<Instruction> getProcedures() {
-        Collection<Instruction> c = PROCEDURE.values();
-        c.remove(getProcedurePrincipal());
+    public Collection<Bloc> getProcedures() {
+        Collection<Bloc> c = PROCEDURE.values();
+        //c.remove(getProcedurePrincipal());
         return c;
     }
 
@@ -95,7 +99,7 @@ public class Programme extends Instruction implements Serializable {
         return initialisation;
     }
 
-    public Iterable<Instruction> procedures() {
+    public Iterable<Bloc> procedures() {
         return PROCEDURE.values();
     }
 

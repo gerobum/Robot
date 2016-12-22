@@ -1,9 +1,14 @@
 package fx.panneaux;
 
 import fx.programme.Initialisation;
+import fx.programme.Programme;
 import fx.programme.expressions.*;
+import fx.programme.instructions.Avance;
 import fx.programme.instructions.Instruction;
+import fx.programme.instructions.Racine;
 import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
@@ -42,11 +47,15 @@ public class PanneauProgrammation extends PanneauBordure {
     private final TextField texteLireEcrire = new TextField();
     private final ComboBox<ExprBool> comboExpression = new ComboBox<>();
 
-
     private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
-    public PanneauProgrammation() {
+    private final Programme racine;
+    private TreeView<Instruction> tree;
+
+    public PanneauProgrammation(TreeView<Instruction> tree) {
         super("  Programmation  ");
+        this.racine = (Programme) tree.getRoot().getValue();
+        this.tree = tree;
         doingUI();
         addListeners();
     }
@@ -117,5 +126,113 @@ public class PanneauProgrammation extends PanneauBordure {
                 System.out.println(result.get());
             }
         });
+        EventHandler<ActionEvent> eh = e -> {
+            //programme.getProgramme().
+            TreeItem<Instruction> selectedItem = tree.getSelectionModel().getSelectedItem();
+            //if (selectedItem.getValue().autorisationAjout())
+                selectedItem.getChildren().add(new TreeItem<>(new Avance(null)));
+            //else
+            //    selectedItem.getParent().getChildren().add(new TreeItem<>(new Avance(null)));
+        };
+        boutonAvance.setOnAction(eh);
+
+        /*ajoutInstruction = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TreePath treePath = PanneauPrincipal.this.frameParente.getArbre().getSelectionPath();
+                Instruction select;
+                //if (treePath != null) {
+                if (treePath == null) {
+                    select = (Instruction) PanneauPrincipal.this.frameParente.getArbre().getModel().getRoot();
+                } else {
+                    select = (Instruction) treePath.getLastPathComponent();
+                }
+                if (select.getParent() == null) {
+                    select = PanneauPrincipal.this.frameParente.getProgramme().getProcedurePrincipal();
+                }
+
+                JButton source = (JButton) e.getSource();
+
+                Instruction instruction = null;
+                if (source == boutonAvance) {
+                    instruction = new Avance();
+                } else if (source == boutonTourne) {
+                    instruction = new Tourne();
+                } else if (source == boutonMarque) {
+                    instruction = new Marque();
+                } else if (source == boutonEfface) {
+                    instruction = new Efface();
+                } else if (source == boutonTantQue) {
+                    ExprBool exp;
+                    if (exprBoolComplexe != null) {
+                        exp = exprBoolComplexe;
+                        texteExprBool.setText("");
+                    } else {
+                        exp = (ExprBoolElt) PanneauPrincipal.this.comboExpression.getSelectedItem();
+                    }
+                    //ExpressionBoolenne pasDevantMur = new PasDevantMur(Programme.this.robot);
+                    instruction = new TantQue(exp);
+                } else if (source == boutonSi) {
+                    ExprBool exp;
+                    if (exprBoolComplexe == null) {
+                        exp = (ExprBool) PanneauPrincipal.this.comboExpression.getSelectedItem();
+                    } else {
+                        exp = exprBoolComplexe;
+                    }
+                    instruction = new Si(exp);
+                } else if (source == boutonBloc) {
+                    if (texteBloc.getText().equalsIgnoreCase("")) {
+                        instruction = new Bloc("bloc");
+                    } else {
+                        instruction = new Bloc(texteBloc.getText());
+                    }
+                } else if (source == boutonAjoutProcedure) {
+                    if (texteNouvelleProcedure.getText().length() > 0
+                            && PanneauPrincipal.this.frameParente.getProgramme().getProcedure(texteNouvelleProcedure.getText()) == null) {
+                        instruction = PanneauPrincipal.this.frameParente.getProgramme().ajoutProcedure(texteNouvelleProcedure.getText());
+                        comboAppelProcedure.addItem(instruction);
+                        instruction = null; // Important, ne pas enlever
+                    }
+                } else if (source == boutonAppelProcedure) {
+                    instruction = new Appel((Bloc) comboAppelProcedure.getSelectedItem());
+                } else if (source == boutonPour) {
+                    if (select instanceof InstructionComposee) {
+                        InstructionComposee parent = (InstructionComposee) select;
+                        String de, a, pas;
+                        de = texteDebutPour.getText();
+                        a = texteFinPour.getText();
+                        pas = textePasPour.getText();
+
+                        instruction = new Pour((InstructionComposee) select, de, a, pas);
+
+                    } else {
+                        //instruction = null; // Important, ne pas enlever
+                        return;
+                    }
+                } else if (source == boutonEcrire) {
+                    instruction = new Ecrire(texteLireEcrire.getText());
+                } else if (source == boutonLire) {
+                    String variable = JOptionPane.showInputDialog("Quelle variable doit être affectée ?", instruction);
+                    instruction = new Lire(variable, texteLireEcrire.getText());
+                }
+                if (instruction != null) {
+                    if (select.autorisationAjout()) {
+                        PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, select, select.getChildCount());
+                    } else {
+                        Instruction parent = (Instruction) select.getParent();
+                        if (parent != null && parent.autorisationAjout()) {
+                            PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, parent, parent.getIndex(select));
+                        }
+                    }
+                    JTree arbre = PanneauPrincipal.this.frameParente.getArbre();
+                    for (int i = 0; i < arbre.getRowCount(); i++) {
+                        arbre.expandRow(i);
+                    }
+                    //instruction.setParent(select);
+                }
+            }
+            //}
+        };*/
     }
 }

@@ -1,6 +1,7 @@
 package fx.programme.instructions;
 
-import fx.robot.DansLeMur;
+import fx.exceptions.AjoutImpossible;
+import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import java.util.*;
 import javafx.scene.control.TreeItem;
@@ -21,19 +22,19 @@ public abstract class Instruction {
         this.PARENT = parent;
         ENFANTS = new ArrayList<>();
     }
-
+        
     @Override
     public String toString() {
         if (getParent() != null) {
             if (getParent().getClass() == Si.class) {
                 if (getParent().getIndex(this) == 0) {
                     return "alors " + nom;
-                } else {
-                    return "sinon " + nom;
-                }
-            } else if (getParent().getClass() == TantQue.class || getParent().getClass() == Pour.class) {
-                return "faire " + nom;
+            } else {
+                return "sinon " + nom;
             }
+        } else if (getParent().getClass() == TantQue.class || getParent().getClass() == Pour.class) {
+            return "faire " + nom;
+        }
         }
         return nom;
     }
@@ -72,5 +73,10 @@ public abstract class Instruction {
         } else {
             return null;
         }
+    }
+    
+    public void addChild(Instruction instruction) throws AjoutImpossible {
+        if (!autorisationAjout()) throw new AjoutImpossible();
+        ENFANTS.add(instruction);
     }
 }
