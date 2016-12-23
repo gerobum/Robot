@@ -1,7 +1,6 @@
 package fx.panneaux;
 
 import fx.enumerations.Gardes;
-import fx.enumerations.Instructions;
 import fx.programme.Initialisation;
 import fx.programme.Programme;
 import fx.programme.expressions.*;
@@ -11,8 +10,11 @@ import fx.programme.instructions.Racine;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -42,7 +44,7 @@ public class PanneauProgrammation extends PanneauBordure {
     private ParseurExprBool parseur;
     private final Button boutonAjoutProcedure = new Button("nouvelle procédure");
     private final Button boutonAppelProcedure = new Button("appel de procédure");
-    private final ComboBox<Instructions> comboAppelProcedure = new ComboBox<>();
+    private final ComboBox<Instruction> comboAppelProcedure = new ComboBox<>();
     private final TextField texteNouvelleProcedure = new TextField();
     private final Button boutonEcrire = new Button("écrire");
     private final Button boutonLire = new Button("Lire");
@@ -101,7 +103,7 @@ public class PanneauProgrammation extends PanneauBordure {
         add(texteLireEcrire, 4, row, 4, 1);
 
         comboExpression.getItems().addAll(Gardes.values());
-    
+
         comboExpression.getSelectionModel().selectFirst();
 
         for (Node n : getChildren()) {
@@ -110,6 +112,11 @@ public class PanneauProgrammation extends PanneauBordure {
             }*/
             setFillWidth(n, true);
         }
+
+        boutonAjoutProcedure.setDisable(true);
+        texteNouvelleProcedure.setTooltip(new Tooltip("Entrez un nom de procédure"));
+        boutonAppelProcedure.setDisable(true);
+        comboAppelProcedure.setDisable(true);
     }
 
     private void addListeners() {
@@ -120,15 +127,30 @@ public class PanneauProgrammation extends PanneauBordure {
                 System.out.println(result.get());
             }
         });
+        EventHandler<KeyEvent> changeTexteProcedure = e -> {
+            if (texteNouvelleProcedure.getText() != null
+                    && texteNouvelleProcedure.getText().length() > 0
+                    && comboAppelProcedure.getItems()
+                    .stream()
+                    .map(p -> p.toString())
+                    .noneMatch(p -> p.equals(texteNouvelleProcedure.getText()))) {
+                boutonAjoutProcedure.setDisable(false);
+            } else {
+                boutonAjoutProcedure.setDisable(true);
+            }
+        };
+        
         EventHandler<ActionEvent> eh = e -> {
             //programme.getProgramme().
             TreeItem<Instruction> selectedItem = tree.getSelectionModel().getSelectedItem();
             //if (selectedItem.getValue().autorisationAjout())
-                selectedItem.getChildren().add(new TreeItem<>(new Avance(null)));
+            selectedItem.getChildren().add(new TreeItem<>(new Avance(null)));
             //else
             //    selectedItem.getParent().getChildren().add(new TreeItem<>(new Avance(null)));
         };
+        //texteNouvelleProcedure
         boutonAvance.setOnAction(eh);
+        texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {
 
