@@ -1,5 +1,7 @@
 package fx.panneaux;
 
+import fx.enumerations.Gardes;
+import fx.enumerations.Instructions;
 import fx.programme.Initialisation;
 import fx.programme.Programme;
 import fx.programme.expressions.*;
@@ -40,12 +42,12 @@ public class PanneauProgrammation extends PanneauBordure {
     private ParseurExprBool parseur;
     private final Button boutonAjoutProcedure = new Button("nouvelle procédure");
     private final Button boutonAppelProcedure = new Button("appel de procédure");
-    private final ComboBox<Instruction> comboAppelProcedure = new ComboBox<>();
+    private final ComboBox<Instructions> comboAppelProcedure = new ComboBox<>();
     private final TextField texteNouvelleProcedure = new TextField();
     private final Button boutonEcrire = new Button("écrire");
     private final Button boutonLire = new Button("Lire");
     private final TextField texteLireEcrire = new TextField();
-    private final ComboBox<ExprBool> comboExpression = new ComboBox<>();
+    private final ComboBox<Gardes> comboExpression = new ComboBox<>();
 
     private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
@@ -98,16 +100,8 @@ public class PanneauProgrammation extends PanneauBordure {
         add(boutonEcrire, 2, row, 2, 1);
         add(texteLireEcrire, 4, row, 4, 1);
 
-        comboExpression.getItems().addAll(
-                new DevantMur(),
-                new PasDevantMur(),
-                new SurMarque(),
-                new PasSurMarque(),
-                new DevantMarque(),
-                new PasDevantMarque(),
-                new SurMinerai(),
-                new PasSurMinerai()
-        );
+        comboExpression.getItems().addAll(Gardes.values());
+    
         comboExpression.getSelectionModel().selectFirst();
 
         for (Node n : getChildren()) {

@@ -1,5 +1,6 @@
 package fx.panneaux;
 
+import fx.enumerations.Instructions;
 import fx.programme.Programme;
 import fx.programme.expressions.DevantMur;
 import fx.programme.expressions.PasDevantMur;
