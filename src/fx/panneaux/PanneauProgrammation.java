@@ -4,13 +4,9 @@ import fx.enumerations.Gardes;
 import fx.programme.Initialisation;
 import fx.programme.Programme;
 import fx.programme.expressions.*;
-import fx.programme.instructions.Avance;
-import fx.programme.instructions.Instruction;
-import fx.programme.instructions.Tourne;
+import fx.programme.instructions.*;
 import java.util.Optional;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
+import javafx.event.*;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -32,8 +28,8 @@ public class PanneauProgrammation extends PanneauBordure {
 
     class BoutonAvance extends BoutonInstructionElementaire {
 
-        public BoutonAvance(String texte) {
-            super(texte);
+        public BoutonAvance() {
+            super("avance");
         }
 
         @Override
@@ -45,8 +41,8 @@ public class PanneauProgrammation extends PanneauBordure {
 
     class BoutonTourne extends BoutonInstructionElementaire {
 
-        public BoutonTourne(String texte) {
-            super(texte);
+        public BoutonTourne() {
+            super("tourne");
         }
 
         @Override
@@ -55,13 +51,39 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
+    class BoutonEfface extends BoutonInstructionElementaire {
+
+        public BoutonEfface() {
+            super("efface");
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent) {
+            return new Efface(parent);
+        }
+
+    }
+    class BoutonMarque extends BoutonInstructionElementaire {
+
+        public BoutonMarque() {
+            super("marque");
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent) {
+            return new Marque(parent);
+        }
+
+    }
+
+
 
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
-    private final BoutonAvance boutonAvance = new BoutonAvance("avance");
-    private final BoutonTourne boutonTourne = new BoutonTourne("tourne");
-    private final Button boutonMarque = new Button("marque");
-    private final Button boutonEfface = new Button("efface");
+    private final BoutonAvance boutonAvance = new BoutonAvance();
+    private final BoutonTourne boutonTourne = new BoutonTourne();
+    private final BoutonMarque boutonMarque = new BoutonMarque();
+    private final BoutonEfface boutonEfface = new BoutonEfface();
     private final Button boutonSi = new Button("si");
     private final Button boutonTantQue = new Button("tant que");
     private final Button boutonPour = new Button("pour");
@@ -191,6 +213,8 @@ public class PanneauProgrammation extends PanneauBordure {
         //texteNouvelleProcedure
         boutonAvance.setOnAction(actionInstructionElementaire);
         boutonTourne.setOnAction(actionInstructionElementaire);
+        boutonMarque.setOnAction(actionInstructionElementaire);
+        boutonEfface.setOnAction(actionInstructionElementaire);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {
