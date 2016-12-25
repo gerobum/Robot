@@ -51,6 +51,7 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
+
     class BoutonEfface extends BoutonInstructionElementaire {
 
         public BoutonEfface() {
@@ -63,6 +64,7 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
+
     class BoutonMarque extends BoutonInstructionElementaire {
 
         public BoutonMarque() {
@@ -75,8 +77,6 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
-
-
 
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
@@ -111,6 +111,10 @@ public class PanneauProgrammation extends PanneauBordure {
 
     private final Programme racine;
     private TreeView<Instruction> tree;
+    
+    private Alert alert = new Alert(Alert.AlertType.ERROR, "Pour ajouter une instruction "
+            + "élémentaire, il faut \n"
+            + "sélectionner autre chose que le programme", ButtonType.OK);
 
     public PanneauProgrammation(TreeView<Instruction> tree) {
         super("  Programmation  ");
@@ -203,11 +207,16 @@ public class PanneauProgrammation extends PanneauBordure {
             // Si l'instruction autorise les ajouts
             if (selectedItem.getValue().autorisationAjout()) {
                 // L'ajout se fait à la fin
-                selectedItem.getChildren().add(new TreeItem<>(bouton.newInstance(selectedItem.getValue())));
-            } else { // Sinon, la nouvelle instruction prend la place de celle sélectionnée
-                // Détermination de la position de l'instruction sélectionnée
-                int x = selectedItem.getParent().getChildren().indexOf(selectedItem);
-                selectedItem.getParent().getChildren().add(x, new TreeItem<>(bouton.newInstance(selectedItem.getParent().getValue())));
+                if (selectedItem.getValue().getClass() == Programme.class) {
+                    alert.showAndWait();
+                } else {
+                    selectedItem.getChildren().add(new TreeItem<>(bouton.newInstance(selectedItem.getValue())));
+                }
+            } else // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            {
+                    int x = selectedItem.getParent().getChildren().indexOf(selectedItem);
+                    selectedItem.getParent().getChildren().add(x, new TreeItem<>(bouton.newInstance(selectedItem.getParent().getValue())));
             }
         };
         //texteNouvelleProcedure
