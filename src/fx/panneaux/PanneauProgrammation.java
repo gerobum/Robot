@@ -6,14 +6,13 @@ import fx.programme.Programme;
 import fx.programme.expressions.*;
 import fx.programme.instructions.Avance;
 import fx.programme.instructions.Instruction;
-import fx.programme.instructions.Racine;
+import fx.programme.instructions.Tourne;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.CacheHint;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -22,10 +21,45 @@ import javafx.scene.input.KeyEvent;
  */
 public class PanneauProgrammation extends PanneauBordure {
 
+    abstract class BoutonInstructionElementaire extends Button {
+
+        public BoutonInstructionElementaire(String texte) {
+            super(texte);
+        }
+
+        public abstract Instruction newInstance(Instruction parent);
+    }
+
+    class BoutonAvance extends BoutonInstructionElementaire {
+
+        public BoutonAvance(String texte) {
+            super(texte);
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent) {
+            return new Avance(parent);
+        }
+
+    }
+
+    class BoutonTourne extends BoutonInstructionElementaire {
+
+        public BoutonTourne(String texte) {
+            super(texte);
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent) {
+            return new Tourne(parent);
+        }
+
+    }
+
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
-    private final Button boutonAvance = new Button("avance");
-    private final Button boutonTourne = new Button("tourne");
+    private final BoutonAvance boutonAvance = new BoutonAvance("avance");
+    private final BoutonTourne boutonTourne = new BoutonTourne("tourne");
     private final Button boutonMarque = new Button("marque");
     private final Button boutonEfface = new Button("efface");
     private final Button boutonSi = new Button("si");
@@ -139,17 +173,24 @@ public class PanneauProgrammation extends PanneauBordure {
                 boutonAjoutProcedure.setDisable(true);
             }
         };
-        
-        EventHandler<ActionEvent> eh = e -> {
-            //programme.getProgramme().
+
+        EventHandler<ActionEvent> actionInstructionElementaire = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            BoutonInstructionElementaire bouton = (BoutonInstructionElementaire) e.getSource();
             TreeItem<Instruction> selectedItem = tree.getSelectionModel().getSelectedItem();
-            //if (selectedItem.getValue().autorisationAjout())
-            selectedItem.getChildren().add(new TreeItem<>(new Avance(null)));
-            //else
-            //    selectedItem.getParent().getChildren().add(new TreeItem<>(new Avance(null)));
+            // Si l'instruction autorise les ajouts
+            if (selectedItem.getValue().autorisationAjout()) {
+                // L'ajout se fait à la fin
+                selectedItem.getChildren().add(new TreeItem<>(bouton.newInstance(selectedItem.getValue())));
+            } else { // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+                // Détermination de la position de l'instruction sélectionnée
+                int x = selectedItem.getParent().getChildren().indexOf(selectedItem);
+                selectedItem.getParent().getChildren().add(x, new TreeItem<>(bouton.newInstance(selectedItem.getParent().getValue())));
+            }
         };
         //texteNouvelleProcedure
-        boutonAvance.setOnAction(eh);
+        boutonAvance.setOnAction(actionInstructionElementaire);
+        boutonTourne.setOnAction(actionInstructionElementaire);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {
