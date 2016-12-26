@@ -111,10 +111,8 @@ public class PanneauProgrammation extends PanneauBordure {
 
     private final Programme racine;
     private TreeView<Instruction> tree;
-    
-    private Alert alert = new Alert(Alert.AlertType.ERROR, "Pour ajouter une instruction "
-            + "élémentaire, il faut \n"
-            + "sélectionner autre chose que le programme", ButtonType.OK);
+
+    private final Alert ALERT = new Alert(Alert.AlertType.ERROR);
 
     public PanneauProgrammation(TreeView<Instruction> tree) {
         super("  Programmation  ");
@@ -122,6 +120,11 @@ public class PanneauProgrammation extends PanneauBordure {
         this.tree = tree;
         doingUI();
         addListeners();
+    }
+
+    private void alert(String message) {
+        ALERT.setContentText(message);
+        ALERT.showAndWait();
     }
 
     private void doingUI() {
@@ -177,6 +180,10 @@ public class PanneauProgrammation extends PanneauBordure {
         texteNouvelleProcedure.setTooltip(new Tooltip("Entrez un nom de procédure"));
         boutonAppelProcedure.setDisable(true);
         comboAppelProcedure.setDisable(true);
+
+        // Configuration de la boite de dialogue d'alerte
+        ALERT.setTitle("Mauvaise sélection");
+        ALERT.setHeaderText("Mauvaise sélection");
     }
 
     private void addListeners() {
@@ -203,20 +210,24 @@ public class PanneauProgrammation extends PanneauBordure {
         EventHandler<ActionEvent> actionInstructionElementaire = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             BoutonInstructionElementaire bouton = (BoutonInstructionElementaire) e.getSource();
-            TreeItem<Instruction> selectedItem = tree.getSelectionModel().getSelectedItem();
-            // Si l'instruction autorise les ajouts
-            if (selectedItem.getValue().autorisationAjout()) {
+            TreeItem<Instruction> parent = tree.getSelectionModel().getSelectedItem();
+            if (parent == null) {
+                alert("Pour ajouter une instruction, il faut \n"
+                        + "sélectionner une instruction dans le programme");
+            } else if (parent.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
                 // L'ajout se fait à la fin
-                if (selectedItem.getValue().getClass() == Programme.class) {
-                    alert.showAndWait();
+                if (parent.getValue().getClass() == Programme.class) {
+                    alert("Pour ajouter une instruction, il faut \n"
+                            + "sélectionner autre chose que le programme");
                 } else {
-                    selectedItem.getChildren().add(new TreeItem<>(bouton.newInstance(selectedItem.getValue())));
+                    parent.getChildren().add(new TreeItem<>(bouton.newInstance(parent.getValue())));
                 }
-            } else // Sinon, la nouvelle instruction prend la place de celle sélectionnée
-            // Détermination de la position de l'instruction sélectionnée
-            {
-                    int x = selectedItem.getParent().getChildren().indexOf(selectedItem);
-                    selectedItem.getParent().getChildren().add(x, new TreeItem<>(bouton.newInstance(selectedItem.getParent().getValue())));
+            } else {
+                // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+                // Détermination de la position de l'instruction sélectionnée
+                parent = parent.getParent();
+                int x = parent.getChildren().indexOf(parent);
+                parent.getChildren().add(x, new TreeItem<>(bouton.newInstance(parent.getValue())));
             }
         };
         //texteNouvelleProcedure
