@@ -86,6 +86,17 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
+    class BoutonBloc extends BoutonInstructionElementaire {
+        public BoutonBloc() {
+            super("bloc");
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent) {
+            return new Bloc(parent, "bloc");
+        }
+
+    }
 
     class BoutonSi extends BoutonInstructionGardee {
 
@@ -121,6 +132,7 @@ public class PanneauProgrammation extends PanneauBordure {
     private final BoutonEfface boutonEfface = new BoutonEfface();
     private final BoutonSi boutonSi = new BoutonSi();
     private final BoutonTantQue boutonTantQue = new BoutonTantQue();
+    private final BoutonBloc boutonBloc = new BoutonBloc();
 
     private final Button boutonPour = new Button("pour");
     private final Label de = new Label(" de ");
@@ -129,7 +141,6 @@ public class PanneauProgrammation extends PanneauBordure {
     private final TextField texteFinPour = new TextField("10");
     private final Label pas = new Label(" par pas de ");
     private final TextField textePasPour = new TextField("1");
-    private final Button boutonBloc = new Button("bloc");
     //private final TextField texteBloc = new TextField();
     private final TextArea texteExprBool = new TextArea();
     private ExprBool exprBoolComplexe = null;
@@ -333,6 +344,7 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonTourne.setOnAction(actionInstructionElementaire);
         boutonMarque.setOnAction(actionInstructionElementaire);
         boutonEfface.setOnAction(actionInstructionElementaire);
+        boutonBloc.setOnAction(actionInstructionElementaire);
         boutonSi.setOnAction(actionInstructionGardee);
         boutonTantQue.setOnAction(actionInstructionGardee);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
