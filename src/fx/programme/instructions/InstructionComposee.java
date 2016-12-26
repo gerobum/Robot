@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fx.programme.instructions;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 public abstract class InstructionComposee extends Instruction {
 
     public static final long serialVersionUID = 0L;
-    
+
     private final HashMap<String, Integer> VARIABLE = new HashMap<>();
 
     public InstructionComposee(Instruction parent) {
@@ -23,6 +22,7 @@ public abstract class InstructionComposee extends Instruction {
 
     /**
      * Retourne la valeur d'une variable passée en paramètre
+     *
      * @param nomVar
      * @return
      */
@@ -30,32 +30,41 @@ public abstract class InstructionComposee extends Instruction {
         Integer valeur;
         try {
             valeur = Integer.parseInt(nomVar);
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             valeur = VARIABLE.get(nomVar);
-            if (valeur == null)
-                if (getParent() == null)
+            if (valeur == null) {
+                if (getParent() == null) {
                     return null;
-                else
-                    return ((InstructionComposee)getParent()).get(nomVar);
-            else
+                } else {
+                    try {
+                        return ((InstructionComposee) getParent()).get(nomVar);
+                    } catch (ClassCastException cce) {
+                        return null;
+                    }
+                }
+            } else {
                 return valeur;
+            }
         }
         return valeur;
     }
 
     public Integer set(String nomVar, int valeur) {
-        if (get(nomVar) == null)
+        if (get(nomVar) == null) {
             return VARIABLE.put(nomVar, valeur);
-        else
+        } else {
             return affecte(nomVar, valeur);
+        }
     }
 
     private Integer affecte(String nomVar, int valeur) {
-        if (VARIABLE.containsKey(nomVar))
+        if (VARIABLE.containsKey(nomVar)) {
             return VARIABLE.put(nomVar, valeur);
-        else
+        } else {
             return affecte(nomVar, valeur);
+        }
     }
+
     public String[] getVars() {
         return VARIABLE.keySet().toArray(new String[0]);
     }
@@ -70,5 +79,4 @@ public abstract class InstructionComposee extends Instruction {
         s += "fin\n";
         return s;
     }*/
-
 }

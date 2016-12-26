@@ -100,6 +100,17 @@ public class PanneauProgrammation extends PanneauBordure {
 
     }
 
+    class BoutonPour extends Button {
+
+        public BoutonPour() {
+            super("pour");
+        }
+
+        public Pour newInstance(InstructionComposee parent, String debut, String fin, String pas) {
+            return new Pour(parent, debut, fin, pas);
+        }
+    }
+
     class BoutonSi extends BoutonInstructionGardee {
 
         public BoutonSi() {
@@ -135,14 +146,14 @@ public class PanneauProgrammation extends PanneauBordure {
     private final BoutonSi boutonSi = new BoutonSi();
     private final BoutonTantQue boutonTantQue = new BoutonTantQue();
     private final BoutonBloc boutonBloc = new BoutonBloc();
-
-    private final Button boutonPour = new Button("pour");
+    private final BoutonPour boutonPour = new BoutonPour();
     private final Label de = new Label(" de ");
     private final TextField texteDebutPour = new TextField("1");
     private final Label à = new Label(" à ");
     private final TextField texteFinPour = new TextField("10");
     private final Label pas = new Label(" par pas de ");
     private final TextField textePasPour = new TextField("1");
+
     //private final TextField texteBloc = new TextField();
     private final TextArea texteExprBool = new TextArea();
     private ExprBool exprBoolComplexe = null;
@@ -239,7 +250,7 @@ public class PanneauProgrammation extends PanneauBordure {
         ALERT.setHeaderText("Mauvaise sélection");
     }
 
-    private void ajoutInstructionElementaire(TreeItem<Instruction> selectedInstruction, BoutonInstructionElementaire bouton) {
+    private void ajoutInstruction(TreeItem<Instruction> selectedInstruction, BoutonInstructionElementaire bouton) {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
         if (selectedInstruction == null) {
             alert("Pour ajouter une instruction, il faut \n"
@@ -310,6 +321,38 @@ public class PanneauProgrammation extends PanneauBordure {
         }
     }
 
+    private void ajoutPour(TreeItem<Instruction> selectedInstruction, BoutonPour bouton) {
+        // Ajout d'une instruction élémentaire dans l'arbre de programme.
+
+        if (selectedInstruction == null) {
+            alert("Pour ajouter une instruction, il faut \n"
+                    + "sélectionner une instruction dans le programme");
+        } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
+            // L'ajout se fait à la fin
+            TreeItem<Instruction> parent = selectedInstruction;
+            if (parent.getValue().getClass() == Programme.class) {
+                alert("Pour ajouter une instruction,\n"
+                        + "il faut sélectionner autre\n"
+                        + "chose que le programme");
+            } else {
+                Instruction instruction = bouton.newInstance((InstructionComposee) parent.getValue(), texteDebutPour.getText(), texteFinPour.getText(), textePasPour.getText());
+                parent.getChildren().add(new TreeItem<>(instruction));
+                parent.getValue().addChild(instruction);
+            }
+        } else {
+            // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
+
+                Instruction instruction = bouton.newInstance((InstructionComposee) parent.getValue(), texteDebutPour.getText(), texteFinPour.getText(), textePasPour.getText());
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
+        }
+    }
+
     private void addListeners() {
         boutonInitialise.setOnAction(e -> {
             Optional<Initialisation> result = DIALOG_INIT.showAndWait();
@@ -334,13 +377,19 @@ public class PanneauProgrammation extends PanneauBordure {
         EventHandler<ActionEvent> actionInstructionElementaire = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
-            ajoutInstructionElementaire(tree.getSelectionModel().getSelectedItem(), (BoutonInstructionElementaire) e.getSource());
+            ajoutInstruction(tree.getSelectionModel().getSelectedItem(), (BoutonInstructionElementaire) e.getSource());
             System.out.println(racine.deepToString());
 
         };
         EventHandler<ActionEvent> actionInstructionGardee = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             ajoutInstructionGardee(tree.getSelectionModel().getSelectedItem(), (BoutonInstructionGardee) e.getSource());
+            System.out.println(racine.deepToString());
+
+        };
+        EventHandler<ActionEvent> actionPour = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            ajoutPour(tree.getSelectionModel().getSelectedItem(), (BoutonPour) e.getSource());
             System.out.println(racine.deepToString());
 
         };
@@ -352,6 +401,7 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonBloc.setOnAction(actionInstructionElementaire);
         boutonSi.setOnAction(actionInstructionGardee);
         boutonTantQue.setOnAction(actionInstructionGardee);
+        boutonPour.setOnAction(actionPour);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {

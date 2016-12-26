@@ -79,7 +79,8 @@ public class Pour extends InstructionComposee {
     public String deepToString(String decalage) {
         StringBuilder sb = new StringBuilder();
         sb.append(decalage)
-                .append(toString());
+                .append(toString())
+                .append('\n');
         if (getChildrenCount() > 0) {
             sb.append(getChildAt(0).deepToString(decalage + " "));
         }
