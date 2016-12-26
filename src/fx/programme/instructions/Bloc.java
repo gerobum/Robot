@@ -30,7 +30,7 @@ public class Bloc extends InstructionComposee {
 
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {
-        for(int i = 0; i < getChildCount(); i++) {
+        for(int i = 0; i < getChildrenCount(); i++) {
             Instruction I = (Instruction) getChildAt(i);
           
                 I.go(robot);
@@ -56,11 +56,11 @@ public class Bloc extends InstructionComposee {
     @Override
     public String deepToString(String decalage) {
         StringBuilder sb = new StringBuilder();
-        sb.append(decalage + "debut\n");
-        for(int i = 0; i < getChildCount(); ++i) {
+        sb.append(decalage).append("debut\n");
+        for(int i = 0; i < getChildrenCount(); ++i) {
             sb.append(getChildAt(i).deepToString(" "+decalage));
         }
-        sb.append(decalage + "fin\n");
+        StringBuilder append = sb.append(decalage + "fin\n");
         return sb.toString();
     }
 }

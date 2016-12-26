@@ -16,7 +16,7 @@ public class Utilitaires {
     public final static Random RANDOM = new Random();
     public static TreeItem<Instruction> getArbreFromInstruction(Instruction instruction) {
         TreeItem<Instruction> tr = new TreeItem<>(instruction);
-        for(int i = 0; i < instruction.getChildCount(); ++i) {
+        for(int i = 0; i < instruction.getChildrenCount(); ++i) {
             tr.getChildren().add(getArbreFromInstruction(instruction.getChildAt(i)));
         }
         return tr;

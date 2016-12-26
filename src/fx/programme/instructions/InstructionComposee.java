@@ -62,7 +62,7 @@ public abstract class InstructionComposee extends Instruction {
 
     /*@Override
     public String deepToString(String decalage) {
-        int n = getChildCount();
+        int n = getChildrenCount();
         String s = decalage + nom + "\ndébut\n";
         for(int i = 0; i < n; i++) {
             s += ((Instruction)getChildAt(i)).deepToString(decalage+" ");

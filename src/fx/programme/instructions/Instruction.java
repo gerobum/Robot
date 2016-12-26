@@ -59,7 +59,7 @@ public abstract class Instruction {
         return ENFANTS.indexOf(instruction);
     }
 
-    public int getChildCount() {
+    public int getChildrenCount() {
         return ENFANTS.size();
     }
 

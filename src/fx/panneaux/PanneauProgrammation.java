@@ -86,7 +86,9 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
+
     class BoutonBloc extends BoutonInstructionElementaire {
+
         public BoutonBloc() {
             super("bloc");
         }
@@ -257,12 +259,14 @@ public class PanneauProgrammation extends PanneauBordure {
         } else {
             // Sinon, la nouvelle instruction prend la place de celle sélectionnée
             // Détermination de la position de l'instruction sélectionnée
-            TreeItem<Instruction> parent = selectedInstruction;
-            parent = selectedInstruction.getParent();
-            int x = parent.getChildren().indexOf(selectedInstruction);
-            Instruction instruction = bouton.newInstance(parent.getValue());
-            parent.getChildren().add(x, new TreeItem<>(instruction));
-            parent.getValue().addChild(x, instruction);
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            //if (parent.getParent().getValue().getc)
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
+                Instruction instruction = bouton.newInstance(parent.getValue());
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
         }
     }
 
@@ -295,13 +299,14 @@ public class PanneauProgrammation extends PanneauBordure {
         } else {
             // Sinon, la nouvelle instruction prend la place de celle sélectionnée
             // Détermination de la position de l'instruction sélectionnée
-            TreeItem<Instruction> parent = selectedInstruction;
-            parent = selectedInstruction.getParent();
-            int x = parent.getChildren().indexOf(selectedInstruction);
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
 
-            Instruction instruction = bouton.newInstance(parent.getValue(), garde);
-            parent.getChildren().add(x, new TreeItem<>(instruction));
-            parent.getValue().addChild(x, instruction);
+                Instruction instruction = bouton.newInstance(parent.getValue(), garde);
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
         }
     }
 
@@ -431,7 +436,7 @@ public class PanneauProgrammation extends PanneauBordure {
                 }
                 if (instruction != null) {
                     if (select.autorisationAjout()) {
-                        PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, select, select.getChildCount());
+                        PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, select, select.getChildrenCount());
                     } else {
                         Instruction parent = (Instruction) select.getParent();
                         if (parent != null && parent.autorisationAjout()) {

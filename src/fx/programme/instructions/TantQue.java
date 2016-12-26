@@ -38,7 +38,7 @@ public class TantQue extends InstructionComposee {
     public void go(Robot robot) throws DansLeMur, InterruptedException {
 
         while (garde.evalue(robot)) {
-            if (getChildCount() > 0) {
+            if (getChildrenCount() > 0) {
                 ((Instruction) getFirstChild()).go(robot);
             }
         }
@@ -55,7 +55,7 @@ public class TantQue extends InstructionComposee {
      */
     @Override
     public boolean autorisationAjout() {
-        return getChildCount() < 1;
+        return getChildrenCount() < 1;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TantQue extends InstructionComposee {
         sb.append(decalage)
                 .append(toString()).append("\n");
 
-        if (getChildCount() > 0) {
+        if (getChildrenCount() > 0) {
             sb.append(decalage);
             sb.append("faire\n");
             sb.append(getChildAt(0).deepToString(decalage + " "));

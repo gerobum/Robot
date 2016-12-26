@@ -64,7 +64,7 @@ public class Pour extends InstructionComposee {
 
     @Override
     public boolean autorisationAjout() {
-        return getChildCount() < 1;
+        return getChildrenCount() < 1;
     }
 
     /*@Override
@@ -80,7 +80,7 @@ public class Pour extends InstructionComposee {
         StringBuilder sb = new StringBuilder();
         sb.append(decalage)
                 .append(toString());
-        if (getChildCount() > 0) {
+        if (getChildrenCount() > 0) {
             sb.append(getChildAt(0).deepToString(decalage + " "));
         }
         return sb.toString();

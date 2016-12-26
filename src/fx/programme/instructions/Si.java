@@ -39,7 +39,7 @@ public class Si extends InstructionComposee {
 
         if (garde.evalue(robot)) {
             ((Instruction) getChildAt(0)).go(robot);
-        } else if (getChildCount() > 1) {
+        } else if (getChildrenCount() > 1) {
             ((Instruction) getChildAt(1)).go(robot);
         }
     }
@@ -55,7 +55,7 @@ public class Si extends InstructionComposee {
     }*/
     @Override
     public boolean autorisationAjout() {
-        return getChildCount() < 2;
+        return getChildrenCount() < 2;
     }
 
     @Override
@@ -75,12 +75,12 @@ public class Si extends InstructionComposee {
                 .append(toString())
                 .append("\n");
 
-        if (getChildCount() > 0) {
+        if (getChildrenCount() > 0) {
             sb.append(decalage);
             sb.append("alors\n");
             sb.append(getChildAt(ALORS).deepToString(decalage + " "));
         }
-        if (getChildCount() > 1) {
+        if (getChildrenCount() > 1) {
             sb.append(decalage);
             sb.append("sinon\n");
             sb.append(getChildAt(SINON).deepToString(decalage + " "));
