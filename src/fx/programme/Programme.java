@@ -53,7 +53,7 @@ public class Programme extends Instruction implements Serializable {
     public String deepToString() {
         StringBuilder sb = new StringBuilder(initialisation.toString() + "\n");
         for (Instruction p : PROCEDURE.values()) {
-            sb.append(p.deepToString("  "));
+            sb.append(p.deepToString(""));
         }
         return sb.toString();
     }

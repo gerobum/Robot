@@ -75,6 +75,11 @@ public abstract class Instruction {
         }
     }
     
+    public void addChild(int p, Instruction instruction) throws AjoutImpossible {
+        if (!autorisationAjout()) throw new AjoutImpossible();
+        ENFANTS.add(p, instruction);
+    }
+    
     public void addChild(Instruction instruction) throws AjoutImpossible {
         if (!autorisationAjout()) throw new AjoutImpossible();
         ENFANTS.add(instruction);
