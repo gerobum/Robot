@@ -186,6 +186,29 @@ public class PanneauProgrammation extends PanneauBordure {
         ALERT.setHeaderText("Mauvaise sélection");
     }
 
+    private void ajoutInstruction(TreeItem<Instruction> parent, Instruction instruction) {
+        // Ajout d'une instruction élémentaire dans l'arbre de programme.
+        if (parent == null) {
+            alert("Pour ajouter une instruction, il faut \n"
+                    + "sélectionner une instruction dans le programme");
+        } else if (parent.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
+            // L'ajout se fait à la fin
+            if (parent.getValue().getClass() == Programme.class) {
+                alert("Pour ajouter une instruction,\n"
+                        + "il faut sélectionner autre\n"
+                        + "chose que le programme");
+            } else {
+                parent.getChildren().add(new TreeItem<>(instruction));
+            }
+        } else {
+            // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            parent = parent.getParent();
+            int x = parent.getChildren().indexOf(parent);
+            parent.getChildren().add(x, new TreeItem<>(instruction));
+        }
+    }
+
     private void addListeners() {
         boutonInitialise.setOnAction(e -> {
             Optional<Initialisation> result = DIALOG_INIT.showAndWait();
@@ -214,21 +237,13 @@ public class PanneauProgrammation extends PanneauBordure {
             if (parent == null) {
                 alert("Pour ajouter une instruction, il faut \n"
                         + "sélectionner une instruction dans le programme");
-            } else if (parent.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
-                // L'ajout se fait à la fin
-                if (parent.getValue().getClass() == Programme.class) {
-                    alert("Pour ajouter une instruction, il faut \n"
-                            + "sélectionner autre chose que le programme");
-                } else {
-                    parent.getChildren().add(new TreeItem<>(bouton.newInstance(parent.getValue())));
-                }
             } else {
-                // Sinon, la nouvelle instruction prend la place de celle sélectionnée
-                // Détermination de la position de l'instruction sélectionnée
-                parent = parent.getParent();
-                int x = parent.getChildren().indexOf(parent);
-                parent.getChildren().add(x, new TreeItem<>(bouton.newInstance(parent.getValue())));
+                if (!parent.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts                   
+                    parent = parent.getParent();
+                }
+                ajoutInstruction(parent, bouton.newInstance(parent.getValue()));
             }
+
         };
         //texteNouvelleProcedure
         boutonAvance.setOnAction(actionInstructionElementaire);
