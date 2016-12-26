@@ -60,7 +60,7 @@ public abstract class InstructionComposee extends Instruction {
         return VARIABLE.keySet().toArray(new String[0]);
     }
 
-    @Override
+    /*@Override
     public String deepToString(String decalage) {
         int n = getChildCount();
         String s = decalage + nom + "\ndébut\n";
@@ -69,6 +69,6 @@ public abstract class InstructionComposee extends Instruction {
         }
         s += "fin\n";
         return s;
-    }
+    }*/
 
 }

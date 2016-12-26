@@ -52,4 +52,15 @@ public class Bloc extends InstructionComposee {
     public ImageIcon getIcon() {
         return null; 
     }
+
+    @Override
+    public String deepToString(String decalage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(decalage + "debut\n");
+        for(int i = 0; i < getChildCount(); ++i) {
+            sb.append(getChildAt(i).deepToString(" "+decalage));
+        }
+        sb.append(decalage + "fin\n");
+        return sb.toString();
+    }
 }

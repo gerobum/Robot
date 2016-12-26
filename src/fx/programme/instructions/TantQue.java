@@ -4,6 +4,8 @@ import fx.programme.expressions.ExprBool;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import fx.exceptions.DansLeMur;
+import static fx.programme.instructions.Si.ALORS;
+import static fx.programme.instructions.Si.SINON;
 import fx.robot.Robot;
 
 /**
@@ -65,4 +67,19 @@ public class TantQue extends InstructionComposee {
         //return icone;
         return null;
     }
+
+    @Override
+    public String deepToString(String decalage) {
+           StringBuilder sb = new StringBuilder();
+        sb.append(decalage)
+                .append(toString()).append("\n");
+
+        if (getChildCount() > 0) {
+            sb.append(decalage);
+            sb.append("faire\n");
+            sb.append(getChildAt(0).deepToString(decalage + " "));
+        }
+        return sb.toString();
+    }
+    
 }

@@ -40,4 +40,9 @@ public class Racine extends InstructionComposee {
     public ImageIcon getIcon() {
         return null;
     }
+
+    @Override
+    public String deepToString(String decalage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

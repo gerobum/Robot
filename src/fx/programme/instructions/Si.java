@@ -11,14 +11,14 @@ import fx.robot.Robot;
  * @author Yvan
  */
 public class Si extends InstructionComposee {
-    
+
     private static final long serialVersionUID = 1L;
-    
-    public static final int ALORS = 1;
-    public static final int SINON = 2;
+
+    public static final int ALORS = 0;
+    public static final int SINON = 1;
     private ExprBool garde;
     private static ImageIcon icone;
-    
+
     static {
         Image tmp = new ImageIcon(instruction.Si.class.getResource("images/SI.png")).getImage().getScaledInstance(25, 25, Image.SCALE_AREA_AVERAGING);
         icone = new ImageIcon(tmp);
@@ -31,30 +31,28 @@ public class Si extends InstructionComposee {
         super(parent);
         this.nom = "si";
         this.garde = garde;
-        
-    }
 
+    }
 
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {
-        
-            if (garde.evalue(robot))
-                ((Instruction) getChildAt(0)).go(robot);
-            else if (getChildCount()>1)
-                ((Instruction)getChildAt(1)).go(robot);
+
+        if (garde.evalue(robot)) {
+            ((Instruction) getChildAt(0)).go(robot);
+        } else if (getChildCount() > 1) {
+            ((Instruction) getChildAt(1)).go(robot);
+        }
     }
 
-
     @Override
-    public String toString() {        
-        return super.toString()+" ("+garde+")";
+    public String toString() {
+        return super.toString() + " (" + garde + ")";
     }
 
     /*@Override
     public void set(Object o) {
         garde.set(o);
     }*/
-
     @Override
     public boolean autorisationAjout() {
         return getChildCount() < 2;
@@ -68,5 +66,25 @@ public class Si extends InstructionComposee {
         // à gauche de l'existant une image image avec alors ou sinon...
         //return icone;
         return null;
+    }
+
+    @Override
+    public String deepToString(String decalage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(decalage)
+                .append(toString())
+                .append("\n");
+
+        if (getChildCount() > 0) {
+            sb.append(decalage);
+            sb.append("alors\n");
+            sb.append(getChildAt(ALORS).deepToString(decalage + " "));
+        }
+        if (getChildCount() > 1) {
+            sb.append(decalage);
+            sb.append("sinon\n");
+            sb.append(getChildAt(SINON).deepToString(decalage + " "));
+        }
+        return sb.toString();
     }
 }
