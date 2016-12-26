@@ -26,6 +26,15 @@ public class PanneauProgrammation extends PanneauBordure {
         public abstract Instruction newInstance(Instruction parent);
     }
 
+    abstract class BoutonInstructionGarde extends Button {
+
+        public BoutonInstructionGarde(String texte) {
+            super(texte);
+        }
+
+        public abstract Instruction newInstance(Instruction parent, ExprBool garde);
+    }
+
     class BoutonAvance extends BoutonInstructionElementaire {
 
         public BoutonAvance() {
@@ -78,14 +87,41 @@ public class PanneauProgrammation extends PanneauBordure {
 
     }
 
+    class BoutonSi extends BoutonInstructionGarde {
+
+        public BoutonSi() {
+            super("si");
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent, ExprBool garde) {
+
+            return new Si(parent, garde);
+        }
+    }
+
+    class BoutonTantQue extends BoutonInstructionGarde {
+
+        public BoutonTantQue() {
+            super("tant que");
+        }
+
+        @Override
+        public Instruction newInstance(Instruction parent, ExprBool garde) {
+            return new TantQue(parent, garde);
+        }
+
+    }
+
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
     private final BoutonAvance boutonAvance = new BoutonAvance();
     private final BoutonTourne boutonTourne = new BoutonTourne();
     private final BoutonMarque boutonMarque = new BoutonMarque();
     private final BoutonEfface boutonEfface = new BoutonEfface();
-    private final Button boutonSi = new Button("si");
-    private final Button boutonTantQue = new Button("tant que");
+    private final BoutonSi boutonSi = new BoutonSi();
+    private final BoutonTantQue boutonTantQue = new BoutonTantQue();
+
     private final Button boutonPour = new Button("pour");
     private final Label de = new Label(" de ");
     private final TextField texteDebutPour = new TextField("1");
@@ -120,6 +156,10 @@ public class PanneauProgrammation extends PanneauBordure {
         this.tree = tree;
         doingUI();
         addListeners();
+    }
+
+    private ExprBool getGardeFromCombo() {
+        return comboExpression.getSelectionModel().getSelectedItem().newInstance();
     }
 
     private void alert(String message) {
@@ -214,8 +254,8 @@ public class PanneauProgrammation extends PanneauBordure {
             Optional<Initialisation> result = DIALOG_INIT.showAndWait();
             if (result.isPresent()) {
                 DIALOG_INIT.setInitialisation(result.get());
-                System.out.println(result.get());
             }
+            racine.setInitialisation(result.get());
         });
         EventHandler<KeyEvent> changeTexteProcedure = e -> {
             if (texteNouvelleProcedure.getText() != null
@@ -242,14 +282,40 @@ public class PanneauProgrammation extends PanneauBordure {
                     parent = parent.getParent();
                 }
                 ajoutInstruction(parent, bouton.newInstance(parent.getValue()));
+                System.out.println(racine.deepToString());
             }
 
+        };
+        EventHandler<ActionEvent> actionInstructionGardee = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            BoutonInstructionGarde bouton = (BoutonInstructionGarde) e.getSource();
+            TreeItem<Instruction> parent = tree.getSelectionModel().getSelectedItem();
+            if (parent == null) {
+                alert("Pour ajouter une instruction, il faut \n"
+                        + "sélectionner une instruction dans le programme");
+            } else {
+                if (!parent.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts                   
+                    parent = parent.getParent();
+                }
+                ExprBool garde;
+                if (exprBoolComplexe != null) {
+                    garde = exprBoolComplexe;
+                    texteExprBool.setText("");
+                } else {
+                    //exp = (ExprBoolElt) PanneauPrincipal.this.comboExpression.getSelectedItem();
+                    garde = getGardeFromCombo();
+                }
+                ajoutInstruction(parent, bouton.newInstance(parent.getValue(), garde));
+                System.out.println(racine.deepToString());
+            }
         };
         //texteNouvelleProcedure
         boutonAvance.setOnAction(actionInstructionElementaire);
         boutonTourne.setOnAction(actionInstructionElementaire);
         boutonMarque.setOnAction(actionInstructionElementaire);
         boutonEfface.setOnAction(actionInstructionElementaire);
+        boutonSi.setOnAction(actionInstructionGardee);
+        boutonTantQue.setOnAction(actionInstructionGardee);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {
