@@ -56,6 +56,7 @@ public class Bloc extends InstructionComposee {
     @Override
     public String deepToString(String decalage) {
         StringBuilder sb = new StringBuilder();
+        sb.append(decalage).append(nom).append('\n');
         sb.append(decalage).append("debut\n");
         for(int i = 0; i < getChildrenCount(); ++i) {
             sb.append(getChildAt(i).deepToString(" "+decalage));

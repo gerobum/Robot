@@ -1,17 +1,8 @@
 package fx.panneaux;
 
-import fx.enumerations.Instructions;
 import fx.programme.Programme;
-import fx.programme.expressions.DevantMur;
-import fx.programme.expressions.PasDevantMur;
-import fx.programme.expressions.PasSurMinerai;
-import fx.programme.instructions.Avance;
 import fx.programme.instructions.Instruction;
-import fx.programme.instructions.Si;
-import fx.programme.instructions.TantQue;
-import fx.programme.instructions.Tourne;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import static fx.utilitaires.Utilitaires.*;
 

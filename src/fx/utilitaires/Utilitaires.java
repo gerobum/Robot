@@ -27,6 +27,7 @@ public class Utilitaires {
         for(Bloc bloc : programme.getProcedures()) {
             tr.getChildren().add(getArbreFromInstruction(bloc));
         }
+        //tr.getChildren().add(getArbreFromInstruction(programme.getProcedurePrincipal()));
         
         return tr;
     }

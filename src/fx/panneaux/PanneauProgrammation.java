@@ -137,6 +137,18 @@ public class PanneauProgrammation extends PanneauBordure {
 
     }
 
+    class BoutonProcedure extends Button {
+
+        public BoutonProcedure() {
+            super("nouvelle procedure");
+        }
+
+        public Instruction newInstance(Instruction parent, String nom) {
+            return new Bloc(parent, nom);
+        }
+
+    }
+
     private final Button boutonInitialise = new Button("initialisation");
     //private final Label labelProgrammation = new Label("Programmation");
     private final BoutonAvance boutonAvance = new BoutonAvance();
@@ -169,14 +181,14 @@ public class PanneauProgrammation extends PanneauBordure {
 
     private final InitialisationDialog DIALOG_INIT = new InitialisationDialog();
 
-    private final Programme racine;
+    private final Programme programme;
     private TreeView<Instruction> tree;
 
     private final Alert ALERT = new Alert(Alert.AlertType.ERROR);
 
     public PanneauProgrammation(TreeView<Instruction> tree) {
         super("  Programmation  ");
-        this.racine = (Programme) tree.getRoot().getValue();
+        this.programme = (Programme) tree.getRoot().getValue();
         this.tree = tree;
         doingUI();
         addListeners();
@@ -359,7 +371,7 @@ public class PanneauProgrammation extends PanneauBordure {
             if (result.isPresent()) {
                 DIALOG_INIT.setInitialisation(result.get());
             }
-            racine.setInitialisation(result.get());
+            programme.setInitialisation(result.get());
         });
         EventHandler<KeyEvent> changeTexteProcedure = e -> {
             if (texteNouvelleProcedure.getText() != null
@@ -378,19 +390,19 @@ public class PanneauProgrammation extends PanneauBordure {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
             ajoutInstruction(tree.getSelectionModel().getSelectedItem(), (BoutonInstructionElementaire) e.getSource());
-            System.out.println(racine.deepToString());
+            System.out.println(programme.deepToString());
 
         };
         EventHandler<ActionEvent> actionInstructionGardee = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             ajoutInstructionGardee(tree.getSelectionModel().getSelectedItem(), (BoutonInstructionGardee) e.getSource());
-            System.out.println(racine.deepToString());
+            System.out.println(programme.deepToString());
 
         };
         EventHandler<ActionEvent> actionPour = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             ajoutPour(tree.getSelectionModel().getSelectedItem(), (BoutonPour) e.getSource());
-            System.out.println(racine.deepToString());
+            System.out.println(programme.deepToString());
 
         };
         //texteNouvelleProcedure
@@ -402,6 +414,15 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonSi.setOnAction(actionInstructionGardee);
         boutonTantQue.setOnAction(actionInstructionGardee);
         boutonPour.setOnAction(actionPour);
+        boutonAjoutProcedure.setOnAction(e -> {
+            TreeItem<Instruction> parent = tree.getRoot();
+      
+            Bloc instruction = new Bloc(parent.getValue(), texteNouvelleProcedure.getText());
+            parent.getChildren().add(0, new TreeItem<>(instruction));
+            ((Programme)parent.getValue()).ajoutProcedure(instruction);
+            
+            System.out.println(programme.deepToString());
+        });
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
 
         /*ajoutInstruction = new ActionListener() {

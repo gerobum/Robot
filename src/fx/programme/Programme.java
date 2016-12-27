@@ -12,6 +12,7 @@ import fx.robot.Robot;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javafx.scene.control.TreeItem;
 import javax.swing.ImageIcon;
@@ -37,7 +38,7 @@ public class Programme extends Instruction implements Serializable {
         PROGRAMME = new TreeItem<>(new Racine("programme"));
         PROGRAMME.setExpanded(true);
 
-        PROCEDURE = new HashMap<>();
+        PROCEDURE = new LinkedHashMap<>();
         PRINCIPAL = new Bloc(this, "procédure principale");
         PROCEDURE.put("procédure principale", PRINCIPAL);
         // #### ARBRE_PROGRAMME.insertNodeInto(principal, (Instruction)ARBRE_PROGRAMME.getRoot(), 0);
@@ -119,7 +120,7 @@ public class Programme extends Instruction implements Serializable {
         for (Instruction procedure : PROCEDURE.values()) {
             sb.append(procedure.deepToString("  "));
         }
-        sb.append(PRINCIPAL.deepToString("   "));
+        //sb.append(PRINCIPAL.deepToString("   "));
         return sb.toString();
     }
 
