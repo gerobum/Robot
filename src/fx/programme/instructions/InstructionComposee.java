@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fx.programme.instructions;
 
 import java.util.HashMap;
 
-/**
- *
- * @author Yvan
- */
 public abstract class InstructionComposee extends Instruction {
 
     public static final long serialVersionUID = 0L;

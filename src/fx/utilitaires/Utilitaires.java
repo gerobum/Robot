@@ -1,17 +1,11 @@
-
 package fx.utilitaires;
 
 import fx.programme.Programme;
 import fx.programme.instructions.Bloc;
 import fx.programme.instructions.Instruction;
-import fx.programme.instructions.Racine;
 import java.util.Random;
 import javafx.scene.control.TreeItem;
 
-/**
- *
- * @author yvan
- */
 public class Utilitaires {
     public final static Random RANDOM = new Random();
     public static TreeItem<Instruction> getArbreFromInstruction(Instruction instruction) {

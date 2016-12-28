@@ -11,10 +11,6 @@ import javax.swing.*;
 import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
-/**
- *
- * @author Yvan
- */
 public class Ecrire extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;

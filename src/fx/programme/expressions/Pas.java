@@ -2,10 +2,6 @@ package fx.programme.expressions;
 
 import fx.robot.Robot;
 
-/**
- *
- * @author Yvan
- */
 public class Pas extends OperationBool {
     private static final long serialVersionUID = 1L;
 

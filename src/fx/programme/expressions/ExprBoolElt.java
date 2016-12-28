@@ -1,9 +1,5 @@
 package fx.programme.expressions;
 
-/**
- *
- * @author Yvan
- */
 public abstract class ExprBoolElt extends ExprBool {
     public static final long serialVersionUID = 0L;
     protected String nom;

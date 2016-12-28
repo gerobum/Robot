@@ -4,14 +4,8 @@ import fx.programme.expressions.ExprBool;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import fx.exceptions.DansLeMur;
-import static fx.programme.instructions.Si.ALORS;
-import static fx.programme.instructions.Si.SINON;
 import fx.robot.Robot;
 
-/**
- *
- * @author Yvan
- */
 public class TantQue extends InstructionComposee {
     
     private static final long serialVersionUID = 1L;

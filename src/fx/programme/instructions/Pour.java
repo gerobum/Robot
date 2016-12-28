@@ -4,10 +4,6 @@ import javax.swing.ImageIcon;
 import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
-/**
- *
- * @author Yvan
- */
 public class Pour extends InstructionComposee {
 
     private static final long serialVersionUID = 1L;

@@ -1,10 +1,6 @@
 
 package fx.terrain;
 
-/**
- *
- * @author yvan
- */
 public enum PositionPotentielle {
     QUELCONQUE("N'importe où"), 
     CONTRE_UN_MUR("Contre un mur"),

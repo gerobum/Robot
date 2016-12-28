@@ -7,10 +7,6 @@ import java.util.Random;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
-/**
- *
- * @author yvan
- */
 public class Terrain extends GridPane {
 
     private static final Random random = new Random();

@@ -11,10 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
-/**
- *
- * @author yvan
- */
 public class PanneauProgrammation extends PanneauBordure {
 
     abstract class BoutonInstructionElementaire extends Button {
@@ -405,6 +401,18 @@ public class PanneauProgrammation extends PanneauBordure {
             System.out.println(programme.deepToString());
 
         };
+        EventHandler<ActionEvent> actionNouvelleProcedure = e -> {
+            TreeItem<Instruction> parent = tree.getRoot();
+      
+            Bloc instruction = new Bloc(parent.getValue(), texteNouvelleProcedure.getText());
+            parent.getChildren().add(0, new TreeItem<>(instruction));
+            ((Programme)parent.getValue()).ajoutProcedure(instruction);
+            comboAppelProcedure.getItems().add(instruction);
+            comboAppelProcedure.setDisable(false);
+            comboAppelProcedure.getSelectionModel().select(instruction);
+            System.out.println(programme.deepToString());
+            texteNouvelleProcedure.setText("");
+        };
         //texteNouvelleProcedure
         boutonAvance.setOnAction(actionInstructionElementaire);
         boutonTourne.setOnAction(actionInstructionElementaire);
@@ -414,114 +422,8 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonSi.setOnAction(actionInstructionGardee);
         boutonTantQue.setOnAction(actionInstructionGardee);
         boutonPour.setOnAction(actionPour);
-        boutonAjoutProcedure.setOnAction(e -> {
-            TreeItem<Instruction> parent = tree.getRoot();
-      
-            Bloc instruction = new Bloc(parent.getValue(), texteNouvelleProcedure.getText());
-            parent.getChildren().add(0, new TreeItem<>(instruction));
-            ((Programme)parent.getValue()).ajoutProcedure(instruction);
-            
-            System.out.println(programme.deepToString());
-        });
+        boutonAjoutProcedure.setOnAction(actionNouvelleProcedure);
+        texteNouvelleProcedure.setOnAction(actionNouvelleProcedure);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
-
-        /*ajoutInstruction = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TreePath treePath = PanneauPrincipal.this.frameParente.getArbre().getSelectionPath();
-                Instruction select;
-                //if (treePath != null) {
-                if (treePath == null) {
-                    select = (Instruction) PanneauPrincipal.this.frameParente.getArbre().getModel().getRoot();
-                } else {
-                    select = (Instruction) treePath.getLastPathComponent();
-                }
-                if (select.getParent() == null) {
-                    select = PanneauPrincipal.this.frameParente.getProgramme().getProcedurePrincipal();
-                }
-
-                JButton source = (JButton) e.getSource();
-
-                Instruction instruction = null;
-                if (source == boutonAvance) {
-                    instruction = new Avance();
-                } else if (source == boutonTourne) {
-                    instruction = new Tourne();
-                } else if (source == boutonMarque) {
-                    instruction = new Marque();
-                } else if (source == boutonEfface) {
-                    instruction = new Efface();
-                } else if (source == boutonTantQue) {
-                    ExprBool exp;
-                    if (exprBoolComplexe != null) {
-                        exp = exprBoolComplexe;
-                        texteExprBool.setText("");
-                    } else {
-                        exp = (ExprBoolElt) PanneauPrincipal.this.comboExpression.getSelectedItem();
-                    }
-                    //ExpressionBoolenne pasDevantMur = new PasDevantMur(Programme.this.robot);
-                    instruction = new TantQue(exp);
-                } else if (source == boutonSi) {
-                    ExprBool exp;
-                    if (exprBoolComplexe == null) {
-                        exp = (ExprBool) PanneauPrincipal.this.comboExpression.getSelectedItem();
-                    } else {
-                        exp = exprBoolComplexe;
-                    }
-                    instruction = new Si(exp);
-                } else if (source == boutonBloc) {
-                    if (texteBloc.getText().equalsIgnoreCase("")) {
-                        instruction = new Bloc("bloc");
-                    } else {
-                        instruction = new Bloc(texteBloc.getText());
-                    }
-                } else if (source == boutonAjoutProcedure) {
-                    if (texteNouvelleProcedure.getText().length() > 0
-                            && PanneauPrincipal.this.frameParente.getProgramme().getProcedure(texteNouvelleProcedure.getText()) == null) {
-                        instruction = PanneauPrincipal.this.frameParente.getProgramme().ajoutProcedure(texteNouvelleProcedure.getText());
-                        comboAppelProcedure.addItem(instruction);
-                        instruction = null; // Important, ne pas enlever
-                    }
-                } else if (source == boutonAppelProcedure) {
-                    instruction = new Appel((Bloc) comboAppelProcedure.getSelectedItem());
-                } else if (source == boutonPour) {
-                    if (select instanceof InstructionComposee) {
-                        InstructionComposee parent = (InstructionComposee) select;
-                        String de, a, pas;
-                        de = texteDebutPour.getText();
-                        a = texteFinPour.getText();
-                        pas = textePasPour.getText();
-
-                        instruction = new Pour((InstructionComposee) select, de, a, pas);
-
-                    } else {
-                        //instruction = null; // Important, ne pas enlever
-                        return;
-                    }
-                } else if (source == boutonEcrire) {
-                    instruction = new Ecrire(texteLireEcrire.getText());
-                } else if (source == boutonLire) {
-                    String variable = JOptionPane.showInputDialog("Quelle variable doit être affectée ?", instruction);
-                    instruction = new Lire(variable, texteLireEcrire.getText());
-                }
-                if (instruction != null) {
-                    if (select.autorisationAjout()) {
-                        PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, select, select.getChildrenCount());
-                    } else {
-                        Instruction parent = (Instruction) select.getParent();
-                        if (parent != null && parent.autorisationAjout()) {
-                            PanneauPrincipal.this.frameParente.getProgramme().getArbreProgramme().insertNodeInto(instruction, parent, parent.getIndex(select));
-                        }
-                    }
-                    JTree arbre = PanneauPrincipal.this.frameParente.getArbre();
-                    for (int i = 0; i < arbre.getRowCount(); i++) {
-                        arbre.expandRow(i);
-                    }
-                    //instruction.setParent(select);
-                }
-            }
-            //}
-        };*/
     }
 }

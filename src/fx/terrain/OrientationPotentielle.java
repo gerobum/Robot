@@ -1,10 +1,5 @@
-
 package fx.terrain;
 
-/**
- *
- * @author yvan
- */
 public enum OrientationPotentielle {
     QUELCONQUE("Quelconque"), NORD("Nord"), EST("Est"), SUD("Sud"), OUEST("Ouest");
 

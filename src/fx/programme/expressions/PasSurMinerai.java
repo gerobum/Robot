@@ -4,10 +4,6 @@ import fx.terrain.Minerai;
 import fx.robot.Robot;
 import fx.terrain.Cellule;
 
-/**
- *
- * @author Yvan
- */
 public class PasSurMinerai extends ExprBoolElt {
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fx.programme;
 
 import fx.programme.instructions.Bloc;
@@ -11,16 +7,11 @@ import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javafx.scene.control.TreeItem;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Yvan
- */
 public class Programme extends Instruction implements Serializable {
 
     private static final long serialVersionUID = 1L;

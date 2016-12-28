@@ -6,10 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import static fx.utilitaires.Utilitaires.*;
 
-/**
- *
- * @author yvan
- */
 public class PanneauPrincipal extends SplitPane {
     
     private GridPane gridPane = new GridPane();

@@ -5,10 +5,6 @@ import fx.terrain.OrientationPotentielle;
 import fx.terrain.PositionPotentielle;
 import terrain.Terrain;
 
-/**
- *
- * @author Yvan
- */
 public class PanneauInitialisation extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -18,9 +14,6 @@ public class PanneauInitialisation extends javax.swing.JPanel {
 
     private boolean changementInterne = false;
 
-    /**
-     * Creates new form NewJPanel
-     */
     public PanneauInitialisation() {
         this(new Initialisation());
     }

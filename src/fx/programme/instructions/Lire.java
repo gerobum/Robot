@@ -5,10 +5,6 @@ import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Yvan
- */
 public class Lire extends InstructionElementaire {
     
     private static final long serialVersionUID = 1L;

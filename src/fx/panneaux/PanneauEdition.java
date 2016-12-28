@@ -1,17 +1,8 @@
 package fx.panneaux;
 
-import fx.programme.Initialisation;
-import fx.programme.expressions.*;
-import java.util.Optional;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 
-/**
- *
- * @author yvan
- */
 public class PanneauEdition extends PanneauBordure {
 
     private final Button boutonSupprime = new Button("supprimer");

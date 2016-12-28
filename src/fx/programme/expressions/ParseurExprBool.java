@@ -4,10 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import fx.robot.Robot;
 
-/**
- *
- * @author Yvan
- */
 public class ParseurExprBool {
     private final String[] terme;
     private final Pattern atome;

@@ -4,11 +4,6 @@ import fx.robot.Robot;
 import fx.terrain.Cellule;
 
 
-
-/**
- *
- * @author Yvan
- */
 public class DevantMarque extends ExprBoolElt {
     //private transient Robot robot;
     //public DevantMarque(Robot robot) {

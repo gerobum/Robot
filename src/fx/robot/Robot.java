@@ -2,8 +2,6 @@ package fx.robot;
 
 import fx.panneaux.ApplicationPrincipale;
 import fx.terrain.Cellule;
-import fx.terrain.OrientationPotentielle;
-import fx.terrain.Terrain;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

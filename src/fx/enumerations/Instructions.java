@@ -1,9 +1,5 @@
 package fx.enumerations;
 
-/**
- *
- * @author yvan
- */
 public enum Instructions {
     Appel("appel"),
     Avance("avance"),

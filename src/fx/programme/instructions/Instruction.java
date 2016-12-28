@@ -4,13 +4,8 @@ import fx.exceptions.AjoutImpossible;
 import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 import java.util.*;
-import javafx.scene.control.TreeItem;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Yvan
- */
 public abstract class Instruction {
 
     public static final long serialVersionUID = 0L;

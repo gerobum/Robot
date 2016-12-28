@@ -5,13 +5,7 @@ import fx.terrain.*;
 import fx.terrain.OrientationPotentielle;
 import java.io.Serializable;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Yvan
- */
 public class Initialisation implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1L;

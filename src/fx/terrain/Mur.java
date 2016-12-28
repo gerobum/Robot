@@ -5,10 +5,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author maillot
- */
 public class Mur implements Cellule {
 
     private ImageView image;

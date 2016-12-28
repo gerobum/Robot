@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package fx.programme.expressions;
 
 import fx.robot.Robot;
 import fx.terrain.Cellule;
 import fx.terrain.Mur;
-
-/**
- *
- * @author Yvan
- */
+ 
 public class DevantMur extends ExprBoolElt {
     private static final long serialVersionUID = 1L;
     //private transient Robot robot;

@@ -4,10 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author maillot
- */
 public class CelluleVide implements Cellule {
 
     private final Rectangle rectangle;

@@ -1,16 +1,10 @@
 package fx.panneaux;
 
 import fx.programme.Initialisation;
-import fx.terrain.Marque;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author maillot
- */
 public class InitialisationDialog extends Dialog<Initialisation> {
     private PanneauInitialisation panneauInitialisation;
     public InitialisationDialog() {

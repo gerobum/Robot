@@ -5,10 +5,6 @@ import javafx.embed.swing.SwingNode;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.DialogPane;
 
-/**
- *
- * @author maillot
- */
 public class PanneauInitialisation extends DialogPane {
     
     private final fx.panneaux.swing.PanneauInitialisation PANNEAU_INIT;

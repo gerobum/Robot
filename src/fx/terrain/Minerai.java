@@ -4,10 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author maillot
- */
 public class Minerai implements Cellule {
 
     private ImageView image;

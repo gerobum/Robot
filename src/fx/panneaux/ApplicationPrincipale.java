@@ -16,10 +16,6 @@ import javafx.stage.*;
 import javafx.util.Duration;
 import javax.swing.JTree;
 
-/**
- *
- * @author yvan
- */
 public class ApplicationPrincipale extends Application implements Detachable {
 
     private static final Random random = new Random();

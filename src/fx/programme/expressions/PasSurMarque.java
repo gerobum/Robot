@@ -3,10 +3,6 @@ package fx.programme.expressions;
 import fx.robot.Robot;
 import fx.terrain.Cellule;
 
-/**
- *
- * @author Yvan
- */
 public class PasSurMarque extends ExprBoolElt {
     private static final long serialVersionUID = 1L;
 

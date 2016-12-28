@@ -10,10 +10,6 @@ import fx.programme.expressions.PasSurMinerai;
 import fx.programme.expressions.SurMarque;
 import fx.programme.expressions.SurMinerai;
 
-/**
- *
- * @author yvan
- */
 public enum Gardes {
     DevantMur("devant mur") {
         @Override

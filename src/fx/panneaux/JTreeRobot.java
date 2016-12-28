@@ -9,10 +9,6 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
-/**
- *
- * @author yvan
- */
 public class JTreeRobot extends JTree {
 
     private static final long serialVersionUID = 1L;

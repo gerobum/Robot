@@ -6,10 +6,6 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Yvan
- */
 public class Appel extends InstructionElementaire {
 
     private static final long serialVersionUID = 1L;

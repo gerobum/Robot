@@ -4,10 +4,6 @@ import fx.robot.Robot;
 import fx.terrain.Cellule;
 import fx.terrain.Mur;
 
-/**
- *
- * @author Yvan
- */
 public class PasDevantMur extends ExprBoolElt {
     private static final long serialVersionUID = 1L;
 

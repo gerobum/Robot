@@ -4,10 +4,6 @@ import javax.swing.JTree;
 import fx.programme.Programme;
 import fx.robot.Robot;
 
-/**
- *
- * @author yvan.maillot
- */
 public interface Detachable {
 
 
