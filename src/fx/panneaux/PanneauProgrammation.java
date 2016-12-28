@@ -6,10 +6,13 @@ import fx.programme.Programme;
 import fx.programme.expressions.*;
 import fx.programme.instructions.*;
 import java.util.Optional;
+import java.util.regex.*;
 import javafx.event.*;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
+import javax.swing.JOptionPane;
 
 public class PanneauProgrammation extends PanneauBordure {
 
@@ -144,7 +147,7 @@ public class PanneauProgrammation extends PanneauBordure {
         }
 
     }
-    
+
     class BoutonAppelProcedure extends Button {
 
         public BoutonAppelProcedure() {
@@ -153,6 +156,30 @@ public class PanneauProgrammation extends PanneauBordure {
 
         public Instruction newInstance(Instruction parent, Bloc bloc) {
             return new Appel(parent, bloc);
+        }
+
+    }
+
+    class BoutonLire extends Button {
+
+        public BoutonLire() {
+            super("lire");
+        }
+
+        public Instruction newInstance(Instruction parent, String variable, String message) {
+            return new Lire(parent, variable, message);
+        }
+
+    }
+
+    class BoutonEcrire extends Button {
+
+        public BoutonEcrire() {
+            super("écrire");
+        }
+
+        public Instruction newInstance(Instruction parent, String message) {
+            return new Ecrire(parent, message);
         }
 
     }
@@ -182,8 +209,9 @@ public class PanneauProgrammation extends PanneauBordure {
     private final BoutonAppelProcedure boutonAppelProcedure = new BoutonAppelProcedure();
     private final ComboBox<Instruction> comboAppelProcedure = new ComboBox<>();
     private final TextField texteNouvelleProcedure = new TextField();
-    private final Button boutonEcrire = new Button("écrire");
-    private final Button boutonLire = new Button("Lire");
+    private final BoutonEcrire boutonEcrire = new BoutonEcrire();
+    private final TextField texteVariableALire = new TextField();
+    private final BoutonLire boutonLire = new BoutonLire();
     private final TextField texteLireEcrire = new TextField();
     private final ComboBox<Gardes> comboExpression = new ComboBox<>();
 
@@ -245,9 +273,13 @@ public class PanneauProgrammation extends PanneauBordure {
         add(texteNouvelleProcedure, 2, row++, 6, 1);
         add(boutonAppelProcedure, 0, row, 2, 1);
         add(comboAppelProcedure, 2, row++, 6, 1);
-        add(boutonLire, 0, row, 2, 1);
-        add(boutonEcrire, 2, row, 2, 1);
-        add(texteLireEcrire, 4, row, 4, 1);
+   
+        texteVariableALire.setPrefColumnCount(6);
+        FlowPane fp = new FlowPane(texteVariableALire, new Label(" = "), boutonLire);
+        add(fp, 0, row, 2, 1);
+        
+        fp = new FlowPane(boutonEcrire, texteLireEcrire);
+        add(fp, 3, row, 6, 1);
 
         comboExpression.getItems().addAll(Gardes.values());
 
@@ -264,6 +296,8 @@ public class PanneauProgrammation extends PanneauBordure {
         texteNouvelleProcedure.setTooltip(new Tooltip("Entrez un nom de procédure"));
         boutonAppelProcedure.setDisable(true);
         comboAppelProcedure.setDisable(true);
+        boutonLire.setDisable(true);
+        boutonEcrire.setDisable(true);
 
         // Configuration de la boite de dialogue d'alerte
         ALERT.setTitle("Mauvaise sélection");
@@ -372,8 +406,6 @@ public class PanneauProgrammation extends PanneauBordure {
             }
         }
     }
-    
-    
 
     private void ajoutAppelProcedure(TreeItem<Instruction> selectedInstruction, BoutonAppelProcedure bouton) {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
@@ -401,6 +433,70 @@ public class PanneauProgrammation extends PanneauBordure {
                 int x = parent.getChildren().indexOf(selectedInstruction);
 
                 Instruction instruction = bouton.newInstance(parent.getValue(), (Bloc) comboAppelProcedure.getSelectionModel().getSelectedItem());
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
+        }
+    }
+
+    private void ajoutLire(TreeItem<Instruction> selectedInstruction, BoutonLire bouton) {
+        // Ajout d'une instruction élémentaire dans l'arbre de programme.
+
+        if (selectedInstruction == null) {
+            alert("Pour ajouter une instruction, il faut \n"
+                    + "sélectionner une instruction dans le programme");
+        } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
+            // L'ajout se fait à la fin
+            TreeItem<Instruction> parent = selectedInstruction;
+            if (parent.getValue().getClass() == Programme.class) {
+                alert("Pour ajouter une instruction,\n"
+                        + "il faut sélectionner autre\n"
+                        + "chose que le programme");
+            } else {
+                Instruction instruction = bouton.newInstance(parent.getValue(), texteVariableALire.getText(), texteLireEcrire.getText());
+                parent.getChildren().add(new TreeItem<>(instruction));
+                parent.getValue().addChild(instruction);
+            }
+        } else {
+            // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
+
+                Instruction instruction = bouton.newInstance(parent.getValue(), texteVariableALire.getText(), texteLireEcrire.getText());
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
+        }
+    }
+    
+    private void ajoutEcrire(TreeItem<Instruction> selectedInstruction, BoutonEcrire bouton) {
+        // Ajout d'une instruction élémentaire dans l'arbre de programme.
+
+        if (selectedInstruction == null) {
+            alert("Pour ajouter une instruction, il faut \n"
+                    + "sélectionner une instruction dans le programme");
+        } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
+            // L'ajout se fait à la fin
+            TreeItem<Instruction> parent = selectedInstruction;
+            if (parent.getValue().getClass() == Programme.class) {
+                alert("Pour ajouter une instruction,\n"
+                        + "il faut sélectionner autre\n"
+                        + "chose que le programme");
+            } else {
+                Instruction instruction = bouton.newInstance(parent.getValue(), texteLireEcrire.getText());
+                parent.getChildren().add(new TreeItem<>(instruction));
+                parent.getValue().addChild(instruction);
+            }
+        } else {
+            // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
+
+                Instruction instruction = bouton.newInstance(parent.getValue(), texteLireEcrire.getText());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
                 parent.getValue().addChild(x, instruction);
             }
@@ -449,10 +545,10 @@ public class PanneauProgrammation extends PanneauBordure {
         };
         EventHandler<ActionEvent> actionNouvelleProcedure = e -> {
             TreeItem<Instruction> parent = tree.getRoot();
-      
+
             Bloc instruction = new Bloc(parent.getValue(), texteNouvelleProcedure.getText());
             parent.getChildren().add(0, new TreeItem<>(instruction));
-            ((Programme)parent.getValue()).ajoutProcedure(instruction);
+            ((Programme) parent.getValue()).ajoutProcedure(instruction);
             comboAppelProcedure.getItems().add(instruction);
             comboAppelProcedure.setDisable(false);
             comboAppelProcedure.getSelectionModel().select(instruction);
@@ -463,6 +559,22 @@ public class PanneauProgrammation extends PanneauBordure {
         EventHandler<ActionEvent> actionAppelProcedure = e -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             ajoutAppelProcedure(tree.getSelectionModel().getSelectedItem(), (BoutonAppelProcedure) e.getSource());
+            System.out.println(programme.deepToString());
+        };
+        EventHandler<ActionEvent> actionLire = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            ajoutLire(tree.getSelectionModel().getSelectedItem(), (BoutonLire) e.getSource());
+            texteVariableALire.setText("");
+            texteLireEcrire.setText("");
+            boutonLire.setDisable(true);
+            boutonEcrire.setDisable(true);
+            System.out.println(programme.deepToString());
+        };
+        EventHandler<ActionEvent> actionLireEcrire = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            ajoutEcrire(tree.getSelectionModel().getSelectedItem(), (BoutonEcrire) e.getSource());
+            texteLireEcrire.setText("");
+            boutonEcrire.setDisable(true);
             System.out.println(programme.deepToString());
         };
         //texteNouvelleProcedure
@@ -478,5 +590,25 @@ public class PanneauProgrammation extends PanneauBordure {
         texteNouvelleProcedure.setOnAction(actionNouvelleProcedure);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
         boutonAppelProcedure.setOnAction(actionAppelProcedure);
+        boutonLire.setOnAction(actionLire);
+        boutonEcrire.setOnAction(actionLireEcrire);
+        
+        texteVariableALire.setOnKeyReleased(p -> {
+          //  Matcher variable = new Matcher();
+           Matcher variable = Pattern.compile("[A-Za-z][A-Za-z0-9]*").matcher(texteVariableALire.getText());
+           if (variable.matches()) {
+               boutonLire.setDisable(false);
+           } else {
+               boutonLire.setDisable(true);
+           }
+        });
+        
+        texteLireEcrire.setOnKeyReleased(p -> {
+            if (texteLireEcrire.getText().isEmpty()) {
+               boutonEcrire.setDisable(true);
+           } else {
+               boutonEcrire.setDisable(false);
+           }
+        });
     }
 }

@@ -29,7 +29,6 @@ public class Lire extends InstructionElementaire {
             } catch (NumberFormatException nfe) {
             }
         }
-
     }
 
     /*@Override
