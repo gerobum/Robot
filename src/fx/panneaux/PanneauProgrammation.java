@@ -136,11 +136,23 @@ public class PanneauProgrammation extends PanneauBordure {
     class BoutonProcedure extends Button {
 
         public BoutonProcedure() {
-            super("nouvelle procedure");
+            super("nouvelle procédure");
         }
 
         public Instruction newInstance(Instruction parent, String nom) {
             return new Bloc(parent, nom);
+        }
+
+    }
+    
+    class BoutonAppelProcedure extends Button {
+
+        public BoutonAppelProcedure() {
+            super("appel de procédure");
+        }
+
+        public Instruction newInstance(Instruction parent, Bloc bloc) {
+            return new Appel(parent, bloc);
         }
 
     }
@@ -167,7 +179,7 @@ public class PanneauProgrammation extends PanneauBordure {
     private ExprBool exprBoolComplexe = null;
     private ParseurExprBool parseur;
     private final Button boutonAjoutProcedure = new Button("nouvelle procédure");
-    private final Button boutonAppelProcedure = new Button("appel de procédure");
+    private final BoutonAppelProcedure boutonAppelProcedure = new BoutonAppelProcedure();
     private final ComboBox<Instruction> comboAppelProcedure = new ComboBox<>();
     private final TextField texteNouvelleProcedure = new TextField();
     private final Button boutonEcrire = new Button("écrire");
@@ -360,6 +372,40 @@ public class PanneauProgrammation extends PanneauBordure {
             }
         }
     }
+    
+    
+
+    private void ajoutAppelProcedure(TreeItem<Instruction> selectedInstruction, BoutonAppelProcedure bouton) {
+        // Ajout d'une instruction élémentaire dans l'arbre de programme.
+
+        if (selectedInstruction == null) {
+            alert("Pour ajouter une instruction, il faut \n"
+                    + "sélectionner une instruction dans le programme");
+        } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
+            // L'ajout se fait à la fin
+            TreeItem<Instruction> parent = selectedInstruction;
+            if (parent.getValue().getClass() == Programme.class) {
+                alert("Pour ajouter une instruction,\n"
+                        + "il faut sélectionner autre\n"
+                        + "chose que le programme");
+            } else {
+                Instruction instruction = bouton.newInstance(parent.getValue(), (Bloc) comboAppelProcedure.getSelectionModel().getSelectedItem());
+                parent.getChildren().add(new TreeItem<>(instruction));
+                parent.getValue().addChild(instruction);
+            }
+        } else {
+            // Sinon, la nouvelle instruction prend la place de celle sélectionnée
+            // Détermination de la position de l'instruction sélectionnée
+            TreeItem<Instruction> parent = selectedInstruction.getParent();
+            if (parent.getValue().autorisationAjout()) {
+                int x = parent.getChildren().indexOf(selectedInstruction);
+
+                Instruction instruction = bouton.newInstance(parent.getValue(), (Bloc) comboAppelProcedure.getSelectionModel().getSelectedItem());
+                parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.getValue().addChild(x, instruction);
+            }
+        }
+    }
 
     private void addListeners() {
         boutonInitialise.setOnAction(e -> {
@@ -410,8 +456,14 @@ public class PanneauProgrammation extends PanneauBordure {
             comboAppelProcedure.getItems().add(instruction);
             comboAppelProcedure.setDisable(false);
             comboAppelProcedure.getSelectionModel().select(instruction);
+            boutonAppelProcedure.setDisable(false);
             System.out.println(programme.deepToString());
             texteNouvelleProcedure.setText("");
+        };
+        EventHandler<ActionEvent> actionAppelProcedure = e -> {
+            // Ajout d'une instruction élémentaire dans l'arbre de programme.
+            ajoutAppelProcedure(tree.getSelectionModel().getSelectedItem(), (BoutonAppelProcedure) e.getSource());
+            System.out.println(programme.deepToString());
         };
         //texteNouvelleProcedure
         boutonAvance.setOnAction(actionInstructionElementaire);
@@ -425,5 +477,6 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonAjoutProcedure.setOnAction(actionNouvelleProcedure);
         texteNouvelleProcedure.setOnAction(actionNouvelleProcedure);
         texteNouvelleProcedure.setOnKeyReleased(changeTexteProcedure);
+        boutonAppelProcedure.setOnAction(actionAppelProcedure);
     }
 }
