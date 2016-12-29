@@ -8,7 +8,6 @@ import fx.terrain.*;
 import java.util.*;
 import javafx.animation.ScaleTransition;
 import javafx.application.*;
-import javafx.embed.swing.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -99,9 +98,14 @@ public class ApplicationPrincipale extends Application implements Detachable {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.sizeToScene();
+        primaryStage.setOnCloseRequest(p -> {
+            Platform.exit();
+            System.exit(0);
+        });
         robots.stream().forEach((r) -> {
             r.fit();
         });
+        Platform.setImplicitExit(true);
     }
 
     public int getTailleCelluleX() {
