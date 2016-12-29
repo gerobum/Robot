@@ -174,10 +174,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
         grid.remove(passage);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public Programme getProgramme() {
         return programme;
@@ -221,5 +217,9 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     public Cellule get(int x, int y) {
         return grid.get(x, y);
+    }
+    
+    public static void main(String[] args) {
+        launch(args);
     }
 }
