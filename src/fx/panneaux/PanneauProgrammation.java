@@ -12,7 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
-import javax.swing.JOptionPane;
+import static fx.utilitaires.Utilitaires.*;
 
 public class PanneauProgrammation extends PanneauBordure {
 
@@ -220,7 +220,6 @@ public class PanneauProgrammation extends PanneauBordure {
     private final Programme programme;
     private TreeView<Instruction> tree;
 
-    private final Alert ALERT = new Alert(Alert.AlertType.ERROR);
 
     public PanneauProgrammation(TreeView<Instruction> tree) {
         super("  Programmation  ");
@@ -234,10 +233,6 @@ public class PanneauProgrammation extends PanneauBordure {
         return comboExpression.getSelectionModel().getSelectedItem().newInstance();
     }
 
-    private void alert(String message) {
-        ALERT.setContentText(message);
-        ALERT.showAndWait();
-    }
 
     private void doingUI() {
 
@@ -299,9 +294,6 @@ public class PanneauProgrammation extends PanneauBordure {
         boutonLire.setDisable(true);
         boutonEcrire.setDisable(true);
 
-        // Configuration de la boite de dialogue d'alerte
-        ALERT.setTitle("Mauvaise sélection");
-        ALERT.setHeaderText("Mauvaise sélection");
     }
 
     private void ajoutInstruction(TreeItem<Instruction> selectedInstruction, BoutonInstructionElementaire bouton) {
