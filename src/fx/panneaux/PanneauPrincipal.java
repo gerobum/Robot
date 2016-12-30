@@ -41,7 +41,7 @@ public class PanneauPrincipal extends SplitPane {
         tree = new TreeView<>(getArbreFromProgramme(programme)); 
         
         gridPane.add(new PanneauProgrammation(tree), 0, row++);
-        gridPane.add(new PanneauEdition(), 0, row++);
+        gridPane.add(new PanneauEdition(tree, programme), 0, row++);
         gridPane.add(new PanneauExecution(), 0, row++);
         stackPane.setPrefWidth(500);
         getItems().addAll(gridPane, stackPane);

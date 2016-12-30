@@ -1,5 +1,7 @@
 package fx.panneaux;
 
+import fx.programme.Programme;
+import fx.programme.instructions.Instruction;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
@@ -9,11 +11,13 @@ public class PanneauEdition extends PanneauBordure {
     private final Button boutonCopie = new Button("copier");
     private final Button boutonColle = new Button("coller");
     private final Button boutonCoupe = new Button("couper");
+    private TreeView<Instruction> tree;
+    private Programme programme;
 
-
-
-    public PanneauEdition() {
+    public PanneauEdition(TreeView<Instruction> tree, Programme programme) {
         super(" Edition  ");
+        this.programme = programme;
+        this.tree = tree;
         doingUI();
         addListeners();
     }
@@ -34,6 +38,10 @@ public class PanneauEdition extends PanneauBordure {
     }
 
     private void addListeners() {
-       
+       boutonCoupe.setOnAction(p -> {
+            TreeItem<Instruction> selection = tree.getSelectionModel().getSelectedItem();
+            selection.getValue().getParent().remove(selection.getValue());
+            selection.getParent().getChildren().remove(selection);
+       });
     }
 }
