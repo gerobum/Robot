@@ -20,7 +20,7 @@ public abstract class Instruction {
 
     @Override
     public String toString() {
-        if (getParent() != null) {
+        /*if (getParent() != null) {
             if (getParent().getClass() == Si.class) {
                 if (getParent().getIndex(this) == 0) {
                     return "alors " + nom;
@@ -30,7 +30,7 @@ public abstract class Instruction {
             } else if (getParent().getClass() == TantQue.class || getParent().getClass() == Pour.class) {
                 return "faire " + nom;
             }
-        }
+        }*/
         return nom;
     }
 

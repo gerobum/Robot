@@ -7,7 +7,7 @@ import fx.exceptions.DansLeMur;
 import fx.robot.Robot;
 
 public class TantQue extends InstructionComposee {
-    
+
     private static final long serialVersionUID = 1L;
 
     private ExprBool garde;
@@ -27,7 +27,6 @@ public class TantQue extends InstructionComposee {
     /*public TantQue() {
         this(null);
     }*/
-
     @Override
     public void go(Robot robot) throws DansLeMur, InterruptedException {
 
@@ -64,7 +63,7 @@ public class TantQue extends InstructionComposee {
 
     @Override
     public String deepToString(String decalage) {
-           StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append(decalage)
                 .append(toString()).append("\n");
 
@@ -75,5 +74,5 @@ public class TantQue extends InstructionComposee {
         }
         return sb.toString();
     }
-    
+
 }

@@ -43,8 +43,12 @@ public class PanneauEdition extends PanneauBordure {
         boutonCoupe.setOnAction(p -> {
             TreeItem<Instruction> selectedInstruction = tree.getSelectionModel().getSelectedItem();
             copied = selectedInstruction.getValue();
+            System.out.println(" -> " + copied);
             copied.getParent().remove(copied);
             selectedInstruction.getParent().getChildren().remove(selectedInstruction);
+            System.out.println("------------");
+            System.out.println(copied.deepToString(""));
+            System.out.println("------------");
         });
         boutonColle.setOnAction(p -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.

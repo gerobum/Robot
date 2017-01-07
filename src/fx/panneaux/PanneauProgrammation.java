@@ -225,6 +225,7 @@ public class PanneauProgrammation extends PanneauBordure {
         super("  Programmation  ");
         this.programme = (Programme) tree.getRoot().getValue();
         this.tree = tree;
+        
         doingUI();
         addListeners();
     }
@@ -311,6 +312,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance(parent.getValue());
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -322,6 +324,7 @@ public class PanneauProgrammation extends PanneauBordure {
                 int x = parent.getChildren().indexOf(selectedInstruction);
                 Instruction instruction = bouton.newInstance(parent.getValue());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }
@@ -351,6 +354,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance(parent.getValue(), garde);
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -362,6 +366,7 @@ public class PanneauProgrammation extends PanneauBordure {
 
                 Instruction instruction = bouton.newInstance(parent.getValue(), garde);
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }
@@ -383,6 +388,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance((InstructionComposee) parent.getValue(), texteDebutPour.getText(), texteFinPour.getText(), textePasPour.getText());
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -394,6 +400,7 @@ public class PanneauProgrammation extends PanneauBordure {
 
                 Instruction instruction = bouton.newInstance((InstructionComposee) parent.getValue(), texteDebutPour.getText(), texteFinPour.getText(), textePasPour.getText());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }
@@ -415,6 +422,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance(parent.getValue(), (Bloc) comboAppelProcedure.getSelectionModel().getSelectedItem());
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -426,6 +434,7 @@ public class PanneauProgrammation extends PanneauBordure {
 
                 Instruction instruction = bouton.newInstance(parent.getValue(), (Bloc) comboAppelProcedure.getSelectionModel().getSelectedItem());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }
@@ -447,6 +456,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance(parent.getValue(), texteVariableALire.getText(), texteLireEcrire.getText());
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -458,6 +468,7 @@ public class PanneauProgrammation extends PanneauBordure {
 
                 Instruction instruction = bouton.newInstance(parent.getValue(), texteVariableALire.getText(), texteLireEcrire.getText());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }
@@ -479,6 +490,7 @@ public class PanneauProgrammation extends PanneauBordure {
             } else {
                 Instruction instruction = bouton.newInstance(parent.getValue(), texteLireEcrire.getText());
                 parent.getChildren().add(new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(instruction);
             }
         } else {
@@ -490,6 +502,7 @@ public class PanneauProgrammation extends PanneauBordure {
 
                 Instruction instruction = bouton.newInstance(parent.getValue(), texteLireEcrire.getText());
                 parent.getChildren().add(x, new TreeItem<>(instruction));
+                parent.setExpanded(true);
                 parent.getValue().addChild(x, instruction);
             }
         }

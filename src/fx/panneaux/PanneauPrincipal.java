@@ -37,8 +37,12 @@ public class PanneauPrincipal extends SplitPane {
         tq.addChild(si);
         
         programme.getProcedurePrincipal().addChild(tq);*/
+        TreeItem<Instruction> treeProg = getArbreFromProgramme(programme);
+        
              
-        tree = new TreeView<>(getArbreFromProgramme(programme)); 
+        tree = new TreeView<>(treeProg); 
+        
+        tree.getSelectionModel().select(treeProg.getChildren().get(0));
         
         gridPane.add(new PanneauProgrammation(tree), 0, row++);
         gridPane.add(new PanneauEdition(tree, programme), 0, row++);

@@ -33,6 +33,7 @@ public class Utilitaires {
             tr.getChildren().add(getArbreFromInstruction(bloc));
         }
         //tr.getChildren().add(getArbreFromInstruction(programme.getProcedurePrincipal()));
+        tr.setExpanded(true);
         
         return tr;
     }
