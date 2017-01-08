@@ -23,6 +23,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private int largeur;
     private int hauteur;
     private Set<Robot> robots = new HashSet<>();
+    private Robot selectedRobot = null;
     private Robot robot;
     private Terrain grid;
     private Button avance;
@@ -34,7 +35,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private Stage stage;
     private JTreeRobot arbre;
     private Programme programme;
-
 
     private PanneauPrincipal panneauPrincipal;
 
@@ -85,7 +85,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
         bottom.getChildren().add(marque);
         bottom.getChildren().add(init);
         root.setBottom(bottom);
-        
+
         // ######
         robot = new Robot(this);
         robots.add(robot);
@@ -104,6 +104,15 @@ public class ApplicationPrincipale extends Application implements Detachable {
             r.fit();
         });
         Platform.setImplicitExit(true);
+        grid.setOnMouseClicked(p -> {
+            for(Robot r : robots) {
+                if (r.getNode().getBoundsInParent().contains(p.getX(), p.getY())) {
+                    selectedRobot = r;
+                    return;
+                }
+            }
+            selectedRobot = null;
+        });
     }
 
     public int getTailleCelluleX() {
@@ -216,7 +225,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
     public Cellule get(int x, int y) {
         return grid.get(x, y);
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
