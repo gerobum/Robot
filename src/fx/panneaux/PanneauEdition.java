@@ -5,6 +5,8 @@ import fx.programme.instructions.Instruction;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import static fx.utilitaires.Utilitaires.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PanneauEdition extends PanneauBordure {
 
@@ -40,23 +42,29 @@ public class PanneauEdition extends PanneauBordure {
     }
 
     private void addListeners() {
+        boutonCopie.setOnAction(p -> {
+            copied = getArbreFromInstruction(tree.getSelectionModel().getSelectedItem().getValue().clone());
+        });
         boutonCoupe.setOnAction(p -> {
-            TreeItem<Instruction> selectedInstruction = tree.getSelectionModel().getSelectedItem();
-            copied = selectedInstruction;
-            copied.getParent().getValue().remove(copied.getValue());
-            selectedInstruction.getParent().getChildren().remove(selectedInstruction);
+            copied = tree.getSelectionModel().getSelectedItem();
+            TreeItem<Instruction> parent = copied.getParent();
+            parent.getValue().remove(copied.getValue());
+            parent.getChildren().remove(copied);
         });
         boutonColle.setOnAction(p -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
             TreeItem<Instruction> selectedInstruction = tree.getSelectionModel().getSelectedItem();
             if (selectedInstruction == null) {
-                alert("Pour coller une instruction, il faut \n"
+                alert("Mauvaise sélection", "Pour coller une instruction, il faut \n"
                         + "sélectionner une instruction dans le programme");
+            } else if (copied == null) {
+                alert("Impossible de coller", "Pour coller une instruction, il faut \n"
+                        + "au prélable la couper ou la copier");                
             } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
                 // L'ajout se fait à la fin
                 TreeItem<Instruction> parent = selectedInstruction;
                 if (parent.getValue().getClass() == Programme.class) {
-                    alert("Pour coller une instruction,\n"
+                    alert("Mauvaise sélection", "Pour coller une instruction,\n"
                             + "il faut sélectionner autre\n"
                             + "chose que le programme");
                 } else {

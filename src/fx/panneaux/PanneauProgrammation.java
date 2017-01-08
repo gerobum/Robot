@@ -299,13 +299,13 @@ public class PanneauProgrammation extends PanneauBordure {
     private void ajoutInstruction(TreeItem<Instruction> selectedInstruction, BoutonInstructionElementaire bouton) {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {
@@ -341,13 +341,13 @@ public class PanneauProgrammation extends PanneauBordure {
             garde = getGardeFromCombo();
         }
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {
@@ -375,13 +375,13 @@ public class PanneauProgrammation extends PanneauBordure {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {
@@ -409,13 +409,13 @@ public class PanneauProgrammation extends PanneauBordure {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {
@@ -443,13 +443,13 @@ public class PanneauProgrammation extends PanneauBordure {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {
@@ -477,13 +477,13 @@ public class PanneauProgrammation extends PanneauBordure {
         // Ajout d'une instruction élémentaire dans l'arbre de programme.
 
         if (selectedInstruction == null) {
-            alert("Pour ajouter une instruction, il faut \n"
+            alert("Mauvaise sélection", "Pour ajouter une instruction, il faut \n"
                     + "sélectionner une instruction dans le programme");
         } else if (selectedInstruction.getValue().autorisationAjout()) {// Si l'instruction autorise les ajouts
             // L'ajout se fait à la fin
             TreeItem<Instruction> parent = selectedInstruction;
             if (parent.getValue().getClass() == Programme.class) {
-                alert("Pour ajouter une instruction,\n"
+                alert("Mauvaise sélection", "Pour ajouter une instruction,\n"
                         + "il faut sélectionner autre\n"
                         + "chose que le programme");
             } else {

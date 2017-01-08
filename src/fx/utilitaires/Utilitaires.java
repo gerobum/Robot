@@ -38,7 +38,8 @@ public class Utilitaires {
         return tr;
     }
     
-    public static void alert(String message) {
+    public static void alert(String titre, String message) {
+        ALERT.setTitle(titre);
         ALERT.setContentText(message);
         ALERT.showAndWait();
     }
