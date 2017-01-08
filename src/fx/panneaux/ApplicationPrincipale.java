@@ -34,8 +34,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
     private Button init;
 
     private Stage stage;
-    private JTreeRobot arbre;
-    //private Programme programme;
 
     private PanneauPrincipal panneauPrincipal;
 
@@ -194,7 +192,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     @Override
     public JTree getArbre() {
-        return arbre;
+        return null;
     }
 
     @Override
