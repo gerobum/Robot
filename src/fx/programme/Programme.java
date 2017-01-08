@@ -24,6 +24,7 @@ public class Programme extends Instruction implements Serializable {
 
     public Programme() {
         super(null);
+        this.nom = "programme";
         initialisation = new Initialisation();
         // #### ARBRE_PROGRAMME = new DefaultTreeModel(new Racine());
         PROGRAMME = new TreeItem<>(new Racine("programme"));

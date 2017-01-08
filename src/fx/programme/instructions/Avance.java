@@ -20,6 +20,7 @@ public class Avance extends InstructionElementaire {
             }
         }
         robot.avance();
+        Thread.sleep(200);
     }
 
     /*@Override

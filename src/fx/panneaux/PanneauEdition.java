@@ -12,12 +12,10 @@ public class PanneauEdition extends PanneauBordure {
     private final Button boutonColle = new Button("coller");
     private final Button boutonCoupe = new Button("couper");
     private TreeView<Instruction> tree;
-    private Programme programme;
     private TreeItem<Instruction> copied = null;
 
-    public PanneauEdition(TreeView<Instruction> tree, Programme programme) {
+    public PanneauEdition(TreeView<Instruction> tree) {
         super(" Edition  ");
-        this.programme = programme;
         this.tree = tree;
         doingUI();
         addListeners();

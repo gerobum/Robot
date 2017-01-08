@@ -3,6 +3,7 @@ package fx.panneaux;
 //import fx.panneaux.swing.PanneauPrincipal;
 import fx.interfaces.*;
 import fx.programme.*;
+import fx.programme.instructions.Instruction;
 import fx.robot.*;
 import fx.terrain.*;
 import java.util.*;
@@ -34,7 +35,7 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
     private Stage stage;
     private JTreeRobot arbre;
-    private Programme programme;
+    //private Programme programme;
 
     private PanneauPrincipal panneauPrincipal;
 
@@ -71,10 +72,10 @@ public class ApplicationPrincipale extends Application implements Detachable {
 
         BorderPane root = new BorderPane(grid);
 
-        programme = new Programme();
+        //programme = new Programme();
         //arbre = new JTreeRobot(programme.getArbreProgramme());
 
-        panneauPrincipal = new PanneauPrincipal();
+        panneauPrincipal = new PanneauPrincipal(this);
 
         root.setLeft(panneauPrincipal);
 
@@ -182,11 +183,6 @@ public class ApplicationPrincipale extends Application implements Detachable {
     }
 
     @Override
-    public Programme getProgramme() {
-        return programme;
-    }
-
-    @Override
     public Robot getRobot() {
         return robot;
     }
@@ -226,7 +222,20 @@ public class ApplicationPrincipale extends Application implements Detachable {
         return grid.get(x, y);
     }
 
+    public Robot getSelectedRobot() {
+        return selectedRobot;
+    }
+
+    public Instruction getRoot() {
+        return (Programme) panneauPrincipal.getProgramme();
+    }
+
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public Programme getProgramme() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

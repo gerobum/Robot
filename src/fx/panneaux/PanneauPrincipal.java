@@ -2,6 +2,7 @@ package fx.panneaux;
 
 import fx.programme.Programme;
 import fx.programme.instructions.Instruction;
+import fx.robot.Robot;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import static fx.utilitaires.Utilitaires.*;
@@ -11,11 +12,11 @@ public class PanneauPrincipal extends SplitPane {
     private GridPane gridPane = new GridPane();
     private StackPane stackPane = new StackPane();
     private TreeView<Instruction> tree;
+    private ApplicationPrincipale applicationPrincipale;
     
     
-    
-    public PanneauPrincipal() {
-        
+    public PanneauPrincipal(ApplicationPrincipale applicationPrincipale) {
+        this.applicationPrincipale = applicationPrincipale;
         doingUI();
         addListeners();        
     }
@@ -45,14 +46,18 @@ public class PanneauPrincipal extends SplitPane {
         tree.getSelectionModel().select(treeProg.getChildren().get(0));
         
         gridPane.add(new PanneauProgrammation(tree), 0, row++);
-        gridPane.add(new PanneauEdition(tree, programme), 0, row++);
-        gridPane.add(new PanneauExecution(tree, programme), 0, row++);
+        gridPane.add(new PanneauEdition(tree), 0, row++);
+        gridPane.add(new PanneauExecution(applicationPrincipale), 0, row++);
         stackPane.setPrefWidth(500);
         getItems().addAll(gridPane, stackPane);
           
         
         stackPane.getChildren().add(tree);
         
+    }
+    
+    public Instruction getProgramme() {
+        return tree.getRoot().getValue();
     }
     
     private void addListeners() {
