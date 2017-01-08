@@ -234,7 +234,6 @@ public class PanneauProgrammation extends PanneauBordure {
         return comboExpression.getSelectionModel().getSelectedItem().newInstance();
     }
 
-
     private void doingUI() {
 
         //ColumnConstraints cc = new ColumnConstraints();

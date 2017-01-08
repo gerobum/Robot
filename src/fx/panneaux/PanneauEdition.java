@@ -14,7 +14,7 @@ public class PanneauEdition extends PanneauBordure {
     private final Button boutonCoupe = new Button("couper");
     private TreeView<Instruction> tree;
     private Programme programme;
-    private Instruction copied = null;
+    private TreeItem<Instruction> copied = null;
 
     public PanneauEdition(TreeView<Instruction> tree, Programme programme) {
         super(" Edition  ");
@@ -42,13 +42,9 @@ public class PanneauEdition extends PanneauBordure {
     private void addListeners() {
         boutonCoupe.setOnAction(p -> {
             TreeItem<Instruction> selectedInstruction = tree.getSelectionModel().getSelectedItem();
-            copied = selectedInstruction.getValue();
-            System.out.println(" -> " + copied);
-            copied.getParent().remove(copied);
+            copied = selectedInstruction;
+            copied.getParent().getValue().remove(copied.getValue());
             selectedInstruction.getParent().getChildren().remove(selectedInstruction);
-            System.out.println("------------");
-            System.out.println(copied.deepToString(""));
-            System.out.println("------------");
         });
         boutonColle.setOnAction(p -> {
             // Ajout d'une instruction élémentaire dans l'arbre de programme.
@@ -64,8 +60,9 @@ public class PanneauEdition extends PanneauBordure {
                             + "il faut sélectionner autre\n"
                             + "chose que le programme");
                 } else {
-                    parent.getChildren().add(new TreeItem<>(copied));
-                    parent.getValue().addChild(copied);
+                    parent.getChildren().add(copied);
+                    parent.setExpanded(true);
+                    parent.getValue().addChild(copied.getValue());
                     copied = null;
                 }
             } else {
@@ -75,8 +72,9 @@ public class PanneauEdition extends PanneauBordure {
                 if (parent.getValue().autorisationAjout()) {
                     int x = parent.getChildren().indexOf(selectedInstruction);
 
-                    parent.getChildren().add(x, new TreeItem<>(copied));
-                    parent.getValue().addChild(x, copied);
+                    parent.getChildren().add(x, copied);
+                    parent.setExpanded(true);
+                    parent.getValue().addChild(x, copied.getValue());
                     copied = null;
                 }
             }
@@ -84,6 +82,6 @@ public class PanneauEdition extends PanneauBordure {
     }
 
     public Instruction getCopied() {
-        return copied;
+        return copied.getValue();
     }
 }
