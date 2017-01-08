@@ -1,6 +1,5 @@
 package fx.programme;
 
-import fx.interfaces.*;
 import fx.terrain.*;
 import fx.terrain.OrientationPotentielle;
 import java.io.Serializable;
