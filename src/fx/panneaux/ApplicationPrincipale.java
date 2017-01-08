@@ -17,8 +17,6 @@ import javax.swing.JTree;
 
 public class ApplicationPrincipale extends Application implements Detachable {
 
-    private static final Random random = new Random();
-
     private int nX = 15;
     private int nY = 10;
     private int tailleCellule = 60;
