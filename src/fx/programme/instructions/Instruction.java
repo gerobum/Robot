@@ -6,12 +6,12 @@ import fx.robot.Robot;
 import java.util.*;
 import javax.swing.ImageIcon;
 
-public abstract class Instruction {
+public abstract class Instruction implements Cloneable {
 
     public static final long serialVersionUID = 0L;
     protected String nom;
-    private final Instruction PARENT;
-    private final ArrayList<Instruction> ENFANTS;
+    private Instruction PARENT;
+    private ArrayList<Instruction> ENFANTS;
 
     public Instruction(Instruction parent) {
         this.PARENT = parent;
@@ -20,17 +20,6 @@ public abstract class Instruction {
 
     @Override
     public String toString() {
-        /*if (getParent() != null) {
-            if (getParent().getClass() == Si.class) {
-                if (getParent().getIndex(this) == 0) {
-                    return "alors " + nom;
-                } else {
-                    return "sinon " + nom;
-                }
-            } else if (getParent().getClass() == TantQue.class || getParent().getClass() == Pour.class) {
-                return "faire " + nom;
-            }
-        }*/
         return nom;
     }
 
@@ -87,5 +76,21 @@ public abstract class Instruction {
 
     public void remove(Instruction instruction) {
         ENFANTS.remove(instruction);
+    }
+    
+    @Override
+    public Instruction clone() {
+        try {
+            Instruction instruction = (Instruction) super.clone();
+            instruction.PARENT = null;
+            instruction.ENFANTS = (ArrayList<Instruction>) ENFANTS.clone();
+            for(int i = 0; i < ENFANTS.size(); ++i) {
+                instruction.ENFANTS.set(i, ENFANTS.get(i).clone());
+            }
+            
+            return instruction;
+        } catch (CloneNotSupportedException ex) {
+            throw new InternalError();
+        }
     }
 }
