@@ -16,7 +16,7 @@ import javafx.stage.*;
 import javafx.util.Duration;
 import javax.swing.JTree;
 
-public class ApplicationPrincipale extends Application implements Detachable {
+public class ApplicationPrincipale extends Application {
 
     private int nX = 15;
     private int nY = 10;
@@ -180,37 +180,19 @@ public class ApplicationPrincipale extends Application implements Detachable {
         grid.remove(passage);
     }
 
-    @Override
     public Robot getRobot() {
         return robot;
     }
 
-    @Override
     public void setRobot(Robot robot) {
         this.robot = robot;
     }
 
-    @Override
-    public JTree getArbre() {
-        return null;
-    }
 
-    @Override
     public void setTitle(String nom) {
         stage.setTitle(nom);
     }
 
-    @Override
-    public void executeProgramme() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void executeSelection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void montreDialInit() {
         //DIALOG_INIT.showAndWait();
         System.out.println("INITIALISATION");
@@ -228,12 +210,11 @@ public class ApplicationPrincipale extends Application implements Detachable {
         return (Programme) panneauPrincipal.getProgramme();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
     public Programme getProgramme() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
