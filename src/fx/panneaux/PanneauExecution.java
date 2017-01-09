@@ -1,11 +1,5 @@
 package fx.panneaux;
 
-import fx.exceptions.DansLeMur;
-import fx.programme.Programme;
-import fx.programme.instructions.Instruction;
-import fx.robot.Robot;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import static fx.utilitaires.Utilitaires.*;

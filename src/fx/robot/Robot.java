@@ -11,8 +11,9 @@ import fx.terrain.Marque;
 import fx.terrain.OrientationReelle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.concurrent.Task;
 
-public class Robot implements Cellule, Runnable {
+public class Robot implements Cellule {
 
     private Cellule passage = null;
     private static Random random = new Random();
@@ -23,7 +24,7 @@ public class Robot implements Cellule, Runnable {
     private ApplicationPrincipale applicationPrincipale;
     private int x, y;
     //private Instruction programme;
-    private Thread processus;
+    private Task processus;
     private boolean enMarche = false;
     private int numeroImage = 0;
 
@@ -54,12 +55,12 @@ public class Robot implements Cellule, Runnable {
     }
 
     public void enleverUneMarque() {
-         }
+    }
 
     public void poserUneMarque() {
         applicationPrincipale.add(new Marque(applicationPrincipale.getTailleCelluleX(), applicationPrincipale.getTailleCelluleY()), x, y);
         applicationPrincipale.change(this);
-     }
+    }
 
     public void avance() {
         x += orientation.pasX;
@@ -195,25 +196,32 @@ public class Robot implements Cellule, Runnable {
         image.setFitHeight(fit);
         image.setFitWidth(fit);
     }
-    
+
     public void go() {
-        processus = new Thread(this);
-        processus.start();
+
+        //Platform.runLater(this);
+        Task t = new Task<Void>() {
+            @Override
+            protected Void call() {
+                try {
+                    applicationPrincipale.getProgramme().go(Robot.this);
+                } catch (DansLeMur | InterruptedException ex) {
+                    System.out.println(ex);
+                }
+                return null;
+            }
+        };
+        Thread th = new Thread(t);
+        th.setDaemon(true);
+        th.start();
     }
 
     public void stopThread() {
         // Arrêter le thread en cours
-        processus.interrupt();
+        //processus.interrupt();
+        //Platform.
 
         System.out.println("ARRET DU PROCESSUS");
     }
 
-    @Override
-    public void run() {
-        try {
-            applicationPrincipale.getProgramme().go(this);
-        } catch (DansLeMur | InterruptedException ex) {
-            
-        }
-    }
 }
