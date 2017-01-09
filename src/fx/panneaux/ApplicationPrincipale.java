@@ -5,6 +5,7 @@ import fx.programme.*;
 import fx.programme.instructions.Instruction;
 import fx.robot.*;
 import fx.terrain.*;
+import static fx.utilitaires.Utilitaires.alert;
 import java.util.*;
 import javafx.animation.ScaleTransition;
 import javafx.application.*;
@@ -23,7 +24,7 @@ public class ApplicationPrincipale extends Application {
     private int hauteur;
     private Set<Robot> robots = new HashSet<>();
     private Robot selectedRobot = null;
-    private Robot robot;
+    //private Robot robot;
     private Terrain grid;
     private Button avance;
     private Button tourne;
@@ -46,19 +47,39 @@ public class ApplicationPrincipale extends Application {
         grid = new Terrain();
         avance = new Button("Avance");
         avance.setOnAction(e -> {
-            robot.avance();
+            if (selectedRobot == null) {
+                alert("Sélectionner un robot", "Il faut sélectionner un robot\n"
+                        + "pour le commander");
+            } else {
+                selectedRobot.avance();
+            }
         });
         tourne = new Button("Tourne");
         tourne.setOnAction(e -> {
-            robot.tourne();
+            if (selectedRobot == null) {
+                alert("Sélectionner un robot", "Il faut sélectionner un robot\n"
+                        + "pour le commander");
+            } else {
+                selectedRobot.tourne();
+            }
         });
         marque = new Button("Marque");
         marque.setOnAction(e -> {
-            robot.poserUneMarque();
+            if (selectedRobot == null) {
+                alert("Sélectionner un robot", "Il faut sélectionner un robot\n"
+                        + "pour le commander");
+            } else {
+                selectedRobot.poserUneMarque();
+            }
         });
         efface = new Button("Efface");
         efface.setOnAction(e -> {
-            robot.enleverUneMarque();
+            if (selectedRobot == null) {
+                alert("Sélectionner un robot", "Il faut sélectionner un robot\n"
+                        + "pour le commander");
+            } else {
+                selectedRobot.enleverUneMarque();
+            }
         });
         init = new Button("Init");
         init.setOnAction(e -> {
@@ -70,11 +91,9 @@ public class ApplicationPrincipale extends Application {
 
         //programme = new Programme();
         //arbre = new JTreeRobot(programme.getArbreProgramme());
-
         panneauPrincipal = new PanneauPrincipal(this);
-        
-        //SplitPane splitPane = new SplitPane(panneauPrincipal, grid);
 
+        //SplitPane splitPane = new SplitPane(panneauPrincipal, grid);
         root.setCenter(grid);
         root.setTop(panneauPrincipal);
 
@@ -87,10 +106,8 @@ public class ApplicationPrincipale extends Application {
         root.setRight(bottom);
 
         // ######
-        robot = new Robot(this);
-        robots.add(robot);
-        robot = new Robot(this);
-        robots.add(robot);
+        robots.add(new Robot(this));
+        robots.add(new Robot(this));
         // ######
 
         primaryStage.setScene(new Scene(root));
@@ -105,7 +122,7 @@ public class ApplicationPrincipale extends Application {
         });
         Platform.setImplicitExit(true);
         grid.setOnMouseClicked(p -> {
-            for(Robot r : robots) {
+            for (Robot r : robots) {
                 if (r.getNode().getBoundsInParent().contains(p.getX(), p.getY())) {
                     selectedRobot = r;
                     return;
@@ -180,15 +197,6 @@ public class ApplicationPrincipale extends Application {
     public void remove(Cellule passage) {
         grid.remove(passage);
     }
-
-    public Robot getRobot() {
-        return robot;
-    }
-
-    public void setRobot(Robot robot) {
-        this.robot = robot;
-    }
-
 
     public void setTitle(String nom) {
         stage.setTitle(nom);
