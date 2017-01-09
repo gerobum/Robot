@@ -37,20 +37,7 @@ public class PanneauExecution extends PanneauBordure {
 
     private void addListeners() {
         boutonExecutionProgramme.setOnAction(p -> {
-            try {
-                System.out.println(applicationPrincipale.getSelectedRobot());
-                System.out.println(applicationPrincipale.getRoot().deepToString("  "));
-                applicationPrincipale.getRoot().go(applicationPrincipale.getSelectedRobot());
-            } catch (NullPointerException npe) {
-                if (applicationPrincipale == null) {
-                    System.out.println("ApplicationPrincipale est nulle");
-                }
-                if (applicationPrincipale.getRoot() == null) {
-                    System.out.println("tree est nul");
-                }
-                
-            } catch (DansLeMur | InterruptedException ex) {
-            }
+            applicationPrincipale.getSelectedRobot().go();
         });
     }
 }

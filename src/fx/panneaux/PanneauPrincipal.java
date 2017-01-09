@@ -2,7 +2,6 @@ package fx.panneaux;
 
 import fx.programme.Programme;
 import fx.programme.instructions.Instruction;
-import fx.robot.Robot;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import static fx.utilitaires.Utilitaires.*;
@@ -39,7 +38,7 @@ public class PanneauPrincipal extends SplitPane {
         
         programme.getProcedurePrincipal().addChild(tq);*/
         TreeItem<Instruction> treeProg = getArbreFromProgramme(programme);
-        
+        //setOrientation(Orientation.VERTICAL);
              
         tree = new TreeView<>(treeProg); 
         
@@ -49,10 +48,10 @@ public class PanneauPrincipal extends SplitPane {
         gridPane.add(new PanneauEdition(tree), 0, row++);
         gridPane.add(new PanneauExecution(applicationPrincipale), 0, row++);
         stackPane.setPrefWidth(500);
+        //stackPane.setOrientation(Orientation.VERTICAL);
+        stackPane.getChildren().add(tree);
         getItems().addAll(gridPane, stackPane);
           
-        
-        stackPane.getChildren().add(tree);
         
     }
     

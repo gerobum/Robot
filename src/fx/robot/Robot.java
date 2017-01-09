@@ -1,5 +1,6 @@
 package fx.robot;
 
+import fx.exceptions.DansLeMur;
 import fx.panneaux.ApplicationPrincipale;
 import fx.terrain.Cellule;
 import java.util.Random;
@@ -8,8 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import fx.terrain.Marque;
 import fx.terrain.OrientationReelle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Robot implements Cellule/*, Runnable*/ {
+public class Robot implements Cellule, Runnable {
 
     private Cellule passage = null;
     private static Random random = new Random();
@@ -192,9 +195,25 @@ public class Robot implements Cellule/*, Runnable*/ {
         image.setFitHeight(fit);
         image.setFitWidth(fit);
     }
+    
+    public void go() {
+        processus = new Thread(this);
+        processus.start();
+    }
 
-    public void tombe() {
+    public void stopThread() {
         // Arrêter le thread en cours
-        
+        processus.interrupt();
+
+        System.out.println("ARRET DU PROCESSUS");
+    }
+
+    @Override
+    public void run() {
+        try {
+            applicationPrincipale.getProgramme().go(this);
+        } catch (DansLeMur | InterruptedException ex) {
+            
+        }
     }
 }

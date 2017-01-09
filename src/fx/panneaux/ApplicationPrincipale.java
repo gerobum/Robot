@@ -1,7 +1,6 @@
 package fx.panneaux;
 
 //import fx.panneaux.swing.PanneauPrincipal;
-import fx.interfaces.*;
 import fx.programme.*;
 import fx.programme.instructions.Instruction;
 import fx.robot.*;
@@ -14,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.Duration;
-import javax.swing.JTree;
 
 public class ApplicationPrincipale extends Application {
 
@@ -68,14 +66,17 @@ public class ApplicationPrincipale extends Application {
             //DIALOG_INIT.showAndWait();
         });
 
-        BorderPane root = new BorderPane(grid);
+        BorderPane root = new BorderPane();
 
         //programme = new Programme();
         //arbre = new JTreeRobot(programme.getArbreProgramme());
 
         panneauPrincipal = new PanneauPrincipal(this);
+        
+        //SplitPane splitPane = new SplitPane(panneauPrincipal, grid);
 
-        root.setLeft(panneauPrincipal);
+        root.setCenter(grid);
+        root.setTop(panneauPrincipal);
 
         FlowPane bottom = new FlowPane();
         bottom.getChildren().add(avance);
@@ -131,7 +132,7 @@ public class ApplicationPrincipale extends Application {
     }
 
     private void tombe(Robot robot) {
-        robot.tombe();
+        robot.stopThread();
         ScaleTransition st = new ScaleTransition(Duration.seconds(2), robot.getNode());
         st.setByX(-0.5);
         st.setByY(-0.5);
@@ -151,13 +152,13 @@ public class ApplicationPrincipale extends Application {
                 .filter(n -> GridPane.getColumnIndex(n) == robot.getX() && GridPane.getRowIndex(n) == robot.getY())
                 .filter(n -> grid.get(n) != null)
                 .map(n -> grid.get(n))
-                .peek(System.out::println)
                 .anyMatch(n -> n.getClass() == Trou.class)) {
             System.out.println("Plouf");
             tombe(robot);
         } else {
             robot.getNode().toFront();
         }
+        System.out.println("CHANGE");
     }
 
     public void add(Robot robot) {
@@ -207,11 +208,11 @@ public class ApplicationPrincipale extends Application {
     }
 
     public Instruction getRoot() {
-        return (Programme) panneauPrincipal.getProgramme();
+        return panneauPrincipal.getProgramme();
     }
 
     public Programme getProgramme() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Programme) panneauPrincipal.getProgramme();
     }
 
     public static void main(String[] args) {
