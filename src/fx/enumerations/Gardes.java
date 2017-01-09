@@ -1,8 +1,10 @@
 package fx.enumerations;
 
+import fx.programme.expressions.AuBordDuPrecipice;
 import fx.programme.expressions.DevantMarque;
 import fx.programme.expressions.DevantMur;
 import fx.programme.expressions.ExprBool;
+import fx.programme.expressions.PasAuBordDuPrecipice;
 import fx.programme.expressions.PasDevantMarque;
 import fx.programme.expressions.PasDevantMur;
 import fx.programme.expressions.PasSurMarque;
@@ -11,6 +13,18 @@ import fx.programme.expressions.SurMarque;
 import fx.programme.expressions.SurMinerai;
 
 public enum Gardes {
+    AuBordDuPrecipice("au bord du précipice") {
+        @Override
+        public ExprBool newInstance() {
+            return new AuBordDuPrecipice();
+        }
+    },
+    PasAuBordDuPrecipice("pas au bord du précipice") {
+        @Override
+        public ExprBool newInstance() {
+            return new PasAuBordDuPrecipice();
+        }
+    },
     DevantMur("devant mur") {
         @Override
         public ExprBool newInstance() {
