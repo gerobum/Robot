@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import static fx.utilitaires.Utilitaires.*;
 
 public class PanneauExecution extends PanneauBordure {
 
@@ -37,7 +38,12 @@ public class PanneauExecution extends PanneauBordure {
 
     private void addListeners() {
         boutonExecutionProgramme.setOnAction(p -> {
-            applicationPrincipale.getSelectedRobot().go();
+            if (applicationPrincipale.getSelectedRobot() == null) {
+                alert("Robot non sélectionné", "Veuillez sélectionner un robot\n"
+                        + "avant d'exécuter un programme.");
+            } else {
+                applicationPrincipale.getSelectedRobot().go();
+            }
         });
     }
 }

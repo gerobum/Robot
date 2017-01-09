@@ -84,7 +84,7 @@ public class ApplicationPrincipale extends Application {
         bottom.getChildren().add(efface);
         bottom.getChildren().add(marque);
         bottom.getChildren().add(init);
-        root.setBottom(bottom);
+        root.setRight(bottom);
 
         // ######
         robot = new Robot(this);

@@ -20,6 +20,7 @@ public class Tourne extends InstructionElementaire {
             }
         }
         robot.tourne();
+        Thread.sleep(500);
     }
 
     @Override
