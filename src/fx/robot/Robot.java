@@ -9,8 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import fx.terrain.Marque;
 import fx.terrain.OrientationReelle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.concurrent.Task;
 
 public class Robot implements Cellule {
