@@ -208,10 +208,9 @@ public class Robot implements Cellule {
     }
 
     public void go() {
-
         //Platform.runLater(this);
-
         thread.start();
+
     }
 
     public void stopThread() {

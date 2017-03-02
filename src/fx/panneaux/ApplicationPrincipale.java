@@ -19,7 +19,7 @@ public class ApplicationPrincipale extends Application {
 
     private int nX = 15;
     private int nY = 10;
-    private int tailleCellule = 60;
+    private int tailleCellule = 30;
     private int largeur;
     private int hauteur;
     private Set<Robot> robots = new HashSet<>();
