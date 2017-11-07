@@ -1,0 +1,13 @@
+cd ~/Developpement/Robot/PourGenererJar
+rm -f -r frames main models org pdf META-INF
+cp ../dist/Robot.jar .
+unzip Robot.jar
+rm -f Robot.jar
+cp ../dist/lib/xstream-1.4.9.jar .
+rm -f -r META-INF
+unzip xstream-1.4.9.jar
+rm -f -r META-INF
+rm *.jar
+jar cvfm robot.jar manifestrobot.mf
+rm -r -f com demo expressions instruction interfaces lancement robot solutions terrain utilitaires
+
