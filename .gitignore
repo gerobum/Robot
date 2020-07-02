@@ -51,4 +51,5 @@ captures/
 
 # Keystore files
 *.jks
-
+*.jar
+*.bak

@@ -1,4 +1,4 @@
-cd ~/Developpement/Robot/PourGenererJar
+cd ~/Development/Robot/PourGenererJar
 rm -f -r robot.jar com demo expressions instruction interfaces lancement robot solutions terrain utilitaires META-INF
 cp ../dist/Robot.jar .
 unzip Robot.jar
@@ -8,6 +8,6 @@ rm -f -r META-INF
 unzip xstream-1.4.9.jar
 rm -f -r META-INF
 rm *.jar
-jar cvfm robot.jar manifestrobot.mf com demo expressions instruction interfaces lancement robot solutions terrain utilitaires
+~/Java/jdk1.8.0_172/bin/jar cvfm robot.jar manifestrobot.mf com demo expressions instruction interfaces lancement robot solutions terrain utilitaires
 rm -f -r com demo expressions instruction interfaces lancement robot solutions terrain utilitaires META-INF
 
